@@ -1,0 +1,1372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security Readiness Assessment | Urban Eye Security</title>
+<meta name="description" content="A structured property security self-assessment by Urban Eye Security.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B2C6E;
+  --navy-deep:#13204F;
+  --red:#C4272E;
+  --ink:#17202B;
+  --muted:#667080;
+  --line:#D9DEE5;
+  --warm:#F7F6F3;
+  --pale:#F2F4F7;
+  --white:#FFFFFF;
+  --success:#275846;
+  --review:#9A5E00;
+  --required:#9F2430;
+  --shadow:0 14px 40px rgba(17,29,53,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--warm);
+  color:var(--ink);
+  font-family:"Inter",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+.topbar{
+  height:70px;
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 clamp(22px,5vw,56px);
+  position:sticky; top:0; z-index:20;
+}
+.wordmark{
+  font-size:16px;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:.08em;
+  color:var(--navy);
+}
+.wordmark span{color:var(--red)}
+.header-ref{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.header-ref::before{
+  content:"";
+  width:34px;
+  height:1px;
+  background:var(--red);
+}
+.progress-shell{
+  position:sticky;
+  top:70px;
+  z-index:19;
+  height:2px;
+  background:#E8EBEF;
+}
+.progress-bar{height:2px;width:0;background:var(--red);transition:width .45s ease}
+.page{
+  max-width:1160px;
+  margin:0 auto;
+  padding:46px clamp(22px,5vw,56px) 72px;
+}
+.screen{display:none;animation:rise .28s ease}
+.screen.active{display:block}
+@keyframes rise{from{opacity:0; transform:translateY(9px)}to{opacity:1; transform:translateY(0)}}
+
+/* Cover */
+.cover{
+  min-height:calc(100vh - 165px);
+  display:grid;
+  grid-template-columns:minmax(410px,1fr) minmax(340px,.82fr);
+  background:var(--white);
+  box-shadow:var(--shadow);
+}
+.cover-copy{
+  padding:clamp(42px,6vw,68px);
+  display:flex;
+  flex-direction:column;
+}
+.doc-label,.eyebrow{
+  color:var(--red);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.cover h1{
+  color:var(--ink);
+  font-size:clamp(43px,5.7vw,64px);
+  font-weight:400;
+  line-height:1.06;
+  letter-spacing:-.055em;
+  margin:34px 0 20px;
+  max-width:570px;
+}
+.cover-description{
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.75;
+  max-width:490px;
+  margin:0 0 34px;
+}
+.cover-details{
+  border-top:1px solid var(--line);
+  margin-top:auto;
+  padding-top:22px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-bottom:34px;
+}
+.meta-label{
+  display:block;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:10px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+.meta-value{font-size:13px;color:var(--ink);line-height:1.45}
+.cover-media{
+  position:relative;
+  overflow:hidden;
+  min-height:610px;
+  background:var(--navy-deep);
+  clip-path:ellipse(104% 74% at 100% 50%);
+}
+.cover-media img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:grayscale(.24) contrast(1.03);
+}
+.cover-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(0deg, rgba(19,32,79,.18), transparent 46%);
+}
+.cover-photo-note{
+  position:absolute;z-index:1;
+  right:28px;bottom:24px;
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.75);
+}
+
+/* Buttons */
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  padding:0 28px;
+  border:1px solid transparent;
+  background:var(--red);
+  color:#fff;
+  font:600 13px/1 "Inter",Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  cursor:pointer;
+  transition:background .16s ease,border-color .16s ease,color .16s ease;
+}
+.button:hover{background:#A92129}
+.button:disabled{background:#D4D8DD;color:#7B8490;cursor:not-allowed}
+.button-secondary{
+  background:transparent;
+  color:var(--navy);
+  border-color:var(--line);
+}
+.button-secondary:hover{background:var(--pale);border-color:#BCC4CF;color:var(--navy)}
+.actions{display:flex;align-items:center;gap:12px;margin-top:38px}
+.actions.end{justify-content:flex-end}
+.text-button{
+  border:0;background:transparent;color:var(--muted);
+  font:500 13px/1 "Inter",Arial,sans-serif;
+  cursor:pointer;padding:14px 5px;
+}
+.text-button:hover{color:var(--navy)}
+
+/* Assessment pages */
+.assessment{
+  background:var(--white);
+  min-height:690px;
+  box-shadow:var(--shadow);
+  display:grid;
+  grid-template-columns:255px minmax(0,1fr);
+}
+.section-rail{
+  border-right:1px solid var(--line);
+  padding:46px 34px;
+}
+.section-count{
+  color:var(--red);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+.section-number{
+  font-size:74px;
+  letter-spacing:-.06em;
+  color:var(--navy);
+  font-weight:400;
+  line-height:1;
+  margin-bottom:26px;
+}
+.section-title{
+  font-size:14px;font-weight:600;color:var(--ink);line-height:1.5;margin:0 0 8px;
+}
+.section-caption{
+  color:var(--muted);font-size:12px;line-height:1.65;margin:0;
+}
+.privacy{
+  margin-top:42px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  font-size:11px;
+  line-height:1.7;
+  color:var(--muted);
+}
+.stage{
+  padding:48px clamp(30px,5vw,62px) 52px;
+}
+.stage h2{
+  margin:17px 0 13px;
+  font-size:clamp(28px,3.4vw,37px);
+  line-height:1.18;
+  letter-spacing:-.045em;
+  font-weight:500;
+  max-width:710px;
+}
+.intro{
+  margin:0 0 35px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.72;
+  max-width:660px;
+}
+.grid-categories{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+}
+.category{
+  min-height:108px;
+  background:var(--white);
+  border:1px solid var(--line);
+  padding:20px 21px;
+  cursor:pointer;
+  text-align:left;
+  position:relative;
+  transition:border-color .14s ease,background .14s ease;
+}
+.category:hover{border-color:#AEB6C1;background:#FCFCFB}
+.category.selected{border-color:var(--navy);background:#F7F8FC}
+.category.selected::after{
+  content:"✓"; position:absolute; top:20px; right:21px;
+  color:var(--red);font-weight:700;font-size:14px;
+}
+.category-title{
+  color:var(--navy);font-size:14px;font-weight:600;line-height:1.45;
+  margin-bottom:9px;padding-right:18px;
+}
+.category-caption{color:var(--muted);font-size:12px;line-height:1.55}
+.control-list{border-top:1px solid var(--line)}
+.control{
+  min-height:55px;
+  display:flex; align-items:center; gap:17px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+  padding:14px 4px;
+  color:#2C3542;
+  font-size:14px;
+  line-height:1.55;
+}
+.control:hover .box{border-color:var(--navy)}
+.box{
+  width:19px;height:19px;
+  border:1px solid #AEB6C1;
+  display:flex;align-items:center;justify-content:center;flex:none;
+}
+.control.checked .box{background:var(--navy);border-color:var(--navy)}
+.control.checked .box::after{content:"✓";font-size:12px;color:#fff;font-weight:700}
+.control.checked .control-label{font-weight:500;color:var(--ink)}
+.q{
+  padding:0 0 30px;
+  margin:0 0 30px;
+  border-bottom:1px solid var(--line);
+}
+.q:last-of-type{margin-bottom:0}
+.q-heading{
+  display:flex;
+  gap:15px;
+  align-items:flex-start;
+  margin-bottom:17px;
+}
+.q-id{
+  color:var(--red);font-size:12px;font-weight:700;letter-spacing:.12em;
+  padding-top:4px;flex:none;
+}
+.q-text{font-size:15px;font-weight:500;line-height:1.58;color:var(--ink)}
+.radio-list{display:grid;gap:7px;margin-left:37px}
+.radio{
+  display:flex;align-items:flex-start;gap:12px;
+  border:1px solid var(--line);
+  padding:13px 15px;
+  font-size:13px;line-height:1.6;color:#46505D;
+  cursor:pointer;transition:background .14s,border-color .14s;
+}
+.radio:hover{border-color:#B3BCC8}
+.radio.selected{border-color:var(--navy);background:#F7F8FC;color:var(--ink)}
+.dot{
+  height:16px;width:16px;border-radius:50%;border:1px solid #AAB3BE;
+  display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px;
+}
+.radio.selected .dot{border-color:var(--navy)}
+.radio.selected .dot::after{
+  content:"";width:8px;height:8px;border-radius:50%;background:var(--navy)
+}
+.rating{
+  margin:18px 0 6px;
+  padding:27px 27px 22px;
+  border:1px solid var(--line);
+  background:#FCFCFB;
+}
+.rating-scale{
+  display:flex;justify-content:space-between;
+  color:var(--muted);font-size:11px;letter-spacing:.03em;
+  margin-bottom:18px;
+}
+input[type="range"]{
+  width:100%;
+  appearance:none;
+  height:3px;background:#D8DDE4;outline:none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  appearance:none;width:20px;height:20px;border-radius:50%;
+  background:var(--navy);border:3px solid #fff;box-shadow:0 0 0 1px var(--navy);
+}
+input[type="range"]::-moz-range-thumb{
+  width:16px;height:16px;border-radius:50%;
+  background:var(--navy);border:3px solid #fff;box-shadow:0 0 0 1px var(--navy);
+}
+.rating-value{display:flex;align-items:baseline;gap:8px;margin-top:18px}
+.rating-value strong{font-size:31px;font-weight:500;letter-spacing:-.05em;color:var(--navy)}
+.rating-value span{font-size:12px;color:var(--muted);font-weight:500}
+
+/* Review eligibility and pathway */
+.eligibility-note{margin:-10px 0 30px;padding:16px 18px;background:var(--pale);border-left:3px solid var(--navy);color:#46505D;font-size:13px;line-height:1.65}
+.eligibility-question{padding:0 0 25px;margin:0 0 25px;border-bottom:1px solid var(--line)}
+.eligibility-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:16px 0 0 37px}
+.eligibility-options .radio{min-height:60px}
+.meaning-box{
+  background:#F8F7F4;
+  border-left:3px solid var(--red);
+  padding:22px 25px;
+  margin:-12px 0 34px;
+}
+.meaning-box h3{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--red);
+  margin:0 0 13px;
+  font-weight:700;
+}
+.meaning-box p{
+  margin:0;
+  color:#394453;
+  font-size:14px;
+  line-height:1.75;
+}
+
+.pathway-reason{
+  margin:18px 0 0;
+  padding:15px 17px;
+  background:var(--pale);
+  color:#394453;
+  font-size:13px;
+  line-height:1.72;
+}
+.pathway-reason strong{color:var(--ink)}
+.preparation-heading{
+  margin:19px 0 0;
+  padding-top:17px;
+  border-top:1px solid var(--line);
+  color:var(--red);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.immediate-notice{
+  border-left:3px solid var(--red);
+  padding:19px 21px;
+  margin:0 0 32px;
+  background:#FCF8F7;
+}
+.immediate-notice h3{
+  margin:0 0 11px;
+  color:var(--red);
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+}
+.immediate-notice p{
+  margin:0;
+  color:#394453;
+  font-size:13.5px;
+  line-height:1.72;
+}
+.pathway{border:1px solid var(--line);padding:24px 26px;margin:0 0 34px;background:#FCFCFB}
+.pathway h3{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--red);margin:0 0 17px;font-weight:700}
+.pathway-status{font-size:21px;font-weight:600;line-height:1.35;letter-spacing:-.025em;color:var(--navy);margin-bottom:11px}
+.pathway p{margin:0;color:#46505D;font-size:13.5px;line-height:1.75}
+.preparation-list{margin:18px 0 0;padding:17px 0 0 20px;border-top:1px solid var(--line);color:#46505D;font-size:13px;line-height:1.7}
+.preparation-list li{padding-left:7px;margin-bottom:7px}
+.hidden{display:none!important}
+.application-note{width:100%;margin-top:18px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;line-height:1.7}
+
+/* Summary */
+.summary-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  padding-bottom:30px;
+  margin-bottom:34px;
+  border-bottom:1px solid var(--line);
+}
+.summary-head h2{margin-bottom:0}
+.outcome{
+  width:205px;
+  border-left:3px solid var(--red);
+  padding:10px 0 10px 17px;
+}
+.outcome-label{
+  display:block;font-size:10px;font-weight:700;letter-spacing:.14em;
+  color:var(--muted);text-transform:uppercase;margin-bottom:9px;
+}
+.outcome-value{font-size:18px;font-weight:600;color:var(--review)}
+
+.attention-summary{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:24px;
+  padding:20px 22px;
+  margin:0 0 26px;
+  border:1px solid var(--line);
+  background:#FCFCFB;
+}
+.attention-label{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  margin-bottom:9px;
+}
+.attention-value{
+  color:var(--navy);
+  font-size:22px;
+  line-height:1.25;
+  font-weight:600;
+  letter-spacing:-.025em;
+}
+.attention-value span{color:var(--red)}
+.attention-note{
+  max-width:355px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+  margin:0;
+}
+.results-table-head{
+  display:grid;
+  grid-template-columns:1.15fr .8fr;
+  margin-bottom:7px;
+  padding:0 18px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+.results-table-head span:last-child{text-align:right}
+.results-table{
+  display:grid;
+  grid-template-columns:1.15fr .8fr;
+  border:1px solid var(--line);
+  margin-bottom:34px;
+}
+.result-row{display:contents}
+.result-row > div{
+  border-bottom:1px solid var(--line);
+  padding:15px 18px;font-size:13px;
+}
+.result-row:last-child > div{border-bottom:0}
+.result-key{color:#46505D}
+.result-status{text-align:right;font-weight:600}
+.status-strong{color:var(--success)}
+.status-developing{color:var(--review)}
+.status-review{color:var(--required)}
+.findings h3,.recommendation h3{
+  font-size:11px;text-transform:uppercase;letter-spacing:.16em;
+  color:var(--red);margin:0 0 18px;font-weight:700;
+}
+.findings-list{list-style:none;margin:0 0 34px;padding:0}
+.finding{
+  display:grid;grid-template-columns:33px 1fr;
+  border-top:1px solid var(--line);
+  padding:16px 0;
+  font-size:13.5px;line-height:1.65;color:#46505D;
+}
+.finding:last-child{border-bottom:1px solid var(--line)}
+.finding-num{color:var(--red);font-weight:600}
+.finding strong{font-weight:600;color:var(--ink)}
+.recommendation{
+  background:var(--pale);
+  border-left:3px solid var(--navy);
+  padding:25px 28px;
+  margin-bottom:32px;
+}
+.recommendation p{font-size:14px;color:#394453;line-height:1.75;margin:0}
+.cta-note{
+  color:var(--muted);font-size:12px;line-height:1.7;
+  max-width:555px;margin-top:17px;
+}
+.result-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+@media (max-width:850px){
+  .topbar{height:62px}
+  .progress-shell{top:62px}
+  .cover{grid-template-columns:1fr}
+  .cover-media{order:-1;min-height:285px;clip-path:none}
+  .cover-copy{padding:34px 25px 42px}
+  .cover h1{font-size:42px;margin-top:25px}
+  .assessment{grid-template-columns:1fr}
+  .section-rail{
+    border-right:0;border-bottom:1px solid var(--line);
+    padding:26px 25px;
+    display:grid;grid-template-columns:76px 1fr;gap:18px;
+  }
+  .section-number{font-size:52px;margin:0;grid-row:1 / span 3}
+  .section-count{grid-column:2;margin:0 0 5px}
+  .privacy{display:none}
+  .stage{padding:32px 25px 40px}
+  .grid-categories{grid-template-columns:1fr}
+  .radio-list{margin-left:0}
+  .eligibility-options{grid-template-columns:1fr;margin-left:0}
+  .summary-head{display:block}
+  .outcome{margin-top:25px;width:100%}
+  .attention-summary{display:block}
+  .attention-note{margin-top:15px;max-width:none}
+}
+@media print{
+  .topbar,.progress-shell,.button,.text-button,.result-actions,.cta-note{display:none!important}
+  body,.page{background:#fff;padding:0}
+  .screen{display:none!important}
+  #screen-7{display:block!important}
+  .assessment{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wordmark">URBAN EYE <span>SECURITY</span></div>
+  <div class="header-ref">Security Assessment</div>
+</header>
+<div class="progress-shell"><div class="progress-bar" id="progressBar"></div></div>
+
+<main class="page">
+  <section class="screen active" id="screen-0">
+    <div class="cover">
+      <div class="cover-copy">
+        <div class="doc-label">Property Security Risk Review</div>
+        <h1>Security readiness assessment</h1>
+        <p class="cover-description">
+          A structured self-assessment for identifying gaps in detection,
+          monitoring, response and site protection across homes, businesses
+          and operational properties, followed by a suitability review for a professional site assessment.
+        </p>
+        <div class="cover-details">
+          <div><span class="meta-label">Issued by</span><div class="meta-value">Urban Eye<br>Security</div></div>
+          <div><span class="meta-label">Reference</span><div class="meta-value">UES / PRA /<br>2026</div></div>
+          <div><span class="meta-label">Time</span><div class="meta-value">Approx.<br>4 minutes</div></div>
+        </div>
+        <div>
+          <button class="button" type="button" data-goto="1">Begin assessment</button>
+        </div>
+      </div>
+      <figure class="cover-media" aria-label="Cover photograph">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&amp;fit=crop&amp;w=1100&amp;q=80" alt="Contemporary building exterior">
+        <figcaption class="cover-photo-note">Property protection · risk review</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-1">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">01</div>
+        <div class="section-count">Section 1 of 6</div>
+        <h3 class="section-title">Property profile</h3>
+        <p class="section-caption">Select the property under review.</p>
+        <p class="privacy">Responses remain within this assessment until you choose to request a professional site review.</p>
+      </aside>
+      <div class="stage">
+        <div class="eyebrow">Assessment foundation</div>
+        <h2>Which type of property are you assessing?</h2>
+        <p class="intro">The risk profile, required controls and recommended response arrangements depend on the purpose and use of the premises.</p>
+        <div class="grid-categories" id="propertyOptions">
+          <button class="category" type="button" data-property="residential">
+            <div class="category-title">Residential Property</div><div class="category-caption">Home, apartment or gated residence</div>
+          </button>
+          <button class="category" type="button" data-property="retail">
+            <div class="category-title">Retail Premises</div><div class="category-caption">Shop, pharmacy, restaurant or cash-handling outlet</div>
+          </button>
+          <button class="category" type="button" data-property="office">
+            <div class="category-title">Office Facility</div><div class="category-caption">Corporate, medical or professional premises</div>
+          </button>
+          <button class="category" type="button" data-property="warehouse">
+            <div class="category-title">Warehouse &amp; Logistics</div><div class="category-caption">Storage, distribution or industrial operations</div>
+          </button>
+          <button class="category" type="button" data-property="construction">
+            <div class="category-title">Construction Site</div><div class="category-caption">Active works, stored material or equipment yard</div>
+          </button>
+          <button class="category" type="button" data-property="airbnb">
+            <div class="category-title">Short-Stay Property</div><div class="category-caption">Furnished rental or serviced apartment</div>
+          </button>
+        </div>
+        <div class="actions end">
+          <button class="text-button" type="button" data-goto="0">Back</button>
+          <button class="button" id="continueProperty" type="button" data-goto="2" disabled>Continue</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-2">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">02</div>
+        <div class="section-count">Section 2 of 6</div>
+        <h3 class="section-title">Existing controls</h3>
+        <p class="section-caption">Controls presently installed or operational.</p>
+        <p class="privacy">Select only controls that are installed and currently working.</p>
+      </aside>
+      <div class="stage">
+        <div class="eyebrow">Control register</div>
+        <h2>Which security controls are currently in place?</h2>
+        <p class="intro">This establishes the current protection baseline. Select all applicable controls that are operational at the property.</p>
+        <div class="control-list" id="controls">
+          <div class="control" role="checkbox" tabindex="0" data-control="perimeter"><div class="box"></div><div class="control-label">Perimeter wall, fence or electric fencing</div></div>
+          <div class="control" role="checkbox" tabindex="0" data-control="guard"><div class="box"></div><div class="control-label">On-site guard or watchman service</div></div>
+          <div class="control" role="checkbox" tabindex="0" data-control="basicAlarm"><div class="box"></div><div class="control-label">Audible alarm system without remote verification</div></div>
+          <div class="control" role="checkbox" tabindex="0" data-control="smartAlarm"><div class="box"></div><div class="control-label">Alarm system with remote notifications or app access</div></div>
+          <div class="control" role="checkbox" tabindex="0" data-control="cctv"><div class="box"></div><div class="control-label">CCTV surveillance system</div></div>
+          <div class="control" role="checkbox" tabindex="0" data-control="access"><div class="box"></div><div class="control-label">Access control system, such as keypad, biometric or card reader</div></div>
+          <div class="control" role="checkbox" tabindex="0" data-control="monitoring"><div class="box"></div><div class="control-label">Professional alarm monitoring or coordinated response service</div></div>
+          <div class="control" role="checkbox" tabindex="0" data-control="none"><div class="box"></div><div class="control-label">No formal security controls are presently installed</div></div>
+        </div>
+        <div class="actions end">
+          <button class="text-button" type="button" data-goto="1">Back</button>
+          <button class="button" type="button" data-goto="3">Continue</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-3">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">03</div>
+        <div class="section-count">Section 3 of 6</div>
+        <h3 class="section-title">Detection and response</h3>
+        <p class="section-caption">Performance of current controls.</p>
+        <p class="privacy">Responses should reflect current capability, not planned upgrades.</p>
+      </aside>
+      <div class="stage">
+        <div class="eyebrow">Capability review</div>
+        <h2>How effectively would an incident be detected and reported?</h2>
+        <p class="intro">These questions assess whether current security measures provide clear information, secure oversight and a workable response path.</p>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">01</span><div class="q-text">If a security event occurs, what information would be available to the responsible person for verification and response?</div></div>
+          <div class="radio-list">
+            <div class="radio" data-q="alert" data-score="3"><div class="dot"></div>Exact event type, affected area and time are available remotely, with visual verification where installed.</div>
+            <div class="radio" data-q="alert" data-score="1"><div class="dot"></div>A general remote alert is received, but the cause or location requires confirmation.</div>
+            <div class="radio" data-q="alert" data-score="0"><div class="dot"></div>Only an audible alarm activates, without remote notification.</div>
+            <div class="radio" data-q="alert" data-score="0"><div class="dot"></div>No formal alarm or alert system is currently installed.</div>
+          </div>
+        </div>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">02</span><div class="q-text">When away from the premises, can authorised persons securely review the status of the property and recent security events?</div></div>
+          <div class="radio-list">
+            <div class="radio" data-q="remote" data-score="3"><div class="dot"></div>Alarm, CCTV or access events can be reviewed remotely by authorised users.</div>
+            <div class="radio" data-q="remote" data-score="1"><div class="dot"></div>CCTV can be viewed remotely, but alarm or access-event information is limited.</div>
+            <div class="radio" data-q="remote" data-score="0"><div class="dot"></div>Status can only be confirmed through a physical site visit.</div>
+            <div class="radio" data-q="remote" data-score="0"><div class="dot"></div>No remote security oversight capability is currently available.</div>
+          </div>
+        </div>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">03</span><div class="q-text">If unauthorised access occurred in a vulnerable area after hours, when would the event likely be detected and escalated?</div></div>
+          <div class="radio-list">
+            <div class="radio" data-q="breach" data-score="3"><div class="dot"></div>Within minutes, with sufficient information to initiate an appropriate response.</div>
+            <div class="radio" data-q="breach" data-score="1"><div class="dot"></div>After a delay, depending on a siren, guard patrol or third-party notification.</div>
+            <div class="radio" data-q="breach" data-score="0"><div class="dot"></div>Likely only during the next physical check of the premises.</div>
+            <div class="radio" data-q="breach" data-score="0"><div class="dot"></div>No targeted detection measure currently covers vulnerable areas.</div>
+          </div>
+        </div>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">04</span><div class="q-text">Where guards, monitoring or designated responders are involved, are they connected to a clear alert and escalation procedure?</div></div>
+          <div class="radio-list">
+            <div class="radio" data-q="coordination" data-score="3"><div class="dot"></div>Yes. Alerts are verified and communicated through a defined response process.</div>
+            <div class="radio" data-q="coordination" data-score="1"><div class="dot"></div>Some response arrangements exist, but guards and electronic systems operate separately.</div>
+            <div class="radio" data-q="coordination" data-score="2"><div class="dot"></div>Alerts reach the responsible person, but no formal external response arrangement is in place.</div>
+            <div class="radio" data-q="coordination" data-score="0"><div class="dot"></div>No documented alert or escalation arrangement is currently in place.</div>
+          </div>
+        </div>
+        <div class="actions end">
+          <button class="text-button" type="button" data-goto="2">Back</button>
+          <button class="button" type="button" data-goto="4">Continue</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-4">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">04</div>
+        <div class="section-count">Section 4 of 6</div>
+        <h3 class="section-title">Verification and testing</h3>
+        <p class="section-caption">Confidence based on tested performance.</p>
+        <p class="privacy">A security control is only reliable when its operation has been verified.</p>
+      </aside>
+      <div class="stage">
+        <div class="eyebrow">Assurance review</div>
+        <h2>How confident are you in the tested performance of current controls?</h2>
+        <p class="intro">Confidence should be based on confirmed coverage and recent testing rather than assumption.</p>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">01</span><div class="q-text">How confident are you that all material access points and vulnerable areas are addressed by an appropriate security control?</div></div>
+          <div class="rating">
+            <div class="rating-scale"><span>1 — Not confirmed</span><span>10 — Fully verified</span></div>
+            <input id="coverage" type="range" min="1" max="10" value="5">
+            <div class="rating-value"><strong id="coverageValue">5</strong><span id="coverageDescription">Partially confirmed</span></div>
+          </div>
+        </div>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">02</span><div class="q-text">When was the alarm or detection system last physically tested and confirmed to report an event?</div></div>
+          <div class="radio-list">
+            <div class="radio" data-q="test" data-score="3"><div class="dot"></div>Within the last three months, as part of regular testing.</div>
+            <div class="radio" data-q="test" data-score="2"><div class="dot"></div>Between three and twelve months ago.</div>
+            <div class="radio" data-q="test" data-score="0"><div class="dot"></div>More than twelve months ago.</div>
+            <div class="radio" data-q="test" data-score="0"><div class="dot"></div>It has not been tested, or no alarm system is installed.</div>
+          </div>
+        </div>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">03</span><div class="q-text" id="specificVerification">How confident are you that an after-hours security event would be detected and reported promptly?</div></div>
+          <div class="rating">
+            <div class="rating-scale"><span>1 — Not confirmed</span><span>10 — Fully verified</span></div>
+            <input id="speed" type="range" min="1" max="10" value="5">
+            <div class="rating-value"><strong id="speedValue">5</strong><span id="speedDescription">Partially confirmed</span></div>
+          </div>
+        </div>
+        <div class="actions end">
+          <button class="text-button" type="button" data-goto="3">Back</button>
+          <button class="button" type="button" data-goto="5">Continue</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-5">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">05</div>
+        <div class="section-count">Section 5 of 6</div>
+        <h3 class="section-title">Consequence and priority</h3>
+        <p class="section-caption">Potential impact of delayed detection.</p>
+        <p class="privacy">This identifies the primary consequence that protection measures should address.</p>
+      </aside>
+      <div class="stage">
+        <div class="eyebrow">Impact review</div>
+        <h2>What is the consequence of a delayed security response?</h2>
+        <p class="intro">Assessing potential consequence supports proportionate recommendations and a more appropriate site review.</p>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">01</span><div class="q-text" id="priorityQuestion">How important is timely detection of unauthorized entry at this property?</div></div>
+          <div class="rating">
+            <div class="rating-scale"><span>1 — Low priority</span><span>10 — Essential control</span></div>
+            <input id="priority" type="range" min="1" max="10" value="7">
+            <div class="rating-value"><strong id="priorityValue">7</strong><span id="priorityDescription">High priority</span></div>
+          </div>
+        </div>
+        <div class="q">
+          <div class="q-heading"><span class="q-id">02</span><div class="q-text">What would be the primary consequence of an after-hours security incident remaining undetected until the next operating period?</div></div>
+          <div class="radio-list" id="impactOptions"></div>
+        </div>
+        <div class="actions end">
+          <button class="text-button" type="button" data-goto="4">Back</button>
+          <button class="button" type="button" data-goto="6">Continue</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-6">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">06</div>
+        <div class="section-count">Section 6 of 6</div>
+        <h3 class="section-title">Review eligibility</h3>
+        <p class="section-caption">Suitability for a professional Urban Eye review.</p>
+        <p class="privacy">Security exposure and consultation suitability are evaluated separately. A review invitation is not generated automatically.</p>
+      </aside>
+      <div class="stage">
+        <div class="eyebrow">Review pathway</div>
+        <h2>Is a professional site review appropriate at this stage?</h2>
+        <p class="intro">These final questions determine whether Urban Eye can responsibly proceed to a site-review conversation, or whether preparation is required first.</p>
+        <div class="eligibility-note">A professional review is considered only where responsibility, location, access arrangements and a genuine intention to evaluate improvements are sufficiently clear.</div>
+        <div class="eligibility-question"><div class="q-heading"><span class="q-id">01</span><div class="q-text">What is your relationship to the property being assessed?</div></div><div class="eligibility-options">
+          <div class="radio eligibility-option" data-field="relationship" data-value="owner"><div class="dot"></div>I own the property.</div>
+          <div class="radio eligibility-option" data-field="relationship" data-value="manager"><div class="dot"></div>I manage or am responsible for protecting it.</div>
+          <div class="radio eligibility-option" data-field="relationship" data-value="representative"><div class="dot"></div>I represent the responsible organisation.</div>
+          <div class="radio eligibility-option" data-field="relationship" data-value="exploring"><div class="dot"></div>I am exploring options without decision authority.</div>
+        </div></div>
+        <div class="eligibility-question"><div class="q-heading"><span class="q-id">02</span><div class="q-text">Where is the property located?</div></div><div class="eligibility-options">
+          <div class="radio eligibility-option" data-field="location" data-value="nairobi"><div class="dot"></div>Nairobi.</div>
+          <div class="radio eligibility-option" data-field="location" data-value="kiambu"><div class="dot"></div>Kiambu.</div>
+          <div class="radio eligibility-option" data-field="location" data-value="machakos"><div class="dot"></div>Machakos / Athi River.</div>
+          <div class="radio eligibility-option" data-field="location" data-value="kenya_other"><div class="dot"></div>Another location in Kenya.</div>
+          <div class="radio eligibility-option" data-field="location" data-value="outside"><div class="dot"></div>Outside Kenya.</div>
+        </div></div>
+        <div class="eligibility-question"><div class="q-heading"><span class="q-id">03</span><div class="q-text">What action are you currently considering?</div></div><div class="eligibility-options">
+          <div class="radio eligibility-option" data-field="action" data-value="review"><div class="dot"></div>A professional site review followed by justified recommendations.</div>
+          <div class="radio eligibility-option" data-field="action" data-value="improvements"><div class="dot"></div>Improving or integrating existing security controls.</div>
+          <div class="radio eligibility-option" data-field="action" data-value="planning"><div class="dot"></div>Understanding risks for future planning only.</div>
+          <div class="radio eligibility-option" data-field="action" data-value="research"><div class="dot"></div>General research; no review is currently intended.</div>
+        </div></div>
+        <div class="eligibility-question"><div class="q-heading"><span class="q-id">04</span><div class="q-text">When would a security review be relevant?</div></div><div class="eligibility-options">
+          <div class="radio eligibility-option" data-field="timeline" data-value="30"><div class="dot"></div>Within the next 30 days.</div>
+          <div class="radio eligibility-option" data-field="timeline" data-value="90"><div class="dot"></div>Within 1–3 months.</div>
+          <div class="radio eligibility-option" data-field="timeline" data-value="later"><div class="dot"></div>Later this year.</div>
+          <div class="radio eligibility-option" data-field="timeline" data-value="none"><div class="dot"></div>No current timeline.</div>
+        </div></div>
+        <div class="eligibility-question"><div class="q-heading"><span class="q-id">05</span><div class="q-text">Could an authorised Urban Eye representative inspect relevant entry points, existing controls and risk areas on site?</div></div><div class="eligibility-options">
+          <div class="radio eligibility-option" data-field="inspection" data-value="yes"><div class="dot"></div>Yes.</div>
+          <div class="radio eligibility-option" data-field="inspection" data-value="approval"><div class="dot"></div>Possibly, subject to internal approval.</div>
+          <div class="radio eligibility-option" data-field="inspection" data-value="no"><div class="dot"></div>No.</div>
+        </div></div>
+        <div class="actions end"><button class="text-button" type="button" data-goto="5">Back</button><button class="button" type="button" id="produceResults" disabled>Generate outcome</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-7">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">07</div>
+        <div class="section-count">Assessment Summary</div>
+        <h3 class="section-title">Security readiness outcome</h3>
+        <p class="section-caption">A summary based on the information supplied.</p>
+        <p class="privacy">This summary is an initial self-assessment and does not replace a physical site inspection.</p>
+      </aside>
+      <div class="stage">
+        <div class="summary-head">
+          <div>
+            <div class="eyebrow">Urban Eye Security</div>
+            <h2>Security readiness outcome</h2>
+          </div>
+          <div class="outcome">
+            <span class="outcome-label">Overall status</span>
+            <div class="outcome-value" id="overallStatus">Developing Readiness</div>
+          </div>
+        </div>
+        <div class="attention-summary">
+          <div>
+            <span class="attention-label">Review areas requiring attention</span>
+            <div class="attention-value"><span id="attentionCount">—</span> of 4</div>
+          </div>
+          <p class="attention-note">This indicator is based only on the information provided. It does not measure the full security condition of the property or replace a physical inspection.</p>
+        </div>
+        <div class="results-table-head"><span>Assessment area</span><span>Outcome</span></div>
+        <div class="results-table" id="statusTable"></div>
+        <div class="meaning-box">
+          <h3>What this means</h3>
+          <p id="meaningText">Your results will be interpreted here once the assessment is complete.</p>
+        </div>
+        <div class="pathway" id="pathwayPanel">
+          <h3>Professional review pathway</h3>
+          <div class="pathway-status" id="pathwayStatus">Assessment pending</div>
+          <p id="pathwayText"></p>
+          <div class="pathway-reason hidden" id="pathwayReason"></div>
+          <div class="preparation-heading hidden" id="preparationHeading">Before returning, confirm:</div>
+          <ol class="preparation-list hidden" id="preparationList"></ol>
+        </div>
+        <div class="immediate-notice hidden" id="immediateNotice">
+          <h3>Immediate consideration</h3>
+          <p>Where occupants, staff, valuable assets or active operations may be exposed, inform the responsible property decision-maker of the identified gaps and confirm what interim security and emergency-response arrangements are currently available.</p>
+        </div>
+        <div class="findings">
+          <h3>Priority findings</h3>
+          <ol class="findings-list" id="findingsList"></ol>
+        </div>
+        <div class="recommendation">
+          <h3>Assessment conclusion and recommended action</h3>
+          <p id="recommendationText"></p>
+        </div>
+        <div class="result-actions">
+          <a class="button hidden" id="applyForReview" href="https://www.urbaneyesecurity.co.ke/contact/?service=risk-review&amp;pathway=priority">Apply for a site review</a>
+          <button class="button hidden" type="button" id="printPreparation">Print preparation checklist</button>
+          <button class="button hidden" type="button" id="reviewRequirements">Review requirements before reapplying</button>
+          <button class="button button-secondary" type="button" id="printSummary">Print outcome</button>
+          <button class="button button-secondary" type="button" data-goto="1">Start again</button>
+          <p class="application-note hidden" id="applicationNote">No equipment or service recommendation is made through this online assessment. Any appropriate recommendation follows a professional site review.</p>
+        </div>
+        <p class="cta-note">A professional site review verifies vulnerable access points, existing controls, detection gaps and appropriate response arrangements for the premises. This online outcome is indicative and is not a substitute for a physical inspection.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const state = {
+    screen: 0,
+    property: "",
+    controls: new Set(),
+    scores: { alert: null, remote: null, breach: null, coordination: null, test: null },
+    coverage: 5,
+    speed: 5,
+    priority: 7,
+    impact: "",
+    eligibility: { relationship: "", location: "", action: "", timeline: "", inspection: "" }
+  };
+
+  const propertyContent = {
+    residential: {
+      verification: "How confident are you that unauthorised access to the residence would be detected and reported promptly, whether the home is occupied or vacant?",
+      priority: "How important is prompt detection and clear notification of unauthorised entry to the safety and peace of mind of occupants?",
+      impact: [
+        "Loss of valuables or personal property.",
+        "Safety exposure to occupants or family members.",
+        "Delayed awareness of intrusion, fire or another urgent event.",
+        "Multiple safety, property and peace-of-mind consequences."
+      ]
+    },
+    retail: {
+      verification: "How confident are you that a forced entry or staff-safety incident would be detected, documented and communicated quickly enough to reduce loss and disruption?",
+      priority: "How important is verified detection and timely response for protecting stock, cash-handling areas and staff safety?",
+      impact: [
+        "Loss of cash, stock or business equipment.",
+        "Closure, repairs or interrupted trading.",
+        "Staff safety exposure during trading or closing hours.",
+        "Multiple financial, operational and safety consequences."
+      ]
+    },
+    office: {
+      verification: "How confident are you that unauthorised access to sensitive areas, records or IT assets would be detected and recorded?",
+      priority: "How important is controlled, recorded access to sensitive areas, business information and operational assets?",
+      impact: [
+        "Exposure or loss of confidential records.",
+        "Loss of IT or operational assets.",
+        "Business disruption or reputational damage.",
+        "Multiple governance, financial and operational consequences."
+      ]
+    },
+    warehouse: {
+      verification: "How confident are you that unauthorised movement of goods, vehicles or personnel after hours would be detected and investigated promptly?",
+      priority: "How important is timely detection of after-hours access, loading activity or removal of stored assets?",
+      impact: [
+        "Loss of inventory, equipment or stored materials.",
+        "Weak control over goods movement or loading activity.",
+        "Operational disruption and supply-chain delay.",
+        "Multiple inventory, operational and financial consequences."
+      ]
+    },
+    construction: {
+      verification: "How confident are you that unauthorised access, material theft or equipment interference after hours would be identified promptly?",
+      priority: "How important is after-hours detection for site access, stored materials, plant and equipment?",
+      impact: [
+        "Loss of plant, tools, fuel or project materials.",
+        "Injury or liability arising from unauthorised site access.",
+        "Project delay and additional replacement cost.",
+        "Multiple safety, asset and delivery consequences."
+      ]
+    },
+    airbnb: {
+      verification: "How confident are you that unauthorised access or urgent safety events during vacant periods would be reported promptly to the responsible person?",
+      priority: "How important is prompt detection of unauthorised access or urgent safety events while the unit is vacant?",
+      impact: [
+        "Unauthorised access or occupancy-related disputes.",
+        "Damage to furnishings, fittings or electronics.",
+        "Delayed awareness of smoke, fire or water-related incidents.",
+        "Multiple guest-safety, property and revenue consequences."
+      ]
+    }
+  };
+
+  const descriptor = (value) => {
+    if (value <= 3) return "Not verified";
+    if (value <= 5) return "Partially confirmed";
+    if (value <= 7) return "Reasonable confidence";
+    return "High confidence";
+  };
+
+  const priorityDescriptor = (value) => {
+    if (value <= 3) return "Lower priority";
+    if (value <= 5) return "Moderate priority";
+    if (value <= 7) return "High priority";
+    return "Essential control";
+  };
+
+  const showScreen = (number) => {
+    document.querySelectorAll(".screen").forEach(el => el.classList.remove("active"));
+    document.getElementById("screen-" + number).classList.add("active");
+    state.screen = number;
+    document.getElementById("progressBar").style.width = (number / 7 * 100) + "%";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (number === 4 || number === 5) updatePropertyCopy();
+  };
+
+  document.querySelectorAll("[data-goto]").forEach(button => {
+    button.addEventListener("click", () => showScreen(Number(button.dataset.goto)));
+  });
+
+  document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".category").forEach(item => item.classList.remove("selected"));
+      button.classList.add("selected");
+      state.property = button.dataset.property;
+      document.getElementById("continueProperty").disabled = false;
+    });
+  });
+
+  const toggleControl = (item) => {
+    const name = item.dataset.control;
+    if (name === "none") {
+      state.controls.clear();
+      document.querySelectorAll(".control").forEach(control => control.classList.remove("checked"));
+      state.controls.add("none");
+      item.classList.add("checked");
+      return;
+    }
+    state.controls.delete("none");
+    document.querySelector('.control[data-control="none"]').classList.remove("checked");
+    if (state.controls.has(name)) {
+      state.controls.delete(name);
+      item.classList.remove("checked");
+    } else {
+      state.controls.add(name);
+      item.classList.add("checked");
+    }
+  };
+
+  document.querySelectorAll(".control").forEach(item => {
+    item.addEventListener("click", () => toggleControl(item));
+    item.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleControl(item);
+      }
+    });
+  });
+
+  document.addEventListener("click", event => {
+    const radio = event.target.closest(".radio");
+    if (!radio || !radio.dataset.q) return;
+    const q = radio.dataset.q;
+    document.querySelectorAll('.radio[data-q="' + q + '"]').forEach(item => item.classList.remove("selected"));
+    radio.classList.add("selected");
+    if (q === "impact") {
+      state.impact = radio.textContent.trim();
+    } else {
+      state.scores[q] = Number(radio.dataset.score);
+    }
+  });
+
+  const eligibilityFields = ["relationship", "location", "action", "timeline", "inspection"];
+  const updateEligibilityButton = () => {
+    document.getElementById("produceResults").disabled = !eligibilityFields.every(field => Boolean(state.eligibility[field]));
+  };
+  document.querySelectorAll(".eligibility-option").forEach(option => {
+    option.addEventListener("click", () => {
+      const field = option.dataset.field;
+      document.querySelectorAll('.eligibility-option[data-field="' + field + '"]').forEach(item => item.classList.remove("selected"));
+      option.classList.add("selected");
+      state.eligibility[field] = option.dataset.value;
+      updateEligibilityButton();
+    });
+  });
+
+  const syncSlider = (id, valueId, descriptionId, kind) => {
+    const slider = document.getElementById(id);
+    const sync = () => {
+      const value = Number(slider.value);
+      state[id] = value;
+      document.getElementById(valueId).textContent = value;
+      document.getElementById(descriptionId).textContent = kind === "priority" ? priorityDescriptor(value) : descriptor(value);
+    };
+    slider.addEventListener("input", sync);
+    sync();
+  };
+  syncSlider("coverage", "coverageValue", "coverageDescription", "verification");
+  syncSlider("speed", "speedValue", "speedDescription", "verification");
+  syncSlider("priority", "priorityValue", "priorityDescription", "priority");
+
+  const updatePropertyCopy = () => {
+    const content = propertyContent[state.property] || propertyContent.residential;
+    document.getElementById("specificVerification").textContent = content.verification;
+    document.getElementById("priorityQuestion").textContent = content.priority;
+    const options = document.getElementById("impactOptions");
+    options.innerHTML = content.impact.map(option =>
+      '<div class="radio" data-q="impact" data-score="0"><div class="dot"></div>' + option + '</div>'
+    ).join("");
+  };
+
+  const statusClass = value => {
+    if (value === "Strong") return "status-strong";
+    if (value === "Developing") return "status-developing";
+    return "status-review";
+  };
+
+  const determineReviewPathway = () => {
+    const e = state.eligibility;
+    const authorised = ["owner", "manager", "representative"].includes(e.relationship);
+    const inServiceCountry = e.location !== "outside";
+    const currentIntent = ["review", "improvements"].includes(e.action);
+    const activeTimeline = ["30", "90"].includes(e.timeline);
+    const inspectionReady = e.inspection === "yes";
+
+    const reasons = [];
+    const steps = [];
+
+    if (!authorised) {
+      reasons.push("You indicated that you are exploring options without authority to approve a review for this property.");
+      steps.push("Confirm who is authorised to make security decisions for this property.");
+    }
+    if (!inServiceCountry) {
+      reasons.push("The property is outside Kenya, while Urban Eye's current on-site review pathway is intended for properties within Kenya.");
+      steps.push("Confirm whether an Urban Eye on-site review is available for the property's location.");
+    }
+    if (!currentIntent) {
+      reasons.push("You did not indicate that a site review or security improvement decision is currently being considered.");
+      steps.push("Confirm whether you intend to review or improve security rather than retain this assessment for general planning only.");
+    }
+    if (!activeTimeline) {
+      reasons.push("A review or improvement decision has not been indicated within the next three months.");
+      steps.push("Confirm whether security improvements are being considered within the next three months.");
+    }
+    if (!inspectionReady) {
+      reasons.push(e.inspection === "no"
+        ? "You indicated that an on-site inspection cannot be arranged."
+        : "Permission for an on-site inspection remains subject to approval.");
+      steps.push("Confirm that a physical site inspection can be approved and arranged.");
+    }
+
+    if (!inServiceCountry || e.inspection === "no" || (e.action === "research" && e.timeline === "none")) {
+      return {
+        type: "outside",
+        title: "No Immediate Review Pathway Identified",
+        text: "Your security outcome and your eligibility to proceed are separate. The findings may still require attention, but Urban Eye cannot invite a site-review application on the current information.",
+        reasons,
+        steps
+      };
+    }
+
+    if (authorised && currentIntent && activeTimeline && inspectionReady) {
+      return {
+        type: "priority",
+        title: "Priority Review Suitable",
+        text: "Based on the property profile, identified security position and your stated readiness, this property appears suitable for consideration for a professional Urban Eye site assessment. A site review verifies vulnerable access points, confirms current control performance and determines whether practical improvements are justified.",
+        reasons: [],
+        steps: []
+      };
+    }
+
+    return {
+      type: "preparation",
+      title: "Preparation Recommended",
+      text: "Your security outcome indicates that a professional review may be appropriate, but one or more requirements should be confirmed before a site assessment can be considered.",
+      reasons,
+      steps
+    };
+  };
+
+  const displayReviewPathway = (pathway, overall, consequence) => {
+    const status = document.getElementById("pathwayStatus");
+    const text = document.getElementById("pathwayText");
+    const reason = document.getElementById("pathwayReason");
+    const heading = document.getElementById("preparationHeading");
+    const list = document.getElementById("preparationList");
+    const apply = document.getElementById("applyForReview");
+    const printPreparation = document.getElementById("printPreparation");
+    const reviewRequirements = document.getElementById("reviewRequirements");
+    const note = document.getElementById("applicationNote");
+    const immediateNotice = document.getElementById("immediateNotice");
+
+    status.textContent = pathway.title;
+    status.className = "pathway-status " + (pathway.type === "priority" ? "status-strong" : pathway.type === "preparation" ? "status-developing" : "status-review");
+    text.textContent = pathway.text;
+
+    reason.innerHTML = "";
+    reason.classList.add("hidden");
+    heading.classList.add("hidden");
+    list.innerHTML = "";
+    list.classList.add("hidden");
+    apply.classList.add("hidden");
+    printPreparation.classList.add("hidden");
+    reviewRequirements.classList.add("hidden");
+    note.classList.add("hidden");
+    immediateNotice.classList.add("hidden");
+
+    if (pathway.type === "priority") {
+      apply.classList.remove("hidden");
+      note.classList.remove("hidden");
+      return;
+    }
+
+    if (pathway.reasons.length) {
+      reason.innerHTML = "<strong>Why you cannot proceed yet:</strong><br>" + pathway.reasons.join("<br>");
+      reason.classList.remove("hidden");
+    }
+
+    if (pathway.steps.length) {
+      heading.classList.remove("hidden");
+      list.innerHTML = pathway.steps.map(step => "<li>" + step + "</li>").join("");
+      list.classList.remove("hidden");
+    }
+
+    reviewRequirements.classList.remove("hidden");
+    if (pathway.type === "preparation") {
+      printPreparation.classList.remove("hidden");
+    }
+
+    if (overall === "Review Required" || consequence === "High Priority") {
+      immediateNotice.classList.remove("hidden");
+    }
+  };
+
+
+  const calculateSummary = () => {
+    const selectedControls = state.controls;
+    const performance = ["alert","remote","breach","coordination"].reduce((sum, key) => sum + (state.scores[key] ?? 0), 0);
+    const verification = Math.round((state.coverage / 10) * 3) + Math.round((state.speed / 10) * 3) + (state.scores.test ?? 0);
+
+    let infrastructure = "Developing";
+    if (selectedControls.has("none") || selectedControls.size === 0) infrastructure = "Review Required";
+    else if ((selectedControls.has("smartAlarm") || selectedControls.has("monitoring")) && selectedControls.has("cctv")) infrastructure = "Strong";
+
+    const detection = performance >= 9 ? "Strong" : performance >= 5 ? "Developing" : "Review Required";
+    const assurance = verification >= 7 ? "Strong" : verification >= 4 ? "Developing" : "Review Required";
+    const consequence = state.priority >= 8 ? "High Priority" : state.priority >= 5 ? "Material Priority" : "Standard Priority";
+
+    const displayInfrastructure = infrastructure === "Strong"
+      ? "Strong controls indicated"
+      : infrastructure === "Developing"
+      ? "Some controls in place"
+      : "No formal controls confirmed";
+
+    const displayDetection = detection === "Strong"
+      ? "Timely alerts indicated"
+      : detection === "Developing"
+      ? "Limited capability"
+      : "Immediate review recommended";
+
+    const displayAssurance = assurance === "Strong"
+      ? "Good readiness indicated"
+      : assurance === "Developing"
+      ? "Partly confirmed"
+      : "Not confirmed";
+
+    const displayConsequence = consequence === "High Priority"
+      ? "High impact"
+      : consequence === "Material Priority"
+      ? "Material impact"
+      : "Lower stated impact";
+
+    const total = performance + verification;
+    let overall = "Review Required";
+    if (total >= 16 && infrastructure !== "Review Required") overall = "Strong Foundation";
+    else if (total >= 8 && infrastructure !== "Review Required") overall = "Developing Readiness";
+
+    const overallEl = document.getElementById("overallStatus");
+    overallEl.textContent = overall;
+    overallEl.className = "outcome-value " + (overall === "Strong Foundation" ? "status-strong" : overall === "Developing Readiness" ? "status-developing" : "status-review");
+
+    const rows = [
+      ["Security controls currently in place", displayInfrastructure],
+      ["Incident detection and notification", displayDetection],
+      ["Testing and response readiness", displayAssurance],
+      ["Impact if an incident is detected late", displayConsequence]
+    ];
+    const areasRequiringAttention = [
+      infrastructure !== "Strong",
+      detection !== "Strong",
+      assurance !== "Strong",
+      consequence !== "Standard Priority"
+    ].filter(Boolean).length;
+    document.getElementById("attentionCount").textContent = areasRequiringAttention;
+
+
+    document.getElementById("statusTable").innerHTML = rows.map(([key, value]) => {
+      let cls = "status-developing";
+      if (value === "Strong controls indicated" || value === "Timely alerts indicated" || value === "Good readiness indicated") cls = "status-strong";
+      if (value === "Immediate review recommended" || value === "No formal controls confirmed" || value === "Not confirmed" || value === "High impact") cls = "status-review";
+      return '<div class="result-row"><div class="result-key">' + key + '</div><div class="result-status ' + cls + '">' + value + '</div></div>';
+    }).join("");
+
+    const findings = [];
+    if (selectedControls.has("none") || selectedControls.size === 0) findings.push(["No formal control baseline confirmed.", "The property is not recorded as having operational physical or electronic security controls."]);
+    if ((state.scores.alert ?? 0) < 2) findings.push(["Verified alarm information is not confirmed.", "An incident may not provide sufficient detail for a timely and proportionate response."]);
+    if ((state.scores.remote ?? 0) < 2) findings.push(["Secure remote oversight is limited.", "Authorised persons may be unable to verify property status or recent events when away from site."]);
+    if ((state.scores.breach ?? 0) < 2) findings.push(["Timely detection in vulnerable areas is not confirmed.", "Unauthorised activity may remain undetected during the period in which loss, disruption or safety exposure can occur."]);
+    if (state.coverage < 6) findings.push(["Coverage of access points and vulnerable areas requires verification.", "Doors, windows, gates, restricted areas or operational risk zones may not all be addressed by an appropriate control."]);
+    if ((state.scores.test ?? 0) < 2) findings.push(["Recent testing is not evidenced.", "Operational performance of detection or notification measures should be physically confirmed."]);
+    if (findings.length === 0) findings.push(["A suitable security foundation is indicated.", "A professional review can validate control placement, maintenance and escalation arrangements."]);
+
+    document.getElementById("findingsList").innerHTML = findings.slice(0,5).map((finding, index) =>
+      '<li class="finding"><span class="finding-num">0' + (index + 1) + '</span><span><strong>' + finding[0] + '</strong> ' + finding[1] + '</span></li>'
+    ).join("");
+
+    const meaningText = overall === "Strong Foundation"
+      ? "Your answers indicate that suitable security measures and response arrangements may already be in place. A professional review would confirm that coverage, testing and response procedures remain appropriate for the property."
+      : overall === "Developing Readiness"
+      ? "You have some security measures in place, but your responses do not fully confirm that an incident would be detected, verified and communicated quickly enough for an effective response. A professional review is recommended to clarify the remaining gaps."
+      : "Your answers do not confirm a reliable protection and response arrangement for this property. Where the possible impact of delayed detection is significant, a professional review is recommended to identify priority security gaps.";
+
+    document.getElementById("meaningText").textContent = meaningText;
+
+    const recommendation = overall === "Strong Foundation"
+      ? "The responses indicate a structured security foundation. A professional site review is recommended to validate coverage, confirm recent testing and review whether alert, escalation and response arrangements are proportionate to the property's risk profile."
+      : overall === "Developing Readiness"
+      ? "The responses indicate that important controls exist, but one or more gaps may limit detection, verification or coordinated response. A professional site review is recommended to confirm vulnerable areas, assess existing controls and define practical corrective measures."
+      : "The responses indicate material gaps in the current security readiness position. A professional site review is recommended to establish the protection baseline, identify priority vulnerabilities and define appropriate detection and response measures for the premises.";
+    document.getElementById("recommendationText").textContent = recommendation;
+    displayReviewPathway(determineReviewPathway(), overall, consequence);
+    showScreen(7);
+  };
+
+  document.getElementById("produceResults").addEventListener("click", calculateSummary);
+  document.getElementById("printSummary").addEventListener("click", () => window.print());
+  document.getElementById("printPreparation").addEventListener("click", () => window.print());
+  document.getElementById("reviewRequirements").addEventListener("click", () => showScreen(6));
+})();
+</script>
+</body>
+</html>
