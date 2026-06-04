@@ -367,6 +367,185 @@ input[type="range"]::-moz-range-thumb{
 .rating-value strong{font-size:31px;font-weight:500;letter-spacing:-.05em;color:var(--navy)}
 .rating-value span{font-size:12px;color:var(--muted);font-weight:500}
 
+/* NEW: Could it be possible section */
+.possibility-box{
+  background:#F8F9FC;
+  border-left:3px solid var(--navy);
+  padding:22px 25px;
+  margin:0 0 24px;
+}
+.possibility-box h3{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--navy);
+  margin:0 0 13px;
+  font-weight:700;
+}
+.possibility-box p{
+  margin:0 0 16px;
+  color:#394453;
+  font-size:14px;
+  line-height:1.75;
+}
+.possibility-box p:last-child{margin-bottom:0}
+
+/* NEW: Quantified implication inputs */
+.implication-input{
+  margin:16px 0 0 37px;
+  max-width:420px;
+}
+.implication-input label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:8px;
+  font-weight:500;
+}
+.implication-input input{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  font-size:14px;
+  color:var(--ink);
+  font-family:"Inter",Arial,sans-serif;
+  transition:border-color .14s;
+}
+.implication-input input:focus{
+  outline:none;
+  border-color:var(--navy);
+}
+.implication-input .input-hint{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* NEW: Need-payoff section */
+.need-payoff-box{
+  background:#F7F6F3;
+  border:1px solid var(--line);
+  padding:24px 26px;
+  margin:0 0 24px;
+}
+.need-payoff-box h3{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--red);
+  margin:0 0 17px;
+  font-weight:700;
+}
+.need-payoff-box p{
+  margin:0 0 16px;
+  color:#394453;
+  font-size:14px;
+  line-height:1.75;
+}
+
+/* NEW: Retake warning */
+.retake-warning{
+  background:#FFF8F7;
+  border:1px solid #F0D5D0;
+  padding:20px 24px;
+  margin:0 0 28px;
+  display:none;
+}
+.retake-warning.active{display:block}
+.retake-warning h3{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--red);
+  margin:0 0 12px;
+  font-weight:700;
+}
+.retake-warning p{
+  margin:0 0 14px;
+  color:#5A3A35;
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* NEW: PDF takeaway / email capture */
+.takeaway-panel{
+  background:var(--pale);
+  border:1px solid var(--line);
+  padding:28px 30px;
+  margin:0 0 32px;
+}
+.takeaway-panel h3{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--navy);
+  margin:0 0 17px;
+  font-weight:700;
+}
+.takeaway-panel p{
+  margin:0 0 18px;
+  color:#394453;
+  font-size:14px;
+  line-height:1.75;
+}
+.takeaway-form{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.takeaway-form input{
+  flex:1;
+  min-width:220px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  font-size:14px;
+  color:var(--ink);
+  font-family:"Inter",Arial,sans-serif;
+}
+.takeaway-form input:focus{
+  outline:none;
+  border-color:var(--navy);
+}
+.takeaway-form button{
+  min-height:44px;
+  padding:0 22px;
+}
+
+/* NEW: Booking panel */
+.booking-panel{
+  background:#F0F4F8;
+  border:1px solid #C8D4E0;
+  padding:28px 30px;
+  margin:0 0 32px;
+}
+.booking-panel h3{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--success);
+  margin:0 0 17px;
+  font-weight:700;
+}
+.booking-panel p{
+  margin:0 0 18px;
+  color:#394453;
+  font-size:14px;
+  line-height:1.75;
+}
+.booking-data-preview{
+  background:var(--white);
+  border:1px solid var(--line);
+  padding:16px 20px;
+  margin:0 0 18px;
+  font-size:12px;
+  line-height:1.8;
+  color:#46505D;
+}
+.booking-data-preview strong{
+  color:var(--ink);
+  font-weight:600;
+}
+
 /* Review eligibility and pathway */
 .eligibility-note{margin:-10px 0 30px;padding:16px 18px;background:var(--pale);border-left:3px solid var(--navy);color:#46505D;font-size:13px;line-height:1.65}
 .eligibility-question{padding:0 0 25px;margin:0 0 25px;border-bottom:1px solid var(--line)}
@@ -572,10 +751,14 @@ input[type="range"]::-moz-range-thumb{
   .grid-categories{grid-template-columns:1fr}
   .radio-list{margin-left:0}
   .eligibility-options{grid-template-columns:1fr;margin-left:0}
+  .implication-input{margin-left:0}
   .summary-head{display:block}
   .outcome{margin-top:25px;width:100%}
   .attention-summary{display:block}
   .attention-note{margin-top:15px;max-width:none}
+  .takeaway-form{flex-direction:column}
+  .takeaway-form input{min-width:100%}
+  .booking-data-preview{font-size:11px}
 }
 @media print{
   .topbar,.progress-shell,.button,.text-button,.result-actions,.cta-note{display:none!important}
@@ -607,7 +790,7 @@ input[type="range"]::-moz-range-thumb{
         <div class="cover-details">
           <div><span class="meta-label">Issued by</span><div class="meta-value">Urban Eye<br>Security</div></div>
           <div><span class="meta-label">Reference</span><div class="meta-value">UES / PRA /<br>2026</div></div>
-          <div><span class="meta-label">Time</span><div class="meta-value">Approx.<br>4 minutes</div></div>
+          <div><span class="meta-label">Time</span><div class="meta-value">Approx.<br>6 minutes</div></div>
         </div>
         <div>
           <button class="button" type="button" data-goto="1">Begin assessment</button>
@@ -624,7 +807,7 @@ input[type="range"]::-moz-range-thumb{
     <div class="assessment">
       <aside class="section-rail">
         <div class="section-number">01</div>
-        <div class="section-count">Section 1 of 6</div>
+        <div class="section-count">Section 1 of 8</div>
         <h3 class="section-title">Property profile</h3>
         <p class="section-caption">Select the property under review.</p>
         <p class="privacy">Responses remain within this assessment until you choose to request a professional site review.</p>
@@ -665,7 +848,7 @@ input[type="range"]::-moz-range-thumb{
     <div class="assessment">
       <aside class="section-rail">
         <div class="section-number">02</div>
-        <div class="section-count">Section 2 of 6</div>
+        <div class="section-count">Section 2 of 8</div>
         <h3 class="section-title">Existing controls</h3>
         <p class="section-caption">Controls presently installed or operational.</p>
         <p class="privacy">Select only controls that are installed and currently working.</p>
@@ -696,7 +879,7 @@ input[type="range"]::-moz-range-thumb{
     <div class="assessment">
       <aside class="section-rail">
         <div class="section-number">03</div>
-        <div class="section-count">Section 3 of 6</div>
+        <div class="section-count">Section 3 of 8</div>
         <h3 class="section-title">Detection and response</h3>
         <p class="section-caption">Performance of current controls.</p>
         <p class="privacy">Responses should reflect current capability, not planned upgrades.</p>
@@ -753,7 +936,7 @@ input[type="range"]::-moz-range-thumb{
     <div class="assessment">
       <aside class="section-rail">
         <div class="section-number">04</div>
-        <div class="section-count">Section 4 of 6</div>
+        <div class="section-count">Section 4 of 8</div>
         <h3 class="section-title">Verification and testing</h3>
         <p class="section-caption">Confidence based on tested performance.</p>
         <p class="privacy">A security control is only reliable when its operation has been verified.</p>
@@ -789,6 +972,44 @@ input[type="range"]::-moz-range-thumb{
         </div>
         <div class="actions end">
           <button class="text-button" type="button" data-goto="3">Back</button>
+          <button class="button" type="button" data-goto="4.5">Continue</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW: Section 4.5 — Could It Be Possible (Perspective Shifting) -->
+  <section class="screen" id="screen-4.5">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">04</div>
+        <div class="section-count">Section 4.5 of 8</div>
+        <h3 class="section-title">Possibility review</h3>
+        <p class="section-caption">Reframing current limitations against verified alternatives.</p>
+        <p class="privacy">This section explores what verified protection would mean for this property.</p>
+      </aside>
+      <div class="stage">
+        <div class="eyebrow">Perspective shift</div>
+        <h2>What would verified, coordinated protection change?</h2>
+        <p class="intro">Before assessing the consequences of your current position, consider what a verified security arrangement would deliver. This helps calibrate whether the gap between your current state and verified protection is material.</p>
+
+        <div class="possibility-box">
+          <h3>Consider this scenario</h3>
+          <p id="possibilityScenario">If your current controls provided verified detection with remote confirmation, clear event documentation, and a coordinated response protocol for every after-hours access attempt — how would that change your confidence in protecting the people, assets and operations at this property?</p>
+        </div>
+
+        <div class="q">
+          <div class="q-heading"><span class="q-id">01</span><div class="q-text" id="possibilityQuestion">If unauthorised access to this property were detected within minutes, verified remotely, and escalated through a defined response protocol, how would that affect your operational confidence?</div></div>
+          <div class="radio-list">
+            <div class="radio" data-q="possibility" data-score="3"><div class="dot"></div>It would fundamentally change our risk position — we could operate with confirmed protection rather than assumption.</div>
+            <div class="radio" data-q="possibility" data-score="2"><div class="dot"></div>It would significantly improve confidence for high-value assets or vulnerable periods.</div>
+            <div class="radio" data-q="possibility" data-score="1"><div class="dot"></div>It would be a moderate improvement over current arrangements.</div>
+            <div class="radio" data-q="possibility" data-score="0"><div class="dot"></div>Current arrangements already provide sufficient confidence for our needs.</div>
+          </div>
+        </div>
+
+        <div class="actions end">
+          <button class="text-button" type="button" data-goto="4">Back</button>
           <button class="button" type="button" data-goto="5">Continue</button>
         </div>
       </div>
@@ -799,7 +1020,7 @@ input[type="range"]::-moz-range-thumb{
     <div class="assessment">
       <aside class="section-rail">
         <div class="section-number">05</div>
-        <div class="section-count">Section 5 of 6</div>
+        <div class="section-count">Section 5 of 8</div>
         <h3 class="section-title">Consequence and priority</h3>
         <p class="section-caption">Potential impact of delayed detection.</p>
         <p class="privacy">This identifies the primary consequence that protection measures should address.</p>
@@ -817,11 +1038,71 @@ input[type="range"]::-moz-range-thumb{
           </div>
         </div>
         <div class="q">
-          <div class="q-heading"><span class="q-id">02</span><div class="q-text">What would be the primary consequence of an after-hours security incident remaining undetected until the next operating period?</div></div>
+          <div class="q-heading"><span class="q-id">02</span><div class="q-text" id="impactQuestion">What would be the primary consequence of an after-hours security incident remaining undetected until the next operating period?</div></div>
           <div class="radio-list" id="impactOptions"></div>
         </div>
+
+        <!-- NEW: Quantified implication input -->
+        <div class="q">
+          <div class="q-heading"><span class="q-id">03</span><div class="q-text" id="quantifiedImpactQuestion">If an after-hours incident at this property went undetected, what is your estimated direct cost — including replacement of lost assets, repairs, business interruption, and any regulatory or contractual penalties?</div></div>
+          <div class="implication-input">
+            <label for="quantifiedCost">Estimated direct cost (KES)</label>
+            <input type="text" id="quantifiedCost" placeholder="e.g. 250000" inputmode="numeric">
+            <p class="input-hint" id="quantifiedHint">Consider stock, equipment, fittings, lost revenue days, and any penalties from insurers or landlords for inadequate protection.</p>
+          </div>
+        </div>
+
         <div class="actions end">
-          <button class="text-button" type="button" data-goto="4">Back</button>
+          <button class="text-button" type="button" data-goto="4.5">Back</button>
+          <button class="button" type="button" data-goto="5.5">Continue</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW: Section 5.5 — Need-Payoff (SPIN closure) -->
+  <section class="screen" id="screen-5.5">
+    <div class="assessment">
+      <aside class="section-rail">
+        <div class="section-number">05</div>
+        <div class="section-count">Section 5.5 of 8</div>
+        <h3 class="section-title">Value articulation</h3>
+        <p class="section-caption">Defining what solving this exposure is worth.</p>
+        <p class="privacy">This helps calibrate proportionate investment against verified risk reduction.</p>
+      </aside>
+      <div class="stage">
+        <div class="eyebrow">Need-payoff</div>
+        <h2>What would verified protection be worth to this operation?</h2>
+        <p class="intro">Before determining next steps, articulate the value of closing your highest-priority security gap. This ensures any recommended measures are proportionate to the risk and the operational value at stake.</p>
+
+        <div class="need-payoff-box">
+          <h3>Frame your thinking</h3>
+          <p id="needPayoffFrame">You have identified a gap between your current security position and verified, coordinated protection. The question is not whether security is important — it is whether the specific gap you have diagnosed justifies a professional review to define precise, budget-appropriate controls.</p>
+        </div>
+
+        <div class="q">
+          <div class="q-heading"><span class="q-id">01</span><div class="q-text" id="needPayoffQuestion1">If a professional site review identified specific, budget-appropriate controls that eliminated your highest-priority exposure — verified detection, remote confirmation, and coordinated response — what would justify the investment?</div></div>
+          <div class="radio-list">
+            <div class="radio" data-q="needpayoff" data-score="3"><div class="dot"></div>Preventing loss or damage that would exceed the review and implementation cost within a single incident.</div>
+            <div class="radio" data-q="needpayoff" data-score="2"><div class="dot"></div>Reducing insurance premiums, landlord penalties, or compliance exposure through verified controls.</div>
+            <div class="radio" data-q="needpayoff" data-score="2"><div class="dot"></div>Ensuring operational continuity — avoiding closure, project delay, or reputational damage.</div>
+            <div class="radio" data-q="needpayoff" data-score="1"><div class="dot"></div>Peace of mind for owners, managers, or occupants — confidence that the property is protected whether occupied or vacant.</div>
+            <div class="radio" data-q="needpayoff" data-score="0"><div class="dot"></div>I am not yet convinced the gap justifies professional review or investment.</div>
+          </div>
+        </div>
+
+        <div class="q">
+          <div class="q-heading"><span class="q-id">02</span><div class="q-text">What budget range would you consider proportionate for a professional review that delivers specific, justified recommendations for this property?</div></div>
+          <div class="radio-list">
+            <div class="radio" data-q="budget" data-score="3"><div class="dot"></div>Up to KES 50,000 for a comprehensive site review with written recommendations.</div>
+            <div class="radio" data-q="budget" data-score="2"><div class="dot"></div>Up to KES 25,000 for a focused review of the highest-priority gaps identified.</div>
+            <div class="radio" data-q="budget" data-score="1"><div class="dot"></div>Only if the review cost can be offset against subsequent implementation or insurance savings.</div>
+            <div class="radio" data-q="budget" data-score="0"><div class="dot"></div>I am not prepared to invest in a professional review at this stage.</div>
+          </div>
+        </div>
+
+        <div class="actions end">
+          <button class="text-button" type="button" data-goto="5">Back</button>
           <button class="button" type="button" data-goto="6">Continue</button>
         </div>
       </div>
@@ -832,7 +1113,7 @@ input[type="range"]::-moz-range-thumb{
     <div class="assessment">
       <aside class="section-rail">
         <div class="section-number">06</div>
-        <div class="section-count">Section 6 of 6</div>
+        <div class="section-count">Section 6 of 8</div>
         <h3 class="section-title">Review eligibility</h3>
         <p class="section-caption">Suitability for a professional Urban Eye review.</p>
         <p class="privacy">Security exposure and consultation suitability are evaluated separately. A review invitation is not generated automatically.</p>
@@ -841,6 +1122,15 @@ input[type="range"]::-moz-range-thumb{
         <div class="eyebrow">Review pathway</div>
         <h2>Is a professional site review appropriate at this stage?</h2>
         <p class="intro">These final questions determine whether Urban Eye can responsibly proceed to a site-review conversation, or whether preparation is required first.</p>
+
+        <!-- NEW: Retake warning -->
+        <div class="retake-warning" id="retakeWarning">
+          <h3>Multiple assessment attempts detected</h3>
+          <p>We noticed you have reviewed this assessment more than once. Our diagnostic tool is designed for honest, current-state answers — not for achieving a preferred outcome.</p>
+          <p>If your situation has genuinely changed, you may continue. Otherwise, we recommend booking a brief eligibility call to discuss why your initial responses did not qualify and whether an exception is appropriate.</p>
+          <button class="button button-secondary" type="button" id="retakeBookCall" style="margin-top:8px;font-size:12px;min-height:40px;padding:0 18px;">Book eligibility discussion</button>
+        </div>
+
         <div class="eligibility-note">A professional review is considered only where responsibility, location, access arrangements and a genuine intention to evaluate improvements are sufficiently clear.</div>
         <div class="eligibility-question"><div class="q-heading"><span class="q-id">01</span><div class="q-text">What is your relationship to the property being assessed?</div></div><div class="eligibility-options">
           <div class="radio eligibility-option" data-field="relationship" data-value="owner"><div class="dot"></div>I own the property.</div>
@@ -872,7 +1162,7 @@ input[type="range"]::-moz-range-thumb{
           <div class="radio eligibility-option" data-field="inspection" data-value="approval"><div class="dot"></div>Possibly, subject to internal approval.</div>
           <div class="radio eligibility-option" data-field="inspection" data-value="no"><div class="dot"></div>No.</div>
         </div></div>
-        <div class="actions end"><button class="text-button" type="button" data-goto="5">Back</button><button class="button" type="button" id="produceResults" disabled>Generate outcome</button></div>
+        <div class="actions end"><button class="text-button" type="button" data-goto="5.5">Back</button><button class="button" type="button" id="produceResults" disabled>Generate outcome</button></div>
       </div>
     </div>
   </section>
@@ -922,6 +1212,27 @@ input[type="range"]::-moz-range-thumb{
           <h3>Immediate consideration</h3>
           <p>Where occupants, staff, valuable assets or active operations may be exposed, inform the responsible property decision-maker of the identified gaps and confirm what interim security and emergency-response arrangements are currently available.</p>
         </div>
+
+        <!-- NEW: Booking panel for green-light respondents -->
+        <div class="booking-panel hidden" id="bookingPanel">
+          <h3>Book your 1-on-1 Security Review Consultation</h3>
+          <p>Your assessment indicates this property is suitable for a professional site review. The next step is a 30-minute consultation where we review your diagnostic data, discuss your specific operational concerns, and determine whether an on-site assessment is justified.</p>
+          <div class="booking-data-preview" id="bookingDataPreview"></div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">This data will be shared with your interviewer 30 minutes before your call. Nothing is sold during this consultation — it is a diagnostic conversation only.</p>
+          <a class="button" id="bookConsultation" href="#" target="_blank" style="text-decoration:none;">Book consultation with data pre-loaded</a>
+        </div>
+
+        <!-- NEW: Takeaway panel for yellow/red respondents -->
+        <div class="takeaway-panel hidden" id="takeawayPanel">
+          <h3>Your security gap summary</h3>
+          <p id="takeawayText">Enter your email to receive a one-page summary of the gaps identified in this assessment, plus the preparation checklist required before reapplying. This is not a full report — it is designed to help you brief the responsible decision-maker.</p>
+          <div class="takeaway-form">
+            <input type="email" id="takeawayEmail" placeholder="your.email@company.com">
+            <button class="button" type="button" id="sendTakeaway">Email my gap summary</button>
+          </div>
+          <p id="takeawayConfirm" style="display:none;color:var(--success);font-size:13px;margin-top:12px;">✓ Your gap summary has been sent. Review the preparation checklist and return when requirements are confirmed.</p>
+        </div>
+
         <div class="findings">
           <h3>Priority findings</h3>
           <ol class="findings-list" id="findingsList"></ol>
@@ -931,7 +1242,6 @@ input[type="range"]::-moz-range-thumb{
           <p id="recommendationText"></p>
         </div>
         <div class="result-actions">
-          <a class="button hidden" id="applyForReview" href="https://www.urbaneyesecurity.co.ke/contact/?service=risk-review&amp;pathway=priority">Apply for a site review</a>
           <button class="button hidden" type="button" id="printPreparation">Print preparation checklist</button>
           <button class="button hidden" type="button" id="reviewRequirements">Review requirements before reapplying</button>
           <button class="button button-secondary" type="button" id="printSummary">Print outcome</button>
@@ -946,15 +1256,34 @@ input[type="range"]::-moz-range-thumb{
 
 <script>
 (() => {
+  // NEW: Retake tracking via localStorage
+  const RETAKE_KEY = 'ues_assessment_attempts';
+  const RETAKE_TIMES_KEY = 'ues_assessment_timestamps';
+
+  const trackAttempt = () => {
+    const attempts = parseInt(localStorage.getItem(RETAKE_KEY) || '0', 10) + 1;
+    localStorage.setItem(RETAKE_KEY, String(attempts));
+    const timestamps = JSON.parse(localStorage.getItem(RETAKE_TIMES_KEY) || '[]');
+    timestamps.push(new Date().toISOString());
+    localStorage.setItem(RETAKE_TIMES_KEY, JSON.stringify(timestamps.slice(-10)));
+    return attempts;
+  };
+
+  const currentAttempt = trackAttempt();
+
   const state = {
     screen: 0,
     property: "",
     controls: new Set(),
-    scores: { alert: null, remote: null, breach: null, coordination: null, test: null },
+    scores: { alert: null, remote: null, breach: null, coordination: null, test: null, possibility: null, needpayoff: null, budget: null },
     coverage: 5,
     speed: 5,
     priority: 7,
     impact: "",
+    quantifiedCost: "",
+    possibility: null,
+    needpayoff: null,
+    budget: null,
     eligibility: { relationship: "", location: "", action: "", timeline: "", inspection: "" }
   };
 
@@ -967,7 +1296,12 @@ input[type="range"]::-moz-range-thumb{
         "Safety exposure to occupants or family members.",
         "Delayed awareness of intrusion, fire or another urgent event.",
         "Multiple safety, property and peace-of-mind consequences."
-      ]
+      ],
+      possibilityScenario: "If your current controls provided verified detection with remote confirmation, clear event documentation, and a coordinated response protocol for every after-hours access attempt — how would that change your confidence in protecting your family, valuables and home?",
+      possibilityQuestion: "If unauthorised access to your residence were detected within minutes, verified remotely, and escalated through a defined response protocol, how would that affect your confidence in the safety of occupants whether you are home or away?",
+      quantifiedHint: "Consider replacement of electronics, jewellery, furnishings, plus temporary relocation costs if the property is rendered uninhabitable, and any insurance excess or premium increases.",
+      needPayoffFrame: "You have identified a gap between your current home security position and verified, coordinated protection. The question is not whether security matters — it is whether the specific gap you have diagnosed justifies a professional review to define precise, budget-appropriate controls for your residence.",
+      needPayoffQuestion1: "If a professional site review identified specific, budget-appropriate controls that eliminated your highest-priority exposure — verified detection, remote confirmation, and coordinated response — what would justify the investment for your home?"
     },
     retail: {
       verification: "How confident are you that a forced entry or staff-safety incident would be detected, documented and communicated quickly enough to reduce loss and disruption?",
@@ -977,7 +1311,12 @@ input[type="range"]::-moz-range-thumb{
         "Closure, repairs or interrupted trading.",
         "Staff safety exposure during trading or closing hours.",
         "Multiple financial, operational and safety consequences."
-      ]
+      ],
+      possibilityScenario: "If your current controls provided verified detection with remote confirmation, clear event documentation, and a coordinated response protocol for every after-hours access attempt — how would that change your confidence in protecting stock, cash and staff?",
+      possibilityQuestion: "If forced entry or a staff-safety incident at your premises were detected within minutes, verified remotely with visual confirmation, and escalated through a defined response protocol, how would that affect your confidence in reducing loss and disruption?",
+      quantifiedHint: "Consider lost stock value, cash on premises, repair costs, days of closed trading, staff compensation for trauma or injury, and any regulatory fines for inadequate staff protection.",
+      needPayoffFrame: "You have identified a gap between your current retail security position and verified, coordinated protection. The question is not whether security matters — it is whether the specific gap you have diagnosed justifies a professional review to define precise, budget-appropriate controls for your premises.",
+      needPayoffQuestion1: "If a professional site review identified specific, budget-appropriate controls that eliminated your highest-priority exposure — verified detection, remote confirmation, and coordinated response — what would justify the investment for your retail operation?"
     },
     office: {
       verification: "How confident are you that unauthorised access to sensitive areas, records or IT assets would be detected and recorded?",
@@ -987,7 +1326,12 @@ input[type="range"]::-moz-range-thumb{
         "Loss of IT or operational assets.",
         "Business disruption or reputational damage.",
         "Multiple governance, financial and operational consequences."
-      ]
+      ],
+      possibilityScenario: "If your current controls provided verified detection with remote confirmation, clear event documentation, and a coordinated response protocol for every after-hours access attempt — how would that change your confidence in protecting records, IT assets and client data?",
+      possibilityQuestion: "If unauthorised access to sensitive areas, records or IT assets were detected within minutes, verified remotely, and escalated through a defined response protocol, how would that affect your confidence in data protection and regulatory compliance?",
+      quantifiedHint: "Consider cost of data breach notification, regulatory fines (e.g., under Data Protection Act), IT asset replacement, client compensation, reputational recovery, and business interruption during forensic investigation.",
+      needPayoffFrame: "You have identified a gap between your current office security position and verified, coordinated protection. The question is not whether security matters — it is whether the specific gap you have diagnosed justifies a professional review to define precise, budget-appropriate controls for your premises.",
+      needPayoffQuestion1: "If a professional site review identified specific, budget-appropriate controls that eliminated your highest-priority exposure — verified detection, remote confirmation, and coordinated response — what would justify the investment for your office facility?"
     },
     warehouse: {
       verification: "How confident are you that unauthorised movement of goods, vehicles or personnel after hours would be detected and investigated promptly?",
@@ -997,7 +1341,12 @@ input[type="range"]::-moz-range-thumb{
         "Weak control over goods movement or loading activity.",
         "Operational disruption and supply-chain delay.",
         "Multiple inventory, operational and financial consequences."
-      ]
+      ],
+      possibilityScenario: "If your current controls provided verified detection with remote confirmation, clear event documentation, and a coordinated response protocol for every after-hours access attempt — how would that change your confidence in protecting inventory, equipment and supply chain integrity?",
+      possibilityQuestion: "If unauthorised movement of goods, vehicles or personnel after hours were detected within minutes, verified remotely with loading-bay confirmation, and escalated through a defined response protocol, how would that affect your confidence in inventory control and supply-chain integrity?",
+      quantifiedHint: "Consider replacement value of lost inventory, equipment downtime, supply-chain penalties from delayed deliveries, insurance excess, and cost of emergency procurement to fulfil orders.",
+      needPayoffFrame: "You have identified a gap between your current warehouse security position and verified, coordinated protection. The question is not whether security matters — it is whether the specific gap you have diagnosed justifies a professional review to define precise, budget-appropriate controls for your operation.",
+      needPayoffQuestion1: "If a professional site review identified specific, budget-appropriate controls that eliminated your highest-priority exposure — verified detection, remote confirmation, and coordinated response — what would justify the investment for your warehouse and logistics operation?"
     },
     construction: {
       verification: "How confident are you that unauthorised access, material theft or equipment interference after hours would be identified promptly?",
@@ -1007,7 +1356,12 @@ input[type="range"]::-moz-range-thumb{
         "Injury or liability arising from unauthorised site access.",
         "Project delay and additional replacement cost.",
         "Multiple safety, asset and delivery consequences."
-      ]
+      ],
+      possibilityScenario: "If your current controls provided verified detection with remote confirmation, clear event documentation, and a coordinated response protocol for every after-hours access attempt — how would that change your confidence in protecting plant, materials and project timeline?",
+      possibilityQuestion: "If unauthorised access, material theft or equipment interference after hours were detected within minutes, verified remotely, and escalated through a defined response protocol, how would that affect your confidence in project delivery and liability exposure?",
+      quantifiedHint: "Consider replacement cost of plant and tools, project delay penalties from the client, extended site security costs, increased insurance premiums, and liability exposure if an intruder is injured on site.",
+      needPayoffFrame: "You have identified a gap between your current construction site security position and verified, coordinated protection. The question is not whether security matters — it is whether the specific gap you have diagnosed justifies a professional review to define precise, budget-appropriate controls for your site.",
+      needPayoffQuestion1: "If a professional site review identified specific, budget-appropriate controls that eliminated your highest-priority exposure — verified detection, remote confirmation, and coordinated response — what would justify the investment for your construction project?"
     },
     airbnb: {
       verification: "How confident are you that unauthorised access or urgent safety events during vacant periods would be reported promptly to the responsible person?",
@@ -1017,7 +1371,12 @@ input[type="range"]::-moz-range-thumb{
         "Damage to furnishings, fittings or electronics.",
         "Delayed awareness of smoke, fire or water-related incidents.",
         "Multiple guest-safety, property and revenue consequences."
-      ]
+      ],
+      possibilityScenario: "If your current controls provided verified detection with remote confirmation, clear event documentation, and a coordinated response protocol for every after-hours access attempt — how would that change your confidence in protecting furnishings, guest safety and rental income?",
+      possibilityQuestion: "If unauthorised access or urgent safety events during vacant periods were detected within minutes, verified remotely, and escalated through a defined response protocol, how would that affect your confidence in guest safety and property protection?",
+      quantifiedHint: "Consider replacement of furnishings and electronics, guest refund or relocation costs, platform penalty ratings, lost future bookings, and any landlord or body-corporate fines for security breaches.",
+      needPayoffFrame: "You have identified a gap between your current short-stay property security position and verified, coordinated protection. The question is not whether security matters — it is whether the specific gap you have diagnosed justifies a professional review to define precise, budget-appropriate controls for your property.",
+      needPayoffQuestion1: "If a professional site review identified specific, budget-appropriate controls that eliminated your highest-priority exposure — verified detection, remote confirmation, and coordinated response — what would justify the investment for your short-stay property?"
     }
   };
 
@@ -1041,11 +1400,14 @@ input[type="range"]::-moz-range-thumb{
     state.screen = number;
     document.getElementById("progressBar").style.width = (number / 7 * 100) + "%";
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (number === 4 || number === 5) updatePropertyCopy();
+    if (number === 4 || number === 5 || number === 4.5 || number === 5.5) updatePropertyCopy();
+    if (number === 6 && currentAttempt > 1) {
+      document.getElementById("retakeWarning").classList.add("active");
+    }
   };
 
   document.querySelectorAll("[data-goto]").forEach(button => {
-    button.addEventListener("click", () => showScreen(Number(button.dataset.goto)));
+    button.addEventListener("click", () => showScreen(button.dataset.goto));
   });
 
   document.querySelectorAll(".category").forEach(button => {
@@ -1129,6 +1491,12 @@ input[type="range"]::-moz-range-thumb{
   syncSlider("speed", "speedValue", "speedDescription", "verification");
   syncSlider("priority", "priorityValue", "priorityDescription", "priority");
 
+  // NEW: Quantified cost input
+  document.getElementById("quantifiedCost").addEventListener("input", (e) => {
+    state.quantifiedCost = e.target.value.replace(/[^0-9]/g, '');
+    e.target.value = state.quantifiedCost;
+  });
+
   const updatePropertyCopy = () => {
     const content = propertyContent[state.property] || propertyContent.residential;
     document.getElementById("specificVerification").textContent = content.verification;
@@ -1137,6 +1505,22 @@ input[type="range"]::-moz-range-thumb{
     options.innerHTML = content.impact.map(option =>
       '<div class="radio" data-q="impact" data-score="0"><div class="dot"></div>' + option + '</div>'
     ).join("");
+
+    // NEW: Update possibility section
+    const possScenario = document.getElementById("possibilityScenario");
+    if (possScenario) possScenario.textContent = content.possibilityScenario;
+    const possQuestion = document.getElementById("possibilityQuestion");
+    if (possQuestion) possQuestion.textContent = content.possibilityQuestion;
+
+    // NEW: Update quantified hint
+    const quantHint = document.getElementById("quantifiedHint");
+    if (quantHint) quantHint.textContent = content.quantifiedHint;
+
+    // NEW: Update need-payoff section
+    const needFrame = document.getElementById("needPayoffFrame");
+    if (needFrame) needFrame.textContent = content.needPayoffFrame;
+    const needQuestion = document.getElementById("needPayoffQuestion1");
+    if (needQuestion) needQuestion.textContent = content.needPayoffQuestion1;
   };
 
   const statusClass = value => {
@@ -1208,13 +1592,51 @@ input[type="range"]::-moz-range-thumb{
     };
   };
 
+  // NEW: Build assessment data payload for booking URL
+  const buildBookingPayload = () => {
+    const payload = {
+      property: state.property,
+      overall: document.getElementById("overallStatus").textContent,
+      attention: document.getElementById("attentionCount").textContent,
+      findings: [],
+      controls: Array.from(state.controls),
+      scores: {
+        alert: state.scores.alert,
+        remote: state.scores.remote,
+        breach: state.scores.breach,
+        coordination: state.scores.coordination,
+        test: state.scores.test,
+        possibility: state.scores.possibility,
+        needpayoff: state.scores.needpayoff,
+        budget: state.scores.budget
+      },
+      coverage: state.coverage,
+      speed: state.speed,
+      priority: state.priority,
+      impact: state.impact,
+      quantifiedCost: state.quantifiedCost,
+      eligibility: state.eligibility,
+      timestamp: new Date().toISOString()
+    };
+    // Get top 3 findings text
+    const findingElements = document.querySelectorAll(".finding");
+    findingElements.forEach((el, i) => {
+      if (i < 3) {
+        const text = el.querySelector("span:last-child").textContent.trim();
+        payload.findings.push(text.substring(0, 120));
+      }
+    });
+    return btoa(JSON.stringify(payload));
+  };
+
   const displayReviewPathway = (pathway, overall, consequence) => {
     const status = document.getElementById("pathwayStatus");
     const text = document.getElementById("pathwayText");
     const reason = document.getElementById("pathwayReason");
     const heading = document.getElementById("preparationHeading");
     const list = document.getElementById("preparationList");
-    const apply = document.getElementById("applyForReview");
+    const bookingPanel = document.getElementById("bookingPanel");
+    const takeawayPanel = document.getElementById("takeawayPanel");
     const printPreparation = document.getElementById("printPreparation");
     const reviewRequirements = document.getElementById("reviewRequirements");
     const note = document.getElementById("applicationNote");
@@ -1229,39 +1651,140 @@ input[type="range"]::-moz-range-thumb{
     heading.classList.add("hidden");
     list.innerHTML = "";
     list.classList.add("hidden");
-    apply.classList.add("hidden");
+    bookingPanel.classList.add("hidden");
+    takeawayPanel.classList.add("hidden");
     printPreparation.classList.add("hidden");
     reviewRequirements.classList.add("hidden");
     note.classList.add("hidden");
     immediateNotice.classList.add("hidden");
 
     if (pathway.type === "priority") {
-      apply.classList.remove("hidden");
+      // NEW: Show booking panel with data preview
+      bookingPanel.classList.remove("hidden");
       note.classList.remove("hidden");
-      return;
-    }
 
-    if (pathway.reasons.length) {
-      reason.innerHTML = "<strong>Why you cannot proceed yet:</strong><br>" + pathway.reasons.join("<br>");
-      reason.classList.remove("hidden");
-    }
+      // Build data preview
+      const dataPreview = document.getElementById("bookingDataPreview");
+      const propertyNames = {
+        residential: "Residential Property",
+        retail: "Retail Premises",
+        office: "Office Facility",
+        warehouse: "Warehouse & Logistics",
+        construction: "Construction Site",
+        airbnb: "Short-Stay Property"
+      };
+      const controlsList = Array.from(state.controls).map(c => {
+        const names = {
+          perimeter: "Perimeter wall/fence",
+          guard: "On-site guard",
+          basicAlarm: "Basic alarm",
+          smartAlarm: "Smart alarm",
+          cctv: "CCTV",
+          access: "Access control",
+          monitoring: "Monitoring service",
+          none: "No controls"
+        };
+        return names[c] || c;
+      }).join(", ") || "None selected";
 
-    if (pathway.steps.length) {
-      heading.classList.remove("hidden");
-      list.innerHTML = pathway.steps.map(step => "<li>" + step + "</li>").join("");
-      list.classList.remove("hidden");
-    }
+      dataPreview.innerHTML = `
+        <strong>Property type:</strong> ${propertyNames[state.property] || state.property}<br>
+        <strong>Overall status:</strong> ${overall}<br>
+        <strong>Controls in place:</strong> ${controlsList}<br>
+        <strong>Priority areas:</strong> ${document.getElementById("attentionCount").textContent} of 4 require attention<br>
+        <strong>Estimated exposure:</strong> KES ${state.quantifiedCost || "Not provided"}<br>
+        <strong>Location:</strong> ${state.eligibility.location || "Not specified"}
+      `;
 
-    reviewRequirements.classList.remove("hidden");
-    if (pathway.type === "preparation") {
+        // NEW: Build booking URL with encoded payload
+        const payload = buildBookingPayload();
+        document.getElementById("bookConsultation").href = 
+          "https://www.urbaneyesecurity.co.ke/consultation-booking/?data=" + encodeURIComponent(payload) + 
+         "&source=assessment&pathway=priority";
+        return;
+      }
+
+      // NEW: Show takeaway panel for non-priority respondents
+      takeawayPanel.classList.remove("hidden");
+
+      if (pathway.reasons.length) {
+        reason.innerHTML = "<strong>Why you cannot proceed yet:</strong><br>" + pathway.reasons.join("<br>");
+        reason.classList.remove("hidden");
+      }
+
+      if (pathway.steps.length) {
+        heading.classList.remove("hidden");
+        list.innerHTML = pathway.steps.map(step => "<li>" + step + "</li>").join("");
+        list.classList.remove("hidden");
+      }
+
+      reviewRequirements.classList.remove("hidden");
+      if (pathway.type === "preparation") {
       printPreparation.classList.remove("hidden");
-    }
+      }
 
-    if (overall === "Review Required" || consequence === "High Priority") {
+      if (overall === "Review Required" || consequence === "High Priority") {
       immediateNotice.classList.remove("hidden");
-    }
+      }
+    };
+
+  // NEW: Email takeaway handler
+  document.getElementById("sendTakeaway").addEventListener("click", async () => {
+  const email = document.getElementById("takeawayEmail").value.trim();
+  if (!email || !email.includes("@")) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  const btn = document.getElementById("sendTakeaway");
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+
+  // Build submission payload
+  const overall = document.getElementById("overallStatus").textContent;
+  const attentionCount = document.getElementById("attentionCount").textContent;
+
+  const payload = {
+    email: email,
+    property_type: state.property || "Not specified",
+    overall_status: overall,
+    attention_areas: attentionCount + " of 4",
+    estimated_exposure_kes: state.quantifiedCost || "Not provided",
+    location: state.eligibility?.location || "Not specified",
+    relationship: state.eligibility?.relationship || "Not specified",
+    timeline: state.eligibility?.timeline || "Not specified",
+    priority_score: state.priority || "Not scored",
+    source: "Urban Eye Security Readiness Assessment",
+    submitted_at: new Date().toISOString()
   };
 
+  try {
+    const response = await fetch("https://formspree.io/f/mdavopbk", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      document.getElementById("takeawayConfirm").style.display = "block";
+      document.getElementById("takeawayEmail").disabled = true;
+      btn.textContent = "Sent";
+    } else {
+      btn.disabled = false;
+      btn.textContent = "Send report";
+      alert("There was a problem sending your report. Please try again.");
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = "Send report";
+    alert("Connection error. Please check your internet and try again.");
+  }
+  });
+
+  // NEW: Retake book call handler
+  document.getElementById("retakeBookCall").addEventListener("click", () => {
+    window.open("https://www.urbaneyesecurity.co.ke/contact/?reason=retake-eligibility&attempts=" + currentAttempt, "_blank");
+  });
 
   const calculateSummary = () => {
     const selectedControls = state.controls;
@@ -1323,7 +1846,6 @@ input[type="range"]::-moz-range-thumb{
     ].filter(Boolean).length;
     document.getElementById("attentionCount").textContent = areasRequiringAttention;
 
-
     document.getElementById("statusTable").innerHTML = rows.map(([key, value]) => {
       let cls = "status-developing";
       if (value === "Strong controls indicated" || value === "Timely alerts indicated" || value === "Good readiness indicated") cls = "status-strong";
@@ -1338,6 +1860,18 @@ input[type="range"]::-moz-range-thumb{
     if ((state.scores.breach ?? 0) < 2) findings.push(["Timely detection in vulnerable areas is not confirmed.", "Unauthorised activity may remain undetected during the period in which loss, disruption or safety exposure can occur."]);
     if (state.coverage < 6) findings.push(["Coverage of access points and vulnerable areas requires verification.", "Doors, windows, gates, restricted areas or operational risk zones may not all be addressed by an appropriate control."]);
     if ((state.scores.test ?? 0) < 2) findings.push(["Recent testing is not evidenced.", "Operational performance of detection or notification measures should be physically confirmed."]);
+
+    // NEW: Add possibility and need-payoff based findings
+    if ((state.scores.possibility ?? 0) >= 2 && overall !== "Strong Foundation") {
+      findings.push(["You recognise the value of verified protection.", "Your responses indicate that coordinated, verified controls would materially improve your security position. A professional review can define the specific measures required."]);
+    }
+    if (state.quantifiedCost && parseInt(state.quantifiedCost) > 100000 && overall !== "Strong Foundation") {
+      findings.push(["Significant financial exposure identified.", "You estimated KES " + state.quantifiedCost + " in potential direct costs. This exposure level typically justifies a professional review to define proportionate protective measures."]);
+    }
+    if ((state.scores.needpayoff ?? 0) >= 2 && overall !== "Strong Foundation") {
+      findings.push(["Business case for review is acknowledged.", "You indicated that preventing loss, ensuring continuity, or reducing compliance exposure would justify investment. A professional review can quantify the specific return on protective investment."]);
+    }
+
     if (findings.length === 0) findings.push(["A suitable security foundation is indicated.", "A professional review can validate control placement, maintenance and escalation arrangements."]);
 
     document.getElementById("findingsList").innerHTML = findings.slice(0,5).map((finding, index) =>
