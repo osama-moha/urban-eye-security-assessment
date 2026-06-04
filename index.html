@@ -760,6 +760,66 @@ input[type="range"]::-moz-range-thumb{
   .takeaway-form input{min-width:100%}
   .booking-data-preview{font-size:11px}
 }
+/* NEW: Framework recommendation */
+.framework-recommendation{
+  background:#F0F4F8;
+  border:1px solid #C8D4E0;
+  padding:28px 30px;
+  margin:0 0 32px;
+}
+.framework-recommendation h3{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--success);
+  margin:0 0 17px;
+  font-weight:700;
+}
+.framework-name{
+  font-size:21px;
+  font-weight:600;
+  color:var(--navy);
+  letter-spacing:-.025em;
+  margin-bottom:6px;
+}
+.framework-price{
+  font-size:16px;
+  font-weight:600;
+  color:var(--red);
+  margin-bottom:12px;
+}
+.framework-why{
+  font-size:13.5px;
+  line-height:1.75;
+  color:#46505D;
+  margin:0 0 18px;
+}
+.framework-note{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:12px;
+  line-height:1.6;
+}
+.framework-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:0 22px;
+  background:var(--navy);
+  color:#fff;
+  font:600 12px/1 "Inter",Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  text-decoration:none;
+  transition:background .16s;
+}
+.framework-link:hover{background:#13204F}
+@media (max-width:850px){
+  .framework-recommendation{padding:22px 20px}
+  .framework-name{font-size:18px}
+  .framework-price{font-size:14px}
+}
 @media print{
   .topbar,.progress-shell,.button,.text-button,.result-actions,.cta-note{display:none!important}
   body,.page{background:#fff;padding:0}
@@ -972,14 +1032,14 @@ input[type="range"]::-moz-range-thumb{
         </div>
         <div class="actions end">
           <button class="text-button" type="button" data-goto="3">Back</button>
-          <button class="button" type="button" data-goto="4.5">Continue</button>
+          <button class="button" type="button" data-goto="4_5">Continue</button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- NEW: Section 4.5 — Could It Be Possible (Perspective Shifting) -->
-  <section class="screen" id="screen-4.5">
+  <section class="screen" id="screen-4_5">
     <div class="assessment">
       <aside class="section-rail">
         <div class="section-number">04</div>
@@ -1053,15 +1113,15 @@ input[type="range"]::-moz-range-thumb{
         </div>
 
         <div class="actions end">
-          <button class="text-button" type="button" data-goto="4.5">Back</button>
-          <button class="button" type="button" data-goto="5.5">Continue</button>
+          <button class="text-button" type="button" data-goto="4_5">Back</button>
+          <button class="button" type="button" data-goto="5_5">Continue</button>
         </div>
       </div>
     </div>
   </section>
 
   <!-- NEW: Section 5.5 — Need-Payoff (SPIN closure) -->
-  <section class="screen" id="screen-5.5">
+  <section class="screen" id="screen-5_5">
     <div class="assessment">
       <aside class="section-rail">
         <div class="section-number">05</div>
@@ -1162,7 +1222,7 @@ input[type="range"]::-moz-range-thumb{
           <div class="radio eligibility-option" data-field="inspection" data-value="approval"><div class="dot"></div>Possibly, subject to internal approval.</div>
           <div class="radio eligibility-option" data-field="inspection" data-value="no"><div class="dot"></div>No.</div>
         </div></div>
-        <div class="actions end"><button class="text-button" type="button" data-goto="5.5">Back</button><button class="button" type="button" id="produceResults" disabled>Generate outcome</button></div>
+        <div class="actions end"><button class="text-button" type="button" data-goto="5_5">Back</button><button class="button" type="button" id="produceResults" disabled>Generate outcome</button></div>
       </div>
     </div>
   </section>
@@ -1225,7 +1285,7 @@ input[type="range"]::-moz-range-thumb{
         <!-- NEW: Takeaway panel for yellow/red respondents -->
         <div class="takeaway-panel hidden" id="takeawayPanel">
           <h3>Your security gap summary</h3>
-          <p id="takeawayText">Enter your email to receive a one-page summary of the gaps identified in this assessment, plus the preparation checklist required before reapplying. This is not a full report — it is designed to help you brief the responsible decision-maker.</p>
+          <p id="takeawayText">Enter your email to receive a one-page summary of the gaps identified in this assessment, plus the preparation checklist required before reapplying. <span id="takeawayCostSpan"></span>This is not a full report — it is designed to help you brief the responsible decision-maker and return with confirmed requirements.</p>
           <div class="takeaway-form">
             <input type="email" id="takeawayEmail" placeholder="your.email@company.com">
             <button class="button" type="button" id="sendTakeaway">Email my gap summary</button>
@@ -1235,8 +1295,16 @@ input[type="range"]::-moz-range-thumb{
 
         <div class="findings">
           <h3>Priority findings</h3>
-          <ol class="findings-list" id="findingsList"></ol>
+          <ol class="findings-list" id="findingsList">        </div>
+
+        <!-- NEW: Framework recommendation based on assessment -->
+        <div class="framework-recommendation hidden" id="frameworkRec">
+          <h3>Recommended starting framework</h3>
+          <div id="frameworkRecContent"></div>
+          <a class="framework-link" id="frameworkRecLink" href="https://urbaneyesecurity.co.ke/security-packages/" target="_blank">View package details and pricing</a>
+          <p class="framework-note">This is a starting estimate based on your assessment responses. Final scope and pricing are confirmed after your site review.</p>
         </div>
+
         <div class="recommendation">
           <h3>Assessment conclusion and recommended action</h3>
           <p id="recommendationText"></p>
@@ -1400,7 +1468,7 @@ input[type="range"]::-moz-range-thumb{
     state.screen = number;
     document.getElementById("progressBar").style.width = (number / 7 * 100) + "%";
     window.scrollTo({ top: 0, behavior: "smooth" });
-    if (number === 4 || number === 5 || number === 4.5 || number === 5.5) updatePropertyCopy();
+    if (number === 4 || number === 5 || number === "4_5" || number === "5_5") updatePropertyCopy();
     if (number === 6 && currentAttempt > 1) {
       document.getElementById("retakeWarning").classList.add("active");
     }
@@ -1696,95 +1764,244 @@ input[type="range"]::-moz-range-thumb{
         <strong>Location:</strong> ${state.eligibility.location || "Not specified"}
       `;
 
-        // NEW: Build booking URL with encoded payload
-        const payload = buildBookingPayload();
-        document.getElementById("bookConsultation").href = 
-          "https://www.urbaneyesecurity.co.ke/consultation-booking/?data=" + encodeURIComponent(payload) + 
-         "&source=assessment&pathway=priority";
-        return;
+      // NEW: Build booking URL with encoded payload
+      const payload = buildBookingPayload();
+      // Get the recommended framework for URL
+      const frameworkEl = document.getElementById("frameworkRecContent");
+      let frameworkName = "";
+      let frameworkService = "risk-review";
+      if (frameworkEl) {
+        const nameEl = frameworkEl.querySelector(".framework-name");
+        if (nameEl) {
+          frameworkName = nameEl.textContent;
+          // Map framework to service parameter your contact page expects
+          const fwMap = {
+            "Urban Eye Essential Home": "residential",
+            "Urban Eye Complete Home": "residential",
+            "Urban Eye Premium Home": "residential",
+            "Urban Eye Essential Retail": "retail",
+            "Urban Eye Storefront Guardian": "retail",
+            "Urban Eye Office Shield": "office",
+            "Urban Eye Resilient Logistics": "warehouse",
+            "Construction Site Protection": "construction"
+          };
+          frameworkService = fwMap[frameworkName] || "risk-review";
+        }
       }
 
-      // NEW: Show takeaway panel for non-priority respondents
-      takeawayPanel.classList.remove("hidden");
+      // Map timeline to contact page format
+      const tlMap = { "30": "Within 30 days", "90": "1-3 months", "later": "Later this year", "none": "Not sure" };
+      const timelineValue = tlMap[state.eligibility.timeline] || "Not sure";
 
-      if (pathway.reasons.length) {
-        reason.innerHTML = "<strong>Why you cannot proceed yet:</strong><br>" + pathway.reasons.join("<br>");
-        reason.classList.remove("hidden");
-      }
+      // Build main concern summary
+      const controlsList = Array.from(state.controls).map(c => {
+        const names = { perimeter: "Perimeter wall/fence", guard: "On-site guard", basicAlarm: "Basic alarm", smartAlarm: "Smart alarm", cctv: "CCTV", access: "Access control", monitoring: "Monitoring service", none: "No controls" };
+        return names[c] || c;
+      }).join(", ") || "None";
 
-      if (pathway.steps.length) {
-        heading.classList.remove("hidden");
-        list.innerHTML = pathway.steps.map(step => "<li>" + step + "</li>").join("");
-        list.classList.remove("hidden");
-      }
+      const overall = document.getElementById("overallStatus").textContent;
+      const attentionCount = document.getElementById("attentionCount").textContent;
 
-      reviewRequirements.classList.remove("hidden");
-      if (pathway.type === "preparation") {
+      const mainConcern = 
+        "Assessment Results: " + overall + " | " +
+        "Attention: " + attentionCount + " of 4 | " +
+        "Controls: " + controlsList + " | " +
+        "Estimated Exposure: KES " + (state.quantifiedCost || "Not provided") + " | " +
+        "Location: " + (state.eligibility.location || "Not specified") + " | " +
+        "Framework: " + (frameworkName || "Not specified");
+
+      document.getElementById("bookConsultation").href = 
+        "https://urbaneyesecurity.co.ke/contact/" +
+        "?source=assessment" +
+        "&service=" + frameworkService +
+        "&property_type=" + (state.property || "") +
+        "&preferred_timeline=" + encodeURIComponent(timelineValue) +
+        "&main_concern=" + encodeURIComponent(mainConcern);
+      return;
+    }
+
+    // NEW: Show takeaway panel for non-priority respondents
+    takeawayPanel.classList.remove("hidden");
+
+    if (pathway.reasons.length) {
+      reason.innerHTML = "<strong>Why you cannot proceed yet:</strong><br>" + pathway.reasons.join("<br>");
+      reason.classList.remove("hidden");
+    }
+
+    if (pathway.steps.length) {
+      heading.classList.remove("hidden");
+      list.innerHTML = pathway.steps.map(step => "<li>" + step + "</li>").join("");
+      list.classList.remove("hidden");
+    }
+
+    reviewRequirements.classList.remove("hidden");
+    if (pathway.type === "preparation") {
       printPreparation.classList.remove("hidden");
-      }
+    }
 
-      if (overall === "Review Required" || consequence === "High Priority") {
+    if (overall === "Review Required" || consequence === "High Priority") {
       immediateNotice.classList.remove("hidden");
-      }
-    };
+    }
+  };
 
   // NEW: Email takeaway handler
   document.getElementById("sendTakeaway").addEventListener("click", async () => {
-  const email = document.getElementById("takeawayEmail").value.trim();
-  if (!email || !email.includes("@")) {
-    alert("Please enter a valid email address.");
-    return;
-  }
+    const email = document.getElementById("takeawayEmail").value.trim();
+    if (!email || !email.includes("@")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
 
-  const btn = document.getElementById("sendTakeaway");
-  btn.disabled = true;
-  btn.textContent = "Sending...";
+    const btn = document.getElementById("sendTakeaway");
+    btn.disabled = true;
+    btn.textContent = "Sending...";
 
-  // Build submission payload
-  const overall = document.getElementById("overallStatus").textContent;
-  const attentionCount = document.getElementById("attentionCount").textContent;
+    // Build submission payload
+    const overall = document.getElementById("overallStatus").textContent;
+    const attentionCount = document.getElementById("attentionCount").textContent;
 
-  const payload = {
-    email: email,
-    property_type: state.property || "Not specified",
-    overall_status: overall,
-    attention_areas: attentionCount + " of 4",
-    estimated_exposure_kes: state.quantifiedCost || "Not provided",
-    location: state.eligibility?.location || "Not specified",
-    relationship: state.eligibility?.relationship || "Not specified",
-    timeline: state.eligibility?.timeline || "Not specified",
-    priority_score: state.priority || "Not scored",
-    source: "Urban Eye Security Readiness Assessment",
-    submitted_at: new Date().toISOString()
-  };
+    const payload = {
+      email: email,
+      property_type: state.property || "Not specified",
+      overall_status: overall,
+      attention_areas: attentionCount + " of 4",
+      estimated_exposure_kes: state.quantifiedCost || "Not provided",
+      location: state.eligibility?.location || "Not specified",
+      relationship: state.eligibility?.relationship || "Not specified",
+      timeline: state.eligibility?.timeline || "Not specified",
+      priority_score: state.priority || "Not scored",
+      source: "Urban Eye Security Readiness Assessment",
+      submitted_at: new Date().toISOString()
+    };
 
-  try {
-    const response = await fetch("https://formspree.io/f/mdavopbk", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(payload)
-    });
+    try {
+      const response = await fetch("https://formspree.io/f/mdavopbk", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-    if (response.ok) {
-      document.getElementById("takeawayConfirm").style.display = "block";
-      document.getElementById("takeawayEmail").disabled = true;
-      btn.textContent = "Sent";
-    } else {
+      if (response.ok) {
+        document.getElementById("takeawayConfirm").style.display = "block";
+        document.getElementById("takeawayEmail").disabled = true;
+        btn.textContent = "Sent";
+      } else {
+        btn.disabled = false;
+        btn.textContent = "Send report";
+        alert("There was a problem sending your report. Please try again.");
+      }
+    } catch (err) {
       btn.disabled = false;
       btn.textContent = "Send report";
-      alert("There was a problem sending your report. Please try again.");
+      alert("Connection error. Please check your internet and try again.");
     }
-  } catch (err) {
-    btn.disabled = false;
-    btn.textContent = "Send report";
-    alert("Connection error. Please check your internet and try again.");
-  }
   });
 
   // NEW: Retake book call handler
   document.getElementById("retakeBookCall").addEventListener("click", () => {
-    window.open("https://www.urbaneyesecurity.co.ke/contact/?reason=retake-eligibility&attempts=" + currentAttempt, "_blank");
+    window.open("https://urbaneyesecurity.co.ke/contact/?source=assessment&service=risk-review&main_concern=" + encodeURIComponent("Assessment retake: attempted " + currentAttempt + " times. Eligibility discussion required."), "_blank");
   });
+
+  const recommendFramework = () => {
+    const property = state.property;
+    const controls = state.controls;
+    const overall = document.getElementById("overallStatus").textContent;
+    const priority = state.priority;
+    const quantifiedCost = parseInt(state.quantifiedCost || '0');
+    const budget = state.scores.budget;
+
+    let rec = null;
+    let anchor = '';
+
+    if (property === 'residential') {
+      if (overall === 'Review Required' || priority >= 9 || quantifiedCost > 500000 || controls.has('none')) {
+        rec = {
+          name: 'Urban Eye Premium Home',
+          price: 'From KES 295,900',
+          anchor: '#premium-home',
+          why: 'Your assessment indicates significant gaps or high-value exposure. Premium adds perimeter detection, CCTV integration, and comprehensive monitoring for layered protection.'
+        };
+      } else if (overall === 'Developing Readiness' || priority >= 6 || controls.has('basicAlarm') || controls.has('guard')) {
+        rec = {
+          name: 'Urban Eye Complete Home',
+          price: 'From KES 138,000',
+          anchor: '#complete-home',
+          why: 'Your assessment shows some controls but gaps in verification or response. Complete adds photo-verified sensors, outdoor deterrence, and coordinated monitoring.'
+        };
+      } else {
+        rec = {
+          name: 'Urban Eye Essential Home',
+          price: 'From KES 89,500',
+          anchor: '#essential-home',
+          why: 'Your assessment indicates a starting foundation is appropriate. Essential covers entry points and main living areas with smart detection and app control.'
+        };
+      }
+    } else if (property === 'retail') {
+      if (controls.has('cctv') && controls.has('access') && overall !== 'Review Required') {
+        rec = {
+          name: 'Urban Eye Storefront Guardian',
+          price: 'From KES 175,000',
+          anchor: '#storefront-guardian',
+          why: 'Your assessment shows you have some electronic controls. Storefront Guardian adds glass-break detection, POS monitoring, staff access logging, and monitoring-ready CCTV.'
+        };
+      } else {
+        rec = {
+          name: 'Urban Eye Essential Retail',
+          price: 'Custom quote post-survey',
+          anchor: '#essential-retail',
+          why: 'Your assessment indicates a foundational retail security setup is needed. Final scope is set after reviewing your shop layout, stockroom risks, and cash-handling areas.'
+        };
+      }
+    } else if (property === 'office') {
+      rec = {
+        name: 'Urban Eye Office Shield',
+        price: 'From KES 299,500',
+        anchor: '#office-shield',
+        why: 'Your assessment indicates a workspace needing role-based access, zoned intrusion alarms, audit trails, and fire safety integration for staff and visitor management.'
+      };
+    } else if (property === 'warehouse') {
+      rec = {
+        name: 'Urban Eye Resilient Logistics',
+        price: 'Custom written quotation',
+        anchor: '#resilient-logistics',
+        why: 'Your assessment indicates a warehouse or distribution operation. Final scope covers loading bays, stockrooms, perimeter detection, and inventory control after site review.'
+      };
+    } else if (property === 'construction') {
+      if (budget === 0 || budget === null) {
+        rec = {
+          name: 'Construction Site Protection',
+          price: 'Equipment purchase or managed lease from KES 35,000',
+          anchor: '#construction-lease',
+          why: 'Your assessment indicates a temporary site. The managed lease option converts security to a monthly operational expense with no long-term hardware commitment.'
+        };
+      } else {
+        rec = {
+          name: 'Construction Site Protection',
+          price: 'Equipment purchase from KES 75,000 or managed lease from KES 35,000 + KES 38,500/month',
+          anchor: '#construction-purchase',
+          why: 'Your assessment indicates a temporary site. Choose equipment purchase for capital projects or managed lease for operational flexibility.'
+        };
+      }
+    } else if (property === 'airbnb') {
+      rec = {
+        name: 'Urban Eye Complete Home',
+        price: 'From KES 138,000',
+        anchor: '#complete-home',
+        why: 'Your assessment indicates a short-stay property needing vacant-period protection with guest-privacy-conscious exterior monitoring, remote oversight, and host notification.'
+      };
+    }
+
+    if (rec) {
+      const container = document.getElementById('frameworkRecContent');
+      container.innerHTML = `
+        <div class="framework-name">${rec.name}</div>
+        <div class="framework-price">${rec.price}</div>
+        <p class="framework-why">${rec.why}</p>
+      `;
+      document.getElementById('frameworkRecLink').href = 'https://urbaneyesecurity.co.ke/security-packages/' + rec.anchor;
+      document.getElementById('frameworkRec').classList.remove('hidden');
+    }
+  };
 
   const calculateSummary = () => {
     const selectedControls = state.controls;
@@ -1892,6 +2109,16 @@ input[type="range"]::-moz-range-thumb{
       ? "The responses indicate that important controls exist, but one or more gaps may limit detection, verification or coordinated response. A professional site review is recommended to confirm vulnerable areas, assess existing controls and define practical corrective measures."
       : "The responses indicate material gaps in the current security readiness position. A professional site review is recommended to establish the protection baseline, identify priority vulnerabilities and define appropriate detection and response measures for the premises.";
     document.getElementById("recommendationText").textContent = recommendation;
+    // Update takeaway text with cost if available
+    const costSpan = document.getElementById('takeawayCostSpan');
+    if (costSpan) {
+      if (state.quantifiedCost && parseInt(state.quantifiedCost) > 0) {
+        costSpan.textContent = 'You estimated a potential direct cost of KES ' + parseInt(state.quantifiedCost).toLocaleString() + '. ';
+      } else {
+        costSpan.textContent = '';
+      }
+    }
+    recommendFramework();
     displayReviewPathway(determineReviewPathway(), overall, consequence);
     showScreen(7);
   };
