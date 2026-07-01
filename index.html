@@ -117,7 +117,7 @@ gtag('config', 'G-ZER6GV8ZCS');
   .hero-title .t-dark{color:var(--navy);}
   .hero-hook{
     font-family:var(--display);font-weight:700;font-size:clamp(1.05rem,2.2vw,1.3rem);
-    color:var(--navy);margin-bottom:14px;max-width:540px;max-width:42rem;
+    color:var(--navy);margin-bottom:14px;max-width:42rem;
   }
   .hero-sub{font-size:1.05rem;color:var(--gray-2);margin-bottom:10px;max-width:42rem;}
   .hero-audience{
@@ -205,23 +205,40 @@ gtag('config', 'G-ZER6GV8ZCS');
   }
 
   .eco-grid{
-    display:grid;grid-template-columns:repeat(7,1fr);gap:20px;margin-top:8px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px;
   }
   .eco-item{
-    display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;
-    padding:22px 8px;
+    display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;
+    padding:28px 16px;
+    background:var(--bg-soft);border:1px solid var(--gray-3);
+    border-radius:var(--radius-md);
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .eco-item:hover {
+    transform:translateY(-2px);
+    border-color:var(--navy);
   }
   .eco-icon{
-    width:72px;height:72px;border-radius:50%;border:1.5px solid var(--gray-3);
+    width:100px;height:100px;border-radius:50%;border:1.5px solid var(--gray-3);
     display:flex;align-items:center;justify-content:center;background:#fff;
     overflow:hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,.03);
   }
   .eco-icon svg{width:24px;height:24px;stroke:var(--navy);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;}
-  .eco-icon img{width:52px;height:52px;object-fit:contain;}
-  .eco-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--gray-2);}
-  .eco-notes{margin-top:40px;display:flex;flex-direction:column;gap:20px;max-width:680px;margin-left:auto;margin-right:auto;text-align:center;}
-  .eco-notes p{font-size:1rem;color:var(--gray-2);line-height:1.7;max-width:42rem;margin-left:auto;margin-right:auto;}
+  .eco-icon img{width:76px;height:76px;object-fit:contain;transition:transform .25s ease;}
+  .eco-item:hover .eco-icon img{transform:scale(1.08);}
+  .eco-label{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--navy-soft);}
+  .eco-notes{margin-top:48px;display:flex;flex-direction:column;gap:24px;max-width:680px;margin-left:auto;margin-right:auto;text-align:center;}
+  .eco-notes p{font-size:.98rem;color:var(--gray-2);line-height:1.65;max-width:42rem;margin-left:auto;margin-right:auto;}
   .eco-notes strong{color:var(--navy);}
+
+  .pitch-quote{
+    font-family:var(--display);font-size:1.35rem;font-weight:800;
+    color:var(--navy);line-height:1.3;
+    margin-bottom:8px;padding:0 16px;
+    border-left:3px solid var(--red);border-right:3px solid var(--red);
+    display:inline-block;
+  }
 
   .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
   .pkg-card{
@@ -262,7 +279,7 @@ gtag('config', 'G-ZER6GV8ZCS');
     max-width:480px;
     margin-left:auto;
     margin-right:auto;
-    line-height:1.65;
+    line-height: 1.65;
   }
 
   .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
@@ -289,17 +306,17 @@ gtag('config', 'G-ZER6GV8ZCS');
   .foot-copy{font-size:.85rem;color:var(--gray-2);}
 
   @media (max-width:920px){
-    .eco-grid{grid-template-columns:repeat(4,1fr);}
+    .eco-grid{grid-template-columns:repeat(2, 1fr);}
     .pkg-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto;}
   }
   @media (max-width:680px){
     .section{padding:56px 0;}
-    .eco-grid{grid-template-columns:repeat(3,1fr);}
+    .eco-grid{grid-template-columns:repeat(3, 1fr);}
     .wordmark .wm-sub{display:none;}
     .hero-ctas .btn{flex:1 1 auto;}
     .toggle-btn{padding:10px 14px;font-size:11px;}
-    .eco-icon{width:60px;height:60px;}
-    .eco-icon img{width:42px;height:42px;}
+    .eco-icon{width:80px;height:80px;}
+    .eco-icon img{width:60px;height:60px;}
   }
 </style>
 </head>
@@ -354,7 +371,7 @@ gtag('config', 'G-ZER6GV8ZCS');
 
       <div class="diagram-card">
         <div class="diagram" id="diagram" data-mode="wired">
-          <svg class="diagram-svg" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Diagram comparing a legacy wired alarm to an Urban Eye wireless system">
+          <svg class="diagram-svg" viewBox="0 0 640 510" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Diagram comparing a legacy wired alarm to an Urban Eye wireless system">
 
             <line class="connector" x1="320" y1="170" x2="140" y2="75"/>
             <line class="connector" x1="320" y1="170" x2="500" y2="75"/>
@@ -403,9 +420,9 @@ gtag('config', 'G-ZER6GV8ZCS');
             <!-- outside / monitoring node -->
             <circle class="node-ring out-ring" cx="320" cy="400" r="44"/>
             <image xlink:href="images/logo.png" href="images/logo.png" x="280" y="360" width="80" height="80" preserveAspectRatio="xMidYMid meet"/>
-            <text class="out-status wired-only" x="320" y="436">NO SIGNAL</text>
-            <text class="out-status ajax-only" x="320" y="436">CONNECTED</text>
-            <text class="out-title" x="320" y="463">MONITORING &amp; RESPONSE</text>
+            <text class="out-status wired-only" x="320" y="465">NO SIGNAL</text>
+            <text class="out-status ajax-only" x="320" y="465">CONNECTED</text>
+            <text class="out-title" x="320" y="490">MONITORING &amp; RESPONSE</text>
           </svg>
 
           <div class="stat-lists">
@@ -475,8 +492,11 @@ gtag('config', 'G-ZER6GV8ZCS');
       </div>
 
       <div class="eco-notes">
-        <p>Most alarm hardware looks like it belongs in a 1990s office. A large plastic box, visible cabling, a utilitarian keypad bolted to the wall. <strong>Ajax is designed like a modern device, not industrial equipment.</strong> Sensors are slim, available in white or black, and sit on a wall without looking like an afterthought. There is no large panel box. Visitors see a discreet sensor, not a security installation.</p>
-        <p>Standard door and motion sensors run <strong>5 to 7 years on a single battery.</strong> The MotionCam, the sensor that takes the verification photo, runs 3 to 4 years. The app monitors every device and alerts you six months before any battery actually needs replacing. No emergency callouts, no surprises.</p>
+        <blockquote class="pitch-quote">
+          “Ajax is designed like a modern device, not industrial equipment.”
+        </blockquote>
+        <p>Most alarm hardware looks like it belongs in a 1990s office. A large plastic box, visible cabling, and a utilitarian keypad bolted to the wall. Sensors should sit on a wall without looking like an afterthought. There is no large panel box. Visitors see a discreet, premium design, not a security installation.</p>
+        <p>Standard door and motion sensors run <strong>5 to 7 years on a single battery.</strong> The MotionCam runs 3 to 4 years. The app monitors every device and alerts you six months before any battery actually needs replacing. No emergency callouts, no surprises.</p>
       </div>
     </div>
   </section>
@@ -624,7 +644,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       toggleWrap.classList.add('has-interacted');
     });
-  }
+  });
 });
 </script>
 
