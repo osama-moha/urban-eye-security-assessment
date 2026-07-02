@@ -3,667 +3,1309 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Security That Sees More | Urban Eye Security</title>
-<meta name="description" content="Wireless security vs. legacy wired alarms — see what actually changes when the power or the line goes down, and how you can verify what triggered an alert before deciding what to do next.">
+<title>Professional Security. Effortless Installation. | Urban Eye Security</title>
+<meta name="description" content="No wires. No concrete drilling. Zero lines to cut. Professional grade security that installs in minutes and keeps you connected through anything.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17823714787"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'AW-17823714787');
-gtag('config', 'G-ZER6GV8ZCS');
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --red:#C8102E;
-    --red-dark:#9C0C24;
-    --red-tint:#FBEAEC;
-    --navy:#161D2B;
-    --navy-soft:#232C3D;
-    --gray-1:#9AA1AA;
-    --gray-2:#666D77;
-    --gray-3:#E4E6E9;
-    --bg:#FFFFFF;
-    --bg-soft:#F6F6F7;
-    --green:#2BAE66;
-    --display:'Archivo',sans-serif;
-    --body:'Inter',sans-serif;
-    --mono:'IBM Plex Mono',monospace;
-    --radius-sm:4px;
-    --radius-md:12px;
-    --maxw:1120px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:var(--body);
-    color:var(--navy);
-    background:var(--bg);
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  img,svg{display:block;max-width:100%;}
-  a{color:inherit;text-decoration:none;}
-  button{font-family:inherit;cursor:pointer;border:none;background:none;}
-  ul{list-style:none;}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
-  .eyebrow{
-    font-family:var(--mono);font-size:12px;font-weight:600;
-    letter-spacing:.16em;text-transform:uppercase;color:var(--red);
-    display:flex;align-items:center;gap:10px;margin-bottom:18px;
-  }
-  .eyebrow::before{content:"";width:18px;height:2px;background:var(--red);display:inline-block;}
-  .section{padding:clamp(64px,9vw,108px) 0;}
-  .section--soft{background:var(--bg-soft);}
-  .section--dark{background:var(--navy);color:#fff;}
-  .section-head{max-width:640px;margin-bottom:48px;}
-  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
-  h2{
-    font-family:var(--display);font-weight:800;
-    font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.08;
-    letter-spacing:-.01em;margin-bottom:14px;
-  }
-  .section--dark h2{color:#fff;}
-  .lede{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--gray-2);max-width:42rem;}
-  .section--dark .lede{color:#B7BDC9;}
-
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    font-family:var(--display);font-weight:800;font-size:13.5px;
-    letter-spacing:.05em;text-transform:uppercase;
-    padding:16px 30px;border-radius:var(--radius-sm);
-    transition:transform .15s ease, background .15s ease, border-color .15s ease;
-    white-space:nowrap;
-  }
-  .btn:active{transform:scale(.98);}
-  .btn-primary{background:var(--red);color:#fff;}
-  .btn-primary:hover{background:var(--red-dark);}
-  .btn-sm{padding:11px 20px;font-size:12px;}
-  .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--gray-3);}
-  .btn-ghost:hover{border-color:var(--navy);}
-  .btn-dark-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);}
-  .btn-dark-ghost:hover{border-color:#fff;}
-  :focus-visible{outline:2px solid var(--red);outline-offset:3px;}
-
-  .topbar{
-    position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);
-    backdrop-filter:blur(10px);border-bottom:1px solid transparent;
-    transition:border-color .2s ease, box-shadow .2s ease;
-  }
-  .topbar.is-scrolled{border-color:var(--gray-3);box-shadow:0 2px 18px rgba(22,29,43,.06);}
-  .topbar-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
-  .wordmark{display:flex;flex-direction:column;line-height:1;}
-  .wordmark .wm-top{font-family:var(--display);font-weight:900;font-size:18px;letter-spacing:-.01em;}
-  .wordmark .wm-top .red{color:var(--red);}
-  .wordmark .wm-sub{font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--gray-2);margin-top:3px;}
-
-  .hero{padding:64px 0 80px;position:relative;}
-  .hero::after{
-    content:"";position:absolute;inset:0;z-index:-1;
-    background-image:repeating-linear-gradient(135deg, rgba(22,29,43,.03) 0 1px, transparent 1px 64px);
-  }
-  .hero-inner{max-width:760px;}
-  .hero-title{
-    font-family:var(--display);font-weight:900;text-transform:uppercase;
-    font-size:clamp(2.5rem,7vw,4.4rem);line-height:.96;letter-spacing:-.015em;
-    margin-bottom:26px;
-  }
-  .hero-title span{display:block;}
-  .hero-title .t-light{color:var(--gray-1);}
-  .hero-title .t-dark{color:var(--navy);}
-  .hero-hook{
-    font-family:var(--display);font-weight:700;font-size:clamp(1.05rem,2.2vw,1.3rem);
-    color:var(--navy);margin-bottom:14px;max-width:42rem;
-  }
-  .hero-sub{font-size:1.05rem;color:var(--gray-2);margin-bottom:10px;max-width:42rem;}
-  .hero-audience{
-    font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--gray-2);margin-bottom:34px;
-  }
-  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;}
-
-  .diff-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;margin-bottom:8px;}
-  .toggle{
-    display:inline-flex;background:#EAECEF;
-    border-radius:999px;padding:5px;gap:4px;position:relative;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,.06);
-  }
-  .toggle-btn{
-    font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.04em;
-    text-transform:uppercase;padding:11px 20px;border-radius:999px;color:var(--gray-2);
-    transition:all .25s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  .toggle-btn.is-active{
-    background:var(--navy);color:#fff;
-    box-shadow: 0 2px 8px rgba(22,29,43,.2);
-  }
-  .toggle-wrap{position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:8px;}
-  .hint{
-    font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.04em;
-    animation:bob 1.6s ease-in-out infinite;
-  }
-  .has-interacted .hint{display:none;}
-  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
-
-  .diagram-card{
-    margin-top:44px;background:var(--bg-soft);border:1px solid var(--gray-3);
-    border-radius:20px;padding:clamp(20px,4vw,44px) clamp(16px,4vw,44px) clamp(32px,4vw,48px);
-  }
-  .diagram-svg{width:100%;height:auto;max-width:640px;margin:0 auto;}
-  .node-label{font-family:var(--mono);font-size:13px;letter-spacing:.05em;fill:var(--gray-2);text-anchor:middle;}
-  .node-ring{fill:#fff;stroke:var(--navy);stroke-width:2;opacity:.85;}
-  .node-icon{stroke:var(--navy);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;}
-  .connector{stroke:var(--navy);stroke-width:2;opacity:.35;}
-  .hub-ring{fill:var(--navy);}
-  .hub-label{font-family:var(--mono);font-size:14px;font-weight:600;fill:#fff;text-anchor:middle;}
-
-  .ajax-only,.wired-only{transition:opacity .25s ease;}
-  .diagram[data-mode="wired"] .ajax-only{opacity:0;pointer-events:none;}
-  .diagram[data-mode="ajax"] .wired-only{opacity:0;pointer-events:none;}
-
-  .out-ring{stroke-width:2.5;}
-  .diagram[data-mode="wired"] .out-ring{stroke:var(--gray-1);fill:#fff;}
-  .diagram[data-mode="ajax"] .out-ring{stroke:var(--green);fill:#EFFAF3;}
-  .out-status{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-anchor:middle;}
-  .diagram[data-mode="wired"] .out-status{fill:var(--gray-2);}
-  .diagram[data-mode="ajax"] .out-status{fill:var(--green);}
-  .out-title{font-family:var(--mono);font-size:13px;fill:var(--gray-2);text-anchor:middle;letter-spacing:.05em;}
-
-  @media (prefers-reduced-motion: no-preference){
-    .pulse-ring{animation:pulse 2.2s ease-out infinite;}
-  }
-  @keyframes pulse{
-    0%{opacity:.55;transform:scale(1);}
-    70%{opacity:0;transform:scale(1.9);}
-    100%{opacity:0;transform:scale(1.9);}
+  :root {
+    --bg-pure: #ffffff;
+    --bg-soft: #f6f8fa;
+    --bg-card: #ffffff;
+    --border-soft: #e5e5e7;
+    --text-primary: #111111;
+    --text-muted: #666d77;
+    --accent-red: #c8102e;
+    --accent-green: #24a04b;
+    
+    --display: 'Archivo', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
   }
 
-  .stat-lists{max-width:580px;margin:36px auto 0;}
-  .stat-list{display:flex;flex-direction:column;gap:14px;}
-  .diagram[data-mode="ajax"] .stat-list.wired-only{display:none;}
-  .diagram[data-mode="wired"] .stat-list.ajax-only{display:none;}
-  .stat-list li{
-    display:flex;gap:12px;align-items:flex-start;font-size:.98rem;color:var(--navy);
-    padding:13px 16px;background:#fff;border:1px solid var(--gray-3);border-radius:10px;
-    max-width:42rem;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--bg-pure);
+    color: var(--text-primary);
+    font-family: var(--body);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
   }
-  .stat-list .dot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;}
-  .diagram[data-mode="wired"] .stat-list .dot{background:var(--gray-1);}
-  .diagram[data-mode="ajax"] .stat-list .dot{background:var(--green);}
+  body.drawer-open { overflow: hidden; }
 
-  .badge-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px;min-height:34px;}
-  .badge{
-    font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.04em;
-    padding:8px 14px;border-radius:999px;
-    background: #F0F4F8;
-    color: #1E3A5F;
-    border: 1px solid #CBD5E1;
-  }
-
-  .eco-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px;
-  }
-  .eco-item{
-    display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;
-    padding:28px 16px;
-    background:var(--bg-soft);border:1px solid var(--gray-3);
-    border-radius:var(--radius-md);
-    transition: transform .2s ease, border-color .2s ease;
-  }
-  .eco-item:hover {
-    transform:translateY(-2px);
-    border-color:var(--navy);
-  }
-  .eco-icon{
-    width:100px;height:100px;border-radius:50%;border:1.5px solid var(--gray-3);
-    display:flex;align-items:center;justify-content:center;background:#fff;
-    overflow:hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,.03);
-  }
-  .eco-icon svg{width:24px;height:24px;stroke:var(--navy);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;}
-  .eco-icon img{width:76px;height:76px;object-fit:contain;transition:transform .25s ease;}
-  .eco-item:hover .eco-icon img{transform:scale(1.08);}
-  .eco-label{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--navy-soft);}
-  .eco-notes{margin-top:48px;display:flex;flex-direction:column;gap:24px;max-width:680px;margin-left:auto;margin-right:auto;text-align:center;}
-  .eco-notes p{font-size:.98rem;color:var(--gray-2);line-height:1.65;max-width:42rem;margin-left:auto;margin-right:auto;}
-  .eco-notes strong{color:var(--navy);}
-
-  .pitch-quote{
-    font-family:var(--display);font-size:1.35rem;font-weight:800;
-    color:var(--navy);line-height:1.3;
-    margin-bottom:8px;padding:0 16px;
-    border-left:3px solid var(--red);border-right:3px solid var(--red);
-    display:inline-block;
-  }
-
-  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  .pkg-card{
-    background:#fff;border:1.5px solid var(--gray-3);border-radius:16px;
-    padding:30px 26px;display:flex;flex-direction:column;gap:14px;position:relative;
-    transition:border-color .2s ease, transform .2s ease;
-  }
-  .pkg-card:hover{transform:translateY(-4px);border-color:var(--navy);}
-  .pkg-card.is-rec{border-color:var(--red);box-shadow:0 18px 40px rgba(200,16,46,.1);}
-  .pkg-tag{
-    position:absolute;top:-13px;left:26px;background:var(--red);color:#fff;
-    font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.08em;
-    padding:5px 12px;border-radius:999px;text-transform:uppercase;
-  }
-  .pkg-name{font-family:var(--display);font-weight:800;font-size:1.18rem;letter-spacing:-.005em;}
-  .pkg-price{font-family:var(--mono);font-size:1.5rem;font-weight:600;color:var(--navy);}
-  .pkg-price span{font-size:.62em;color:var(--gray-2);font-weight:500;display:block;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px;}
-  .pkg-connect{font-size:.82rem;color:var(--gray-2);margin-top:-6px;}
-  .pkg-best{font-size:.88rem;color:var(--gray-2);}
-  .pkg-best strong{color:var(--navy);font-weight:600;}
-  .pkg-desc{font-size:.92rem;color:var(--gray-2);flex:1;max-width:42rem;}
-  .pkg-link{
-    font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--red);
-    letter-spacing:.04em;display:inline-flex;align-items:center;gap:6px;margin-top:auto;
-  }
-  .pkg-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;margin-top:38px;padding-top:30px;border-top:1px solid var(--gray-3);}
-  .pkg-note{font-size:.92rem;color:var(--gray-2);max-width:480px;}
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
   
-  .pkg-seed{
-    font-style:normal;
-    font-size:.9rem;
-    color:var(--gray-2);
-    margin-top:24px;
-    padding:20px 24px;
-    background: #F8F9FB;
-    border-left: 4px solid var(--red);
-    border-radius: 0 8px 8px 0;
-    max-width:480px;
-    margin-left:auto;
-    margin-right:auto;
-    line-height: 1.65;
+  /* Typography Scale */
+  h1, h2, h3, h4 { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; color: var(--text-primary); }
+  p { font-size: 16px; font-weight: 300; color: var(--text-muted); }
+  
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    color: var(--accent-red); letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 16px;
+    transition: opacity 0.2s ease;
   }
 
-  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
-  details{background:#fff;border:1.5px solid var(--gray-3);border-radius:12px;padding:6px 22px;}
-  details[open]{border-color:var(--navy);}
-  summary{
-    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
-    gap:16px;padding:18px 0;font-family:var(--display);font-weight:700;font-size:1.02rem;
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--display); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 18px 36px; border-radius: 2px; border: none; cursor: pointer;
+    text-decoration: none; /* Prevents underlines when using <a> tags */
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
   }
-  summary::-webkit-details-marker{display:none;}
-  .plus{flex:none;width:22px;height:22px;position:relative;}
-  .plus::before,.plus::after{content:"";position:absolute;background:var(--navy);top:50%;left:50%;transform:translate(-50%,-50%);transition:transform .2s ease;}
-  .plus::before{width:14px;height:2px;}
-  .plus::after{width:2px;height:14px;}
-  details[open] .plus::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0;}
-  .faq-answer{padding:0 0 22px;color:var(--gray-2);font-size:.97rem;max-width:42rem;}
+  .btn-primary { background: var(--text-primary); color: var(--bg-pure); }
+  .btn-primary:hover { background: #333333; }
+  .btn-ghost { background: transparent; color: var(--text-primary); border: 1.5px solid var(--text-primary); }
+  .btn-ghost:hover { background: rgba(0, 0, 0, 0.04); }
+  .btn:active { transform: scale(0.98); }
 
-  .final-inner{max-width:620px;margin:0 auto;text-align:center;}
-  .final-ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:34px;}
-  .final-note{margin-top:20px;font-family:var(--mono);font-size:12px;color:#828A98;letter-spacing:.04em;}
-
-  footer{padding:48px 0;border-top:1px solid var(--gray-3);}
-  .foot-inner{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px;}
-  .foot-copy{font-size:.85rem;color:var(--gray-2);}
-
-  @media (max-width:920px){
-    .eco-grid{grid-template-columns:repeat(2, 1fr);}
-    .pkg-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto;}
+  /* Navigation Bar */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-soft);
   }
-  @media (max-width:680px){
-    .section{padding:56px 0;}
-    .eco-grid{grid-template-columns:repeat(3, 1fr);}
-    .wordmark .wm-sub{display:none;}
-    .hero-ctas .btn{flex:1 1 auto;}
-    .toggle-btn{padding:10px 14px;font-size:11px;}
-    .eco-icon{width:80px;height:80px;}
-    .eco-icon img{width:60px;height:60px;}
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { 
+    font-family: var(--display); 
+    font-weight: 900; 
+    font-size: 16px; 
+    letter-spacing: 0.1em; 
+    color: var(--text-primary); 
+    text-decoration: none; 
+  }
+  .logo span { color: var(--accent-red); }
+
+  /* Mode Switcher Pill */
+  .mode-toggle-pill {
+    display: inline-flex;
+    background: var(--bg-soft);
+    border: 1px solid var(--border-soft);
+    padding: 2px;
+    border-radius: 2px;
+  }
+  .mode-pill-btn {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .mode-pill-btn.active {
+    background: var(--text-primary);
+    color: var(--bg-pure);
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 180px 0 100px;
+    background-image: radial-gradient(circle at 80% 20%, rgba(200, 16, 46, 0.03) 0%, transparent 60%);
+    min-height: 90vh; display: flex; align-items: center;
+  }
+  .hero-inner { max-width: 800px; }
+  .hero h1 { font-size: clamp(2.5rem, 6.5vw, 4.8rem); line-height: 0.95; margin-bottom: 24px; transition: opacity 0.2s ease; }
+  .hero-price { font-family: var(--mono); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 600; margin-bottom: 16px; }
+  .hero-price span { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 4px; }
+  .hero p { font-size: clamp(16px, 1.8vw, 20px); margin-bottom: 36px; max-width: 580px; transition: opacity 0.2s ease; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Core Layout Grid */
+  .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
+  .section--soft { background-color: var(--bg-soft); }
+  .section-head { max-width: 600px; margin-bottom: 60px; }
+  .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.0; margin-bottom: 16px; }
+  
+  /* Catalog Style Hardware Listing Layout */
+  .catalog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .catalog-row {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: 2px;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 180px 1.5fr 2.5fr 1fr;
+    align-items: center;
+    gap: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .catalog-row:hover {
+    border-color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  }
+  .catalog-img-wrap {
+    width: 100%;
+    height: 140px;
+    background: var(--bg-soft);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    padding: 12px;
+    border: 1px solid var(--border-soft);
+  }
+  .catalog-img-wrap img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .catalog-row:hover .catalog-img-wrap img {
+    transform: scale(1.05);
+  }
+  .catalog-info h3 {
+    font-size: 17px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .catalog-color-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--bg-soft);
+    padding: 4px 8px;
+    border-radius: 2px;
+    margin-top: 6px;
+    border: 1px solid var(--border-soft);
+  }
+  .color-dots {
+    display: inline-flex;
+    gap: 4px;
+  }
+  .dot-black, .dot-white {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid #c8102e;
+  }
+  .dot-black { background-color: #111111; }
+  .dot-white { background-color: #ffffff; border-color: #dddddd; }
+
+  .catalog-specs {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+  }
+  .catalog-specs li {
+    font-size: 13px;
+    color: var(--text-muted);
+    position: relative;
+    padding-left: 14px;
+    line-height: 1.35;
+  }
+  .catalog-specs li::before {
+    content: "•";
+    color: var(--accent-red);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  .catalog-action {
+    text-align: right;
+  }
+  .catalog-tier-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .badge-all { background: rgba(36, 160, 75, 0.08); color: var(--accent-green); border: 1px solid rgba(36, 160, 75, 0.15); }
+  .badge-mid { background: rgba(200, 16, 46, 0.08); color: var(--accent-red); border: 1px solid rgba(200, 16, 46, 0.15); }
+  .badge-opt { background: var(--bg-soft); border: 1px solid var(--border-soft); color: var(--text-muted); }
+
+  /* Compact Comparison Section Specs */
+  .spec-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--border-soft);
+    border-radius: 2px;
+    background: var(--bg-pure);
+  }
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+  }
+  .spec-table th, .spec-table td {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .spec-table tr:last-child th, .spec-table tr:last-child td {
+    border-bottom: none;
+  }
+  .spec-table th {
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    background: var(--bg-soft);
+  }
+  .spec-table td.highlight-col {
+    background: rgba(36, 160, 75, 0.02);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  .status-dot.active { background-color: var(--accent-green); }
+  .status-dot.inactive { background-color: var(--accent-red); }
+
+  /* Massive Scale Pricing Cards */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+  .price-card {
+    background: var(--bg-card); border: 1px solid var(--border-soft);
+    padding: 40px 28px; display: flex; flex-direction: column; gap: 20px;
+    position: relative; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  }
+  .price-card.featured { border-color: var(--text-primary); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
+  .price-card-tier { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+  .price-card-val { font-family: var(--display); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 900; line-height: 1; }
+  .price-card-val span { font-family: var(--body); font-size: 12px; color: var(--text-muted); font-weight: 400; display: block; margin-top: 4px; }
+  
+  /* Dynamic Interactive Configuration Options */
+  .config-section {
+    border-top: 1px solid var(--border-soft);
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .config-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .config-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .config-option input {
+    accent-color: var(--text-primary);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  .config-option-details {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .config-option-price {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .price-card .btn { margin-top: 16px; }
+
+  /* Simple FAQ Details block */
+  .faq-container { max-width: 800px; margin: 0 auto; }
+  details { border-bottom: 1px solid var(--border-soft); padding: 24px 0; }
+  summary {
+    font-family: var(--display); font-size: 16px; font-weight: 700;
+    list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    text-transform: uppercase; letter-spacing: -0.01em;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-size: 20px; font-weight: 300; transition: transform 0.2s ease; }
+  details[open] summary::after { content: "—"; }
+  .faq-ans { padding-top: 16px; color: var(--text-muted); font-size: 14px; max-width: 680px; line-height: 1.5; }
+
+  /* Sliding Form Drawer Component */
+  .drawer-backdrop {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px);
+    opacity: 0; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 100%; max-width: 580px; z-index: 201;
+    background: var(--bg-pure); border-left: 1px solid var(--border-soft);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.05);
+    transform: translateX(100%); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex; flex-direction: column;
+  }
+  .drawer.open { transform: translateX(0); }
+
+  .drawer-header {
+    padding: 32px 40px 24px; border-bottom: 1px solid var(--border-soft);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .drawer-header h3 { font-size: 24px; letter-spacing: -0.01em; }
+  .drawer-close {
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: var(--bg-soft); border: 1px solid var(--border-soft);
+    cursor: pointer; transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .drawer-close:hover { background: var(--border-soft); transform: scale(1.05); }
+  .drawer-close svg { width: 14px; height: 14px; stroke: var(--text-primary); stroke-width: 2; }
+
+  .drawer-body { flex: 1; overflow-y: auto; padding: 40px; }
+
+  /* Selected Package Box */
+  .selected-pkg-box {
+    background: var(--bg-soft); border: 1px solid var(--border-soft);
+    border-radius: 2px; padding: 24px; margin-bottom: 36px;
+    display: flex; gap: 20px; align-items: center;
+  }
+  .selected-pkg-img {
+    width: 80px; height: 80px; background: var(--bg-pure);
+    border: 1px solid var(--border-soft); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center; padding: 8px; flex-shrink: 0;
+  }
+  .selected-pkg-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .selected-pkg-details { flex: 1; }
+  .selected-pkg-title { font-family: var(--display); font-size: 18px; font-weight: 900; margin-bottom: 4px; text-transform: uppercase; }
+  .selected-pkg-price { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--accent-red); }
+  .selected-pkg-addons { font-size: 11px; font-family: var(--mono); color: var(--text-muted); margin-top: 4px; line-height: 1.3; }
+
+  /* Stark Form Elements */
+  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .form-group { margin-bottom: 20px; }
+  
+  .form-label {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--text-muted); display: block; margin-bottom: 6px;
+  }
+  
+  .form-control {
+    width: 100%; padding: 14px 16px;
+    font-family: var(--body); font-size: 14px;
+    color: var(--text-primary); background: var(--bg-pure);
+    border: 1px solid var(--border-soft); border-radius: 2px;
+    outline: none; transition: border-color 0.15s ease;
+  }
+  .form-control::placeholder { color: #a1a1a6; }
+  .form-control:focus { border-color: var(--text-primary); }
+  
+  /* Phone Prefix Selector Group */
+  .phone-group { display: flex; border: 1px solid var(--border-soft); border-radius: 2px; overflow: hidden; }
+  .phone-prefix {
+    background: var(--bg-soft); border-right: 1px solid var(--border-soft);
+    padding: 0 16px; display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 13px; color: var(--text-muted);
+  }
+  .phone-group .form-control { border: none; }
+
+  .checkbox-group { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
+  .checkbox-group input[type="checkbox"] {
+    margin-top: 3px; accent-color: var(--text-primary); width: 16px; height: 16px; flex-shrink: 0;
+  }
+  .checkbox-group label { font-size: 12px; color: var(--text-muted); line-height: 1.45; cursor: pointer; }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+    .hero { padding: 140px 0 60px; }
+    .form-grid-2 { grid-template-columns: 1fr; }
+    .drawer { max-width: 100%; }
+    .spec-table th, .spec-table td { padding: 12px 16px; font-size: 13px; }
+  }
+
+  @media (max-width: 960px) {
+    .catalog-row {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      text-align: left;
+    }
+    .catalog-img-wrap {
+      height: 160px;
+    }
+    .catalog-specs {
+      grid-template-columns: 1fr;
+    }
+    .catalog-action {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .topbar-inner { height: auto; padding: 12px 16px; flex-direction: column; gap: 12px; align-items: stretch; }
+    .mode-toggle-pill { justify-content: center; }
+    .topbar-inner .btn { width: 100%; text-align: center; }
+    .hero { padding: 220px 0 60px; }
   }
 </style>
 </head>
 <body>
 
-<header class="topbar" id="topbar">
+<header class="topbar">
   <div class="wrap topbar-inner">
-    <a href="https://www.urbaneyesecurity.co.ke/" class="wordmark">
-      <span class="wm-top">URBAN <span class="red">EYE</span></span>
-      <span class="wm-sub">SECURITY</span>
-    </a>
-    <a href="https://www.urbaneyesecurity.co.ke/security-packages/" class="btn btn-primary btn-sm">Explore Packages</a>
+    <!-- Linked Logo back to primary domain -->
+    <a href="https://www.urbaneyesecurity.co.ke/" class="logo">URBAN <span>EYE</span></a>
+    
+    <!-- Mode Switcher Pill -->
+    <div class="mode-toggle-pill">
+      <button id="mode-res" class="mode-pill-btn active" onclick="setSiteMode('residential')">Residential</button>
+      <button id="mode-com" class="mode-pill-btn" onclick="setSiteMode('commercial')">Commercial</button>
+    </div>
+
+    <button onclick="openFormDrawer()" class="btn btn-ghost" style="padding: 10px 20px; font-size: 11px;">Book Site Review</button>
   </div>
 </header>
 
 <main>
 
-  <!-- HERO -->
+  <!-- Dynamic Starlink Cinematic Hero -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <p class="eyebrow">Integrated Security Systems</p>
-      <h1 class="hero-title">
-        <span class="t-light">Security That</span>
-        <span class="t-dark">Sees More.</span>
-      </h1>
-      <p class="hero-hook">Your alarm went off at 2 a.m. Was it the wind, or someone at your back gate?</p>
-      <p class="hero-sub">A wired alarm can't answer that question. Urban Eye sends a photo to your phone in 9 seconds, so you see what triggered it before you decide what to do next.</p>
-      <p class="hero-audience">For Homes &nbsp;•&nbsp; Businesses &nbsp;•&nbsp; Growing Enterprises</p>
+      <p class="eyebrow" id="hero-eyebrow">Enterprise Security System</p>
+      <h1 id="hero-title">Unbox.<br>Mount.<br>Protect.</h1>
+      <div class="hero-price">
+        <span id="hero-price-label">Hardware Kit starting at</span>
+        <span id="hero-price-val">KES 59,800</span>
+      </div>
+      <p id="hero-desc">No wiring corridors. No physical line liabilities. Zero drilling through structural masonry. Professional security deployed to any property in less than 2 hours.</p>
       <div class="hero-ctas">
-        <a href="https://www.urbaneyesecurity.co.ke/security-packages/" class="btn btn-primary">Explore Packages</a>
-        <a href="#difference" class="btn btn-ghost">See The Difference ↓</a>
+        <!-- Scroll-based navigation links for better UX flow -->
+        <a href="#pricing" class="btn btn-primary">Get Started</a>
+        <a href="#how-it-works" class="btn btn-ghost">Explore System</a>
       </div>
     </div>
   </section>
 
-  <!-- SIGNATURE: THE DIFFERENCE -->
-  <section class="section section--soft" id="difference">
+  <!-- Spec-Catalog Hardware Ecosystem Layout -->
+  <section class="section section--soft" id="how-it-works">
     <div class="wrap">
-      <div class="diff-head">
-        <p class="eyebrow" style="margin-bottom:0;">The Real Difference</p>
-        <h2>A wired alarm has one line.<br>Cut it anywhere, and the call never goes out.</h2>
-        <p class="lede">Traditional wired alarms transmit their distress signal down a single copper line. Cut that line anywhere along its run and the control room never gets the call. Toggle to see what changes.</p>
-
-        <div class="toggle-wrap" id="toggleWrap">
-          <div class="toggle" role="group" aria-label="Compare legacy wired vs Urban Eye smart system">
-            <button type="button" class="toggle-btn is-active" data-mode-btn="wired" aria-pressed="true">Legacy Wired</button>
-            <button type="button" class="toggle-btn" data-mode-btn="ajax" aria-pressed="false">Urban Eye Smart System</button>
-          </div>
-          <span class="hint">↳ tap "Urban Eye Smart System"</span>
-        </div>
+      <div class="section-head">
+        <p class="eyebrow">The Hardware Ecosystem</p>
+        <h2>Seven Devices. One Network. Zero Lines.</h2>
+        <p>No architectural disruption. Standard elements mount instantly and connect wirelessly back to the encrypted centralized core.</p>
       </div>
 
-      <div class="diagram-card">
-        <div class="diagram" id="diagram" data-mode="wired">
-          <svg class="diagram-svg" viewBox="0 0 640 510" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="Diagram comparing a legacy wired alarm to an Urban Eye wireless system">
-
-            <line class="connector" x1="320" y1="170" x2="140" y2="75"/>
-            <line class="connector" x1="320" y1="170" x2="500" y2="75"/>
-            <line class="connector" x1="320" y1="170" x2="140" y2="265"/>
-            <line class="connector" x1="320" y1="170" x2="500" y2="265"/>
-
-            <g class="wired-only">
-              <line x1="320" y1="224" x2="320" y2="266" stroke="var(--red)" stroke-width="3.5" stroke-linecap="round"/>
-              <line x1="320" y1="296" x2="320" y2="356" stroke="var(--red)" stroke-width="3.5" stroke-linecap="round"/>
-              <path d="M306,266 L326,283 L310,283 L332,302" fill="none" stroke="var(--red)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-
-            <g class="ajax-only">
-              <line x1="320" y1="224" x2="320" y2="356" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 8"/>
-              <circle class="pulse-ring" cx="345" cy="290" r="6" fill="none" stroke="var(--red)" stroke-width="2"/>
-              <path d="M338,278 a18,18 0 0 1 0,24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" opacity=".55"/>
-              <path d="M345,270 a30,30 0 0 1 0,40" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" opacity=".3"/>
-            </g>
-
-            <g>
-              <circle class="node-ring" cx="140" cy="75" r="32"/>
-              <g class="wired-only node-icon" transform="translate(128,63)"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.4" fill="var(--navy)" stroke="none"/></g>
-              <image class="ajax-only" xlink:href="images/camera.png" href="images/camera.png" x="114" y="49" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>
-              <text class="node-label" x="140" y="128">CCTV</text>
-
-              <circle class="node-ring" cx="500" cy="75" r="32"/>
-              <g class="wired-only node-icon" transform="translate(488,63)"><rect x="3" y="2" width="18" height="20" rx="3"/><circle cx="8.5" cy="9" r=".7" fill="var(--navy)" stroke="none"/><circle cx="12" cy="9" r=".7" fill="var(--navy)" stroke="none"/><circle cx="15.5" cy="9" r=".7" fill="var(--navy)" stroke="none"/><circle cx="8.5" cy="13" r=".7" fill="var(--navy)" stroke="none"/><circle cx="12" cy="13" r=".7" fill="var(--navy)" stroke="none"/><circle cx="15.5" cy="13" r=".7" fill="var(--navy)" stroke="none"/></g>
-              <image class="ajax-only" xlink:href="images/keypad.png" href="images/keypad.png" x="474" y="49" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>
-              <text class="node-label" x="500" y="128">KEYPAD</text>
-
-              <circle class="node-ring" cx="140" cy="265" r="32"/>
-              <g class="wired-only node-icon" transform="translate(128,253)"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6" fill="var(--navy)" stroke="none"/></g>
-              <image class="ajax-only" xlink:href="images/motion%20sensor.png" href="images/motion%20sensor.png" x="114" y="239" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>
-              <text class="node-label" x="140" y="318">SENSOR</text>
-
-              <circle class="node-ring" cx="500" cy="265" r="32"/>
-              <g class="wired-only node-icon" transform="translate(488,253)"><path d="M12 3a5 5 0 0 0-5 5v3l-2 4h14l-2-4V8a5 5 0 0 0-5-5z"/><path d="M10 19a2 2 0 0 0 4 0"/></g>
-              <image class="ajax-only" xlink:href="images/alarm%20siren.png" href="images/alarm%20siren.png" x="474" y="239" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>
-              <text class="node-label" x="500" y="318">SIREN</text>
-            </g>
-
-            <circle class="hub-ring" cx="320" cy="170" r="54"/>
-            <text class="hub-label wired-only" x="320" y="176">HUB</text>
-            <image class="ajax-only" xlink:href="images/hub.png" href="images/hub.png" x="284" y="134" width="72" height="72" preserveAspectRatio="xMidYMid meet"/>
-
-            <!-- outside / monitoring node -->
-            <circle class="node-ring out-ring" cx="320" cy="400" r="44"/>
-            <image xlink:href="images/logo.png" href="images/logo.png" x="280" y="360" width="80" height="80" preserveAspectRatio="xMidYMid meet"/>
-            <text class="out-status wired-only" x="320" y="465">NO SIGNAL</text>
-            <text class="out-status ajax-only" x="320" y="465">CONNECTED</text>
-            <text class="out-title" x="320" y="490">MONITORING &amp; RESPONSE</text>
-          </svg>
-
-          <div class="stat-lists">
-            <ul class="stat-list wired-only">
-              <li><span class="dot"></span>Sensors trigger, but the copper line carrying the distress call is the system's single point of failure. One cut anywhere along its run and the control room never hears from it.</li>
-              <li><span class="dot"></span>A standard 7Ah backup battery keeps the panel alive for roughly 8 hours during a KPLC outage. After that, the panel goes dark. No alerts, no signal, no record.</li>
-              <li><span class="dot"></span>If the signal never leaves the building, no response team is dispatched. The alarm made noise for no one.</li>
-            </ul>
-            <ul class="stat-list ajax-only">
-              <li><span class="dot"></span>Cut the copper line anywhere. The hub is simultaneously running on Ethernet and two SIM cards from different networks. Lose one channel and the others keep transmitting without a pause.</li>
-              <li><span class="dot"></span>Someone trying to jam the wireless signal? Ajax detects RF interference, switches to a free frequency, and sends a jamming alert to your monitoring centre before going silent.</li>
-              <li><span class="dot"></span>Every device runs on its own battery. A KPLC blackout doesn't touch it. The hub keeps transmitting for 16 hours until power returns.</li>
-              <li><span class="dot"></span>Motion triggers a photo to your phone in 9 seconds. You see the face, or the cat, before you decide what to do.</li>
-              <li><span class="dot"></span>The same app that shows you the photo lets you arm, disarm, or call for response from anywhere.</li>
-            </ul>
+      <div class="catalog-list">
+        
+        <!-- Device 1: Hub -->
+        <div class="catalog-row">
+          <div class="catalog-img-wrap">
+            <img src="images/hub.png" alt="Ajax Hub 2 Plus Jeweller">
           </div>
-
-          <div class="badge-row ajax-only">
-            <span class="badge">Ethernet + Dual SIM</span>
-            <span class="badge">Jamming Detection</span>
-            <span class="badge">16hr Battery Backup</span>
-            <span class="badge">Photo in 9 Seconds</span>
+          <div class="catalog-info">
+            <h3>Hub 2 Plus Jeweller</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Centralized Smart Control Panel</p>
+            <div class="catalog-color-badge">
+              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+              Available in Obsidian / Stark White
+            </div>
+          </div>
+          <ul class="catalog-specs">
+            <li>Ethernet, Wi-Fi, dual SIM (2G/3G/4G)</li>
+            <li>Supports detectors with photo verification</li>
+            <li>Max. 200 devices & 25 security groups</li>
+            <li>Built-in battery with 15 hrs backup runtime</li>
+          </ul>
+          <div class="catalog-action">
+            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
           </div>
         </div>
+
+        <!-- Device 2: Motion Sensor -->
+        <div class="catalog-row">
+          <div class="catalog-img-wrap">
+            <img src="images/motion%20sensor.png" alt="MotionCam Jeweller">
+          </div>
+          <div class="catalog-info">
+            <h3>MotionCam Jeweller</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">PIR Motion Detector with Verification Camera</p>
+            <div class="catalog-color-badge">
+              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+              Available in Obsidian / Stark White
+            </div>
+          </div>
+          <ul class="catalog-specs">
+            <li>PIR motion detection up to 39 ft range</li>
+            <li>Sends animated series of photos upon alarm</li>
+            <li>Pet immunity up to 44 lbs (20 kg) & 19 in</li>
+            <li>Tampering alarm and jam detection protection</li>
+          </ul>
+          <div class="catalog-action">
+            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+          </div>
+        </div>
+
+        <!-- Device 3: Siren -->
+        <div class="catalog-row">
+          <div class="catalog-img-wrap">
+            <img src="images/alarm%20siren.png" alt="StreetSiren Jeweller">
+          </div>
+          <div class="catalog-info">
+            <h3>StreetSiren Jeweller</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">High-Decibel Outdoor Sounder</p>
+            <div class="catalog-color-badge">
+              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+              Available in Obsidian / Stark White
+            </div>
+          </div>
+          <ul class="catalog-specs">
+            <li>Adjustable volume from 85 to 113 dB</li>
+            <li>IP54 weatherproof protection (-25°C to 50°C)</li>
+            <li>Tampering and accelerometer alarm trigger</li>
+            <li>Up to 5 years battery life on internal cells</li>
+          </ul>
+          <div class="catalog-action">
+            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+          </div>
+        </div>
+
+        <!-- Device 4: Keypad -->
+        <div class="catalog-row">
+          <div class="catalog-img-wrap">
+            <img src="images/keypad.png" alt="KeyPad Jeweller">
+          </div>
+          <div class="catalog-info">
+            <h3>KeyPad Jeweller</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Wireless Touch Control Console</p>
+            <div class="catalog-color-badge">
+              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+              Available in Obsidian / Stark White
+            </div>
+          </div>
+          <ul class="catalog-specs">
+            <li>Secure keypad supporting contactless tags</li>
+            <li>Dedicated duress/silent alarm entry code</li>
+            <li>One-button system status checks</li>
+            <li>Fully wireless, powered by 4x AA batteries</li>
+          </ul>
+          <div class="catalog-action">
+            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+          </div>
+        </div>
+
+        <!-- Device 5: Leak Detector -->
+        <div class="catalog-row">
+          <div class="catalog-img-wrap">
+            <img src="images/leak%20detector.png" alt="LeaksProtect Jeweller">
+          </div>
+          <div class="catalog-info">
+            <h3>LeaksProtect Jeweller</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Disaster Prevention Flood Sensor</p>
+            <div class="catalog-color-badge">
+              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+              Available in Obsidian / Stark White
+            </div>
+          </div>
+          <ul class="catalog-specs">
+            <li>4 pairs of gold-plated sensor contact rings</li>
+            <li>IP65 fully waterproof housing shield</li>
+            <li>Triggers WaterStop main shutoff in 0.15s</li>
+            <li>Operates up to 5 years without maintenance</li>
+          </ul>
+          <div class="catalog-action">
+            <span class="catalog-tier-badge badge-opt">Optional Upgrade</span>
+          </div>
+        </div>
+
+        <!-- Device 6: Fire Detector -->
+        <div class="catalog-row">
+          <div class="catalog-img-wrap">
+            <img src="images/Ajax%20FireProtect%202%20white.png" alt="FireProtect 2 Jeweller">
+          </div>
+          <div class="catalog-info">
+            <h3>FireProtect 2 SB</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Heat, Smoke, and CO Matrix Sensor</p>
+            <div class="catalog-color-badge">
+              <div class="color-dots"><span class="dot-white"></span></div>
+              Stark White Base Chassis
+            </div>
+          </div>
+          <ul class="catalog-specs">
+            <li>Patented dual-spectrum optical smoke sensor</li>
+            <li>Rapid temperature spike tracking alarms</li>
+            <li>Built-in high-decibel acoustic siren (85 dB)</li>
+            <li>Up to 10 years sealed battery runtime</li>
+          </ul>
+          <div class="catalog-action">
+            <span class="catalog-tier-badge badge-opt">Optional Upgrade</span>
+          </div>
+        </div>
+
+        <!-- Device 7: Panic Button -->
+        <div class="catalog-row">
+          <div class="catalog-img-wrap">
+            <img src="images/panic.png" alt="Button Jeweller">
+          </div>
+          <div class="catalog-info">
+            <h3>Button Jeweller</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Fully Programmable Panic & Automation Key</p>
+            <div class="catalog-color-badge">
+              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+              Available in Obsidian / Stark White
+            </div>
+          </div>
+          <ul class="catalog-specs">
+            <li>Accidental trigger prevention parameters</li>
+            <li>Up to 4,260 ft wireless range to hub core</li>
+            <li>IP55 weatherproof dust/splash casing</li>
+            <li>Ultra-compact body with mounting options</li>
+          </ul>
+          <div class="catalog-action">
+            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ECOSYSTEM -->
+  <!-- High-Contrast Compact Comparison Section -->
   <section class="section">
     <div class="wrap">
-      <div class="section-head center" style="margin-left:auto;margin-right:auto;">
-        <p class="eyebrow" style="justify-content:center;">One Connected System</p>
-        <h2>Seven devices. One brain.<br>Installed in a single day.</h2>
-        <p class="lede">No drilling through concrete. No chasing trunking down your walls. Every sensor talks wirelessly to the hub. A typical home is fully fitted and tested before your team knocks off.</p>
+      <div class="section-head" style="margin-bottom: 40px;">
+        <p class="eyebrow">Architectural Contrast</p>
+        <h2>System Architecture Comparison</h2>
+        <p>A direct look at how modern wireless protocols isolate vulnerabilities compared to legacy copper cabling setups.</p>
       </div>
 
-      <div class="eco-grid">
-        <div class="eco-item">
-          <div class="eco-icon"><img src="images/camera.png" alt="CCTV Camera"></div>
-          <span class="eco-label">CCTV</span>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon"><img src="images/hub.png" alt="Ajax Hub"></div>
-          <span class="eco-label">Hub</span>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon"><img src="images/keypad.png" alt="Alarm Keypad"></div>
-          <span class="eco-label">Alarm Keypad</span>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon"><img src="images/panic.png" alt="Panic Fob"></div>
-          <span class="eco-label">Panic Fob</span>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon"><img src="images/monitoring%20app.png" alt="Monitoring App"></div>
-          <span class="eco-label">Monitoring App</span>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon"><img src="images/alarm%20siren.png" alt="Wireless Siren"></div>
-          <span class="eco-label">Wireless Siren</span>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon"><img src="images/motion%20sensor.png" alt="Motion Sensor"></div>
-          <span class="eco-label">Motion Sensor</span>
-        </div>
-      </div>
-
-      <div class="eco-notes">
-        <blockquote class="pitch-quote">
-          “Ajax is designed like a modern device, not industrial equipment.”
-        </blockquote>
-        <p>Most alarm hardware looks like it belongs in a 1990s office. A large plastic box, visible cabling, and a utilitarian keypad bolted to the wall. Sensors should sit on a wall without looking like an afterthought. There is no large panel box. Visitors see a discreet, premium design, not a security installation.</p>
-        <p>Standard door and motion sensors run <strong>5 to 7 years on a single battery.</strong> The MotionCam runs 3 to 4 years. The app monitors every device and alerts you six months before any battery actually needs replacing. No emergency callouts, no surprises.</p>
+      <div class="spec-table-wrapper">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th style="width: 30%;">Vulnerability Point</th>
+              <th style="width: 35%; color: var(--text-primary);">Urban Eye Security</th>
+              <th style="width: 35%;">Traditional Wired Alarm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Communication Path</strong></td>
+              <td class="highlight-col">
+                <span class="status-dot active"></span>
+                Encrypted Wireless (Multi-Channel)
+              </td>
+              <td>Exposed Copper Cable (Vulnerable to cutting)</td>
+            </tr>
+            <tr>
+              <td><strong>Power Blackouts</strong></td>
+              <td class="highlight-col">
+                <span class="status-dot active"></span>
+                16-Hour Automatic Battery Backup
+              </td>
+              <td>Immediate Offline (Without external generator/UPS)</td>
+            </tr>
+            <tr>
+              <td><strong>Signal Tampering</strong></td>
+              <td class="highlight-col">
+                <span class="status-dot active"></span>
+                Jamming Detection & Frequency Hopping
+              </td>
+              <td>Silent Failure (Physical lines cut without warning)</td>
+            </tr>
+            <tr>
+              <td><strong>Property Integrity</strong></td>
+              <td class="highlight-col">
+                <span class="status-dot active"></span>
+                Zero Wall Drilling or Structural Masonry Damage
+              </td>
+              <td>Conduit installation, trunking, and visible wiring runs</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
-  <!-- PACKAGES -->
-  <section class="section section--soft" id="packages">
+  <!-- Dynamic Pricing Section -->
+  <section class="section section--soft" id="pricing">
     <div class="wrap">
-      <div class="section-head center" style="margin-left:auto;margin-right:auto;">
-        <p class="eyebrow" style="justify-content:center;">Security Packages</p>
-        <h2>What does your<br>property need?</h2>
-        <p class="lede">Every layout is different. These are the starting frameworks. Your free site review confirms the exact configuration.</p>
+      <div class="section-head">
+        <p class="eyebrow" id="pricing-eyebrow">Benefit-Driven Packaging</p>
+        <h2 id="pricing-title">Configure Your Security.</h2>
+        <p>No contracts, no hidden lease terms. Choose your baseline tier below and customize with optional protection modules. Prices include professional installation.</p>
       </div>
-
-      <div class="pkg-grid">
-        <div class="pkg-card">
-          <div class="pkg-name">Home Essential</div>
-          <div class="pkg-price">KES 69,900<span>Outright</span></div>
-          <p class="pkg-connect">+ Urban Eye Connect from KES 1,500/month</p>
-          <div class="pkg-best"><strong>Best for:</strong> Apartments, rental units, and smaller standalone homes.</div>
-          <p class="pkg-desc">Hub. Two door/window sensors. One indoor motion detector. Panic button. Installed and tested in one day. You own every piece outright. No monthly lease, no contract lock-in.</p>
-          <a href="https://www.urbaneyesecurity.co.ke/security-packages/" class="pkg-link">View this plan →</a>
-        </div>
-        <div class="pkg-card is-rec">
-          <span class="pkg-tag">Recommended</span>
-          <div class="pkg-name">Home Verified</div>
-          <div class="pkg-price">KES 99,900<span>Outright</span></div>
-          <p class="pkg-connect">+ Urban Eye Connect from KES 1,500/month</p>
-          <div class="pkg-best"><strong>Best for:</strong> Family homes, parents who travel, and anyone who wants to see exactly what triggered their alarm.</div>
-          <p class="pkg-desc">When motion triggers after dark, a photo hits your phone in 9 seconds, before the siren finishes its first cycle. Cat. Ignore. Person. Call response.</p>
-          <a href="https://www.urbaneyesecurity.co.ke/security-packages/" class="pkg-link">View this plan →</a>
-        </div>
-        <div class="pkg-card">
-          <div class="pkg-name">Home Complete</div>
-          <div class="pkg-price"><span>Starts at</span>KES 149,900</div>
-          <p class="pkg-connect">+ Urban Eye Connect from KES 1,500/month</p>
-          <div class="pkg-best"><strong>Best for:</strong> High-value homes, large estates, and properties that want continuous CCTV recording alongside the alarm.</div>
-          <p class="pkg-desc">Adds full-colour CCTV cameras and a Network Video Recorder. Photo from the sensor. Recorded clip from the camera. One app.</p>
-          <a href="https://www.urbaneyesecurity.co.ke/security-packages/" class="pkg-link">View this plan →</a>
-        </div>
-      </div>
-
-      <div class="pkg-foot">
-        <div style="display:flex;flex-direction:column;gap:0;">
-          <p class="pkg-note">Running a shop, pharmacy, office, or warehouse? Commercial frameworks start at KES 69,900, with zoned detection, access-controlled entry points, and POS-area coverage. Full breakdown on the packages page.</p>
+      
+      <!-- Residential Pricing Tier Matrix -->
+      <div id="pricing-residential-grid" class="pricing-grid">
+        
+        <!-- Tier 1: Apartment -->
+        <div class="price-card" id="card-apartment">
+          <div class="price-card-tier">Apartment / Studio-2BR</div>
+          <div class="price-card-val">
+            <span style="display:inline;" id="price-val-apartment">KES 59,800</span>
+            <span>Outright hardware purchase</span>
+          </div>
+          <p>SecureBase: Main entry contact sensors, floor-zone motion sensor, and staff control keypad. Professional installation included.</p>
           
-          <p class="pkg-seed">Beyond intrusion: During your free site review, ask our technician how your Ajax system can also be configured to automatically shut off your main water valve in 7 seconds if a pipe leaks, or cut power to your AC units and display lights the moment you arm the building.</p>
+          <div class="config-section">
+            <div class="config-label">Optional Property Modules</div>
+            
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-ap-camera" onchange="calculatePrice('apartment')" data-price="3200" data-label="Full-Color Front Door Camera">
+                <span>+ HD Front-Door Camera [1]</span>
+              </div>
+              <span class="config-option-price">KES 3,200</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-ap-disaster" onchange="calculatePrice('apartment')" data-price="48800" data-label="Disaster Prevention (Leak Detection + Mains Shutoff)">
+                <span>+ Leak Shield (Auto-Shutoff)</span>
+              </div>
+              <span class="config-option-price">KES 48,800</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-ap-fire" onchange="calculatePrice('apartment')" data-price="22500" data-label="Fire & Carbon Monoxide Monitoring">
+                <span>+ Fire & CO Detector</span>
+              </div>
+              <span class="config-option-price">KES 22,500</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-ap-auto" onchange="calculatePrice('apartment')" data-price="8700" data-label="Smart Automation (Water Heater/Geyser Control)">
+                <span>+ Geyser Power Controller</span>
+              </div>
+              <span class="config-option-price">KES 8,700</span>
+            </label>
+          </div>
+
+          <button onclick="handleOrder('apartment')" class="btn btn-ghost">Order Kit</button>
         </div>
-        <a href="https://www.urbaneyesecurity.co.ke/security-packages/" class="btn btn-primary">Explore Packages</a>
+        
+        <!-- Tier 2: Maisonette -->
+        <div class="price-card featured" id="card-maisonette">
+          <div class="price-card-tier" style="color: var(--accent-red);">Maisonette / Townhouse</div>
+          <div class="price-card-val">
+            <span style="display:inline;" id="price-val-maisonette">KES 176,100</span>
+            <span>Outright hardware purchase</span>
+          </div>
+          <p>SecureBase: Central core hub, 3x entry contact points, 2x floor-zone motion sensors, staff keypad, and external high-output siren.</p>
+          
+          <div class="config-section">
+            <div class="config-label">Optional Property Modules</div>
+            
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-ms-camera" onchange="calculatePrice('maisonette')" data-price="11800" data-label="Dual Outdoor High-Definition Cameras">
+                <span>+ Dual Outdoor HD Cameras [1]</span>
+              </div>
+              <span class="config-option-price">KES 11,800</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-ms-disaster" onchange="calculatePrice('maisonette')" data-price="63800" data-label="Disaster Prevention (Multi-Zone Leaks + Mains Shutoff)">
+                <span>+ Leak Shield (Auto-Shutoff)</span>
+              </div>
+              <span class="config-option-price">KES 63,800</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-ms-fire" onchange="calculatePrice('maisonette')" data-price="54900" data-label="Multi-Floor Smoke & Heat Matrix">
+                <span>+ Dual Fire & CO Sensors</span>
+              </div>
+              <span class="config-option-price">KES 54,900</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-ms-auto" onchange="calculatePrice('maisonette')" data-price="26100" data-label="Smart Gate & Power Automation Switches">
+                <span>+ Smart Gate & AC Controller</span>
+              </div>
+              <span class="config-option-price">KES 26,100</span>
+            </label>
+          </div>
+
+          <button onclick="handleOrder('maisonette')" class="btn btn-primary">Order Kit</button>
+        </div>
+
+        <!-- Tier 3: Villa -->
+        <div class="price-card" id="card-villa">
+          <div class="price-card-tier">Villa / Gated Compound</div>
+          <div class="price-card-val">
+            <span style="display:inline;" id="price-val-villa">KES 411,800</span>
+            <span>Outright hardware purchase</span>
+          </div>
+          <p>SecureBase: High-capacity hub, signal range extender, 5x door contacts, 3x indoor motion, 2x outdoor compound motion, 2x glass-break, keypads & siren.</p>
+          
+          <div class="config-section">
+            <div class="config-label">Optional Property Modules</div>
+            
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-vl-camera" onchange="calculatePrice('villa')" data-price="29600" data-label="Triple Full-Color Camera System with PTZ Backup">
+                <span>+ Triple-Cam Outdoor System [1]</span>
+              </div>
+              <span class="config-option-price">KES 29,600</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-vl-disaster" onchange="calculatePrice('villa')" data-price="81300" data-label="Disaster Prevention (Multi-Wet-Zone Sensors + Main Shutoff)">
+                <span>+ Leak Shield (Auto-Shutoff)</span>
+              </div>
+              <span class="config-option-price">KES 81,300</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-vl-fire" onchange="calculatePrice('villa')" data-price="92600" data-label="Villa Fire Protection Matrix with Manual Call Point">
+                <span>+ Full Fire & CO Safety Matrix</span>
+              </div>
+              <span class="config-option-price">KES 92,600</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-vl-auto" onchange="calculatePrice('villa')" data-price="58500" data-label="Full Facility Automation Matrix">
+                <span>+ Full Property Automation</span>
+              </div>
+              <span class="config-option-price">KES 58,500</span>
+            </label>
+          </div>
+
+          <button onclick="handleOrder('villa')" class="btn btn-ghost">Order Kit</button>
+        </div>
       </div>
+
+      <!-- Commercial Pricing Tier Matrix (SME / Retail / Offices) -->
+      <div id="pricing-commercial-grid" class="pricing-grid" style="display: none;">
+        
+        <!-- Commercial Configurator Card -->
+        <div class="price-card featured" id="card-commercial" style="grid-column: 1 / -1; max-width: 700px; margin: 0 auto;">
+          <div class="price-card-tier" style="color: var(--accent-red);">Single-Unit Commercial Premise</div>
+          <div class="price-card-val">
+            <span style="display:inline;" id="price-val-commercial">KES 109,700</span>
+            <span>Outright hardware purchase</span>
+          </div>
+          <p>Tailored for shops, offices, and small retail premises. Base package includes: Dual cellular centralized core hub, 2x main entry contact sensors, high-definition photo-verification motion sensor, staff keypad, outdoor high-output alarm siren, and contactless staff access passes. Professional installation included.</p>
+          
+          <div class="config-section">
+            <div class="config-label">Optional Facility Expansion Modules</div>
+            
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-cm-disaster" onchange="calculatePrice('commercial')" data-price="42300" data-label="Disaster Shield (Kitchenette leak detection + auto-shutoff smart valve)">
+                <span>+ Disaster Prevention (Leak Sensor & Auto-Shutoff Smart Valve)</span>
+              </div>
+              <span class="config-option-price">KES 42,300</span>
+            </label>
+
+            <label class="config-option">
+              <div class="config-option-details">
+                <input type="checkbox" id="opt-cm-auto" onchange="calculatePrice('commercial')" data-price="13700" data-label="Facility Automation (Remote gate interface & AC circuit contact control)">
+                <span>+ Smart Automation (Remote Gate & AC Circuit Power Cutoff)</span>
+              </div>
+              <span class="config-option-price">KES 13,700</span>
+            </label>
+          </div>
+
+          <button onclick="handleOrder('commercial')" class="btn btn-primary" style="width: 100%;">Order Facility Configuration</button>
+        </div>
+
+      </div>
+
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- Minimalist FAQ -->
   <section class="section">
     <div class="wrap">
-      <div class="section-head center" style="margin-left:auto;margin-right:auto;">
-        <p class="eyebrow" style="justify-content:center;">Before You Switch</p>
-        <h2>The questions everyone asks first.</h2>
+      <div class="section-head" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <p class="eyebrow" style="justify-content: center;">Frequently Asked Questions</p>
+        <h2>System Clarifications</h2>
       </div>
-
-      <div class="faq-list">
+      <div class="faq-container">
         <details open>
-          <summary>How do I know if an alert is real or a false alarm?<span class="plus"></span></summary>
-          <p class="faq-answer">Photo hits your phone in 9 seconds. Cat. Ignore. Person. Call response. No guessing.</p>
+          <summary>How does the video monitoring integration function?</summary>
+          <p class="faq-ans">We use secure connection protocol streams to display high-definition security camera live feeds directly inside your primary security smartphone interface [1, 2]. Unlike entirely wireless battery-powered sensors, these premium cameras require standard local power cabling (PoE or 12V adapters) and network runs to function reliably.</p>
         </details>
         <details>
-          <summary>My current alarm already has a SIM card. What makes Ajax different?<span class="plus"></span></summary>
-          <p class="faq-answer">A single SIM card is one channel. If that carrier goes down, runs out of credit, or someone uses a cheap GSM jammer, the system goes silent. Ajax runs Ethernet and two SIM cards from two different networks simultaneously. To silence Ajax you would need to cut the Ethernet cable and jam two separate carrier networks at the same time. If jamming is attempted at the wireless sensor frequency, Ajax detects it and sends a jamming alert to your monitoring centre via cellular, which runs on a completely different frequency. One channel is a vulnerability. Three running in parallel are not.</p>
+          <summary>How does the system perform during power blackouts?</summary>
+          <p class="faq-ans">Every intrusion, fire, and water sensor relies on internal battery cells that remain functional without primary current lines. The Centralized Hub automatically shifts to independent 16-hour backup cells. High-definition security cameras require a separate local uninterruptible power supply (UPS) to stream during local power outages.</p>
         </details>
         <details>
-          <summary>What happens during a KPLC blackout?<span class="plus"></span></summary>
-          <p class="faq-answer">Every device carries its own battery. A standard wired panel runs on a 7Ah battery that lasts roughly 8 hours before it shuts down. The Ajax hub keeps running and transmitting for up to 16 hours. When KPLC restores power, it recharges automatically.</p>
+          <summary>Can standard wireless signals be scrambled or jammed?</summary>
+          <p class="faq-ans">The centralized core automatically recognizes external signal interference. If communication jamming attempts are registered, the system dynamically shifts operating frequencies and instantly broadcasts alerts to monitored dispatch operators.</p>
         </details>
         <details>
-          <summary>Is switching from a wired system a big, messy job?<span class="plus"></span></summary>
-          <p class="faq-answer">No drilling. No trunking. No chasing cable through concrete. Sensors clip or screw to the surface and talk wirelessly to the hub. A typical Nairobi home is fully installed and tested in one day.</p>
-        </details>
-        <details>
-          <summary>How long before sensors need replacing?<span class="plus"></span></summary>
-          <p class="faq-answer">Standard door and motion sensors run 5 to 7 years on a single battery. The MotionCam runs 3 to 4 years. The system monitors its own battery levels and alerts you in the app six months before any device actually needs attention, so there are no emergency callouts and no gaps in protection.</p>
-        </details>
-        <details>
-          <summary>Could my current setup already have blind spots I don't know about?<span class="plus"></span></summary>
-          <p class="faq-answer">Yes, and most people don't find out until something happens. Wired sensors fail silently from oxidation on terminal connections. The panel shows "armed" but the sensor stopped responding months ago. The free site assessment checks this before you spend a shilling on anything new.</p>
+          <summary>Is a physical recorder mandatory for camera feeds?</summary>
+          <p class="faq-ans">No. High-definition live video feeds stream directly to your primary application dashboard without a separate recorder. If continuous offline recording archives are required, a network video recorder (NVR) can be added as a separate line item.</p>
         </details>
       </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section class="section section--dark">
-    <div class="wrap final-inner">
-      <p class="eyebrow" style="justify-content:center;color:#B7BDC9;">Ready When You Need It Most</p>
-      <h2>Ready to see what<br>is actually happening?</h2>
-      <p class="lede">If your current alarm depends on a single line and a 7Ah battery, and you want to know for certain it will still be calling for help at 3 a.m. during a blackout, a free site assessment is the fastest way to find out exactly what needs to change.</p>
-      <div class="final-ctas">
-        <a href="https://wa.me/254768055555" target="_blank" rel="noopener" class="btn btn-primary">Book Free Assessment On WhatsApp</a>
-        <a href="https://www.urbaneyesecurity.co.ke/security-packages/" class="btn btn-dark-ghost">Explore Packages</a>
-      </div>
-      <p class="final-note">Free assessment. No pitch. No obligation. Just a straight answer on what your property needs.</p>
     </div>
   </section>
 
 </main>
 
+<!-- Sliding Form Drawer Modal -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeFormDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <h3>Secure Property</h3>
+    <button class="drawer-close" onclick="closeFormDrawer()" aria-label="Dismiss Form">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="drawer-body">
+    <!-- Dynamic Package Selection Preview -->
+    <div class="selected-pkg-box" id="selectedPkgBox">
+      <div class="selected-pkg-img">
+        <img id="selectedPkgImg" src="images/hub.png" alt="Dynamic Hardware Showcase">
+      </div>
+      <div class="selected-pkg-details">
+        <div class="selected-pkg-title" id="selectedPkgTitle">Custom Site Survey</div>
+        <div class="selected-pkg-price" id="selectedPkgPrice">Free Consultation</div>
+        <div class="selected-pkg-addons" id="selectedPkgAddons"></div>
+      </div>
+    </div>
+
+    <!-- Booking details submission -->
+    <form id="siteSurveyForm" onsubmit="handleFormSubmit(event)">
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px; font-weight: 400;">
+        Send us your details and a systems designer will connect directly to organize your layout plan, clarify specifications, and verify custom configurations.
+      </p>
+
+      <!-- Company Name (Dynamically Displayed for Commercial Leads) -->
+      <div class="form-group" id="company-field-wrap" style="display: none;">
+        <label class="form-label">Company Name*</label>
+        <input type="text" class="form-control" id="company-field" name="company" placeholder="Acme Ltd">
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label">First Name*</label>
+          <input type="text" class="form-control" name="firstName" placeholder="Jane" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name*</label>
+          <input type="text" class="form-control" name="lastName" placeholder="Doe" required>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label class="form-label">Email Address*</label>
+          <input type="email" class="form-control" name="email" placeholder="jane.doe@domain.ke" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number*</label>
+          <div class="phone-group">
+            <span class="phone-prefix">KE +254</span>
+            <input type="tel" class="form-control" name="phone" placeholder="712345678" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">City - County*</label>
+        <select class="form-control" name="location" required style="cursor: pointer;">
+          <option value="" disabled selected>Select location...</option>
+          <option value="Nairobi">Nairobi</option>
+          <option value="Kiambu">Kiambu</option>
+          <option value="Mombasa">Mombasa</option>
+          <option value="Machakos">Machakos</option>
+          <option value="Kajiado">Kajiado</option>
+          <option value="Other">Other County</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Property Details*</label>
+        <textarea class="form-control" name="details" rows="3" placeholder="Tell us what you need secured (e.g., number of rooms, outdoor sensors, continuous video options)..." required style="resize: none;"></textarea>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="consentMkt" name="consentMkt">
+        <label for="consentMkt">I agree to receive security updates and systems notifications from Urban Eye.</label>
+      </div>
+
+      <div class="checkbox-group" style="margin-bottom: 32px;">
+        <input type="checkbox" id="consentData" name="consentData" required>
+        <label for="consentData">I consent to the secure handling of my contact information to process this security evaluation request.*</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+    </form>
+  </div>
+</div>
+
 <footer>
-  <div class="wrap foot-inner">
-    <a href="https://www.urbaneyesecurity.co.ke/" class="wordmark">
-      <span class="wm-top" style="font-size:15px;">URBAN <span class="red">EYE</span></span>
-      <span class="wm-sub">SECURITY</span>
-    </a>
-    <p class="foot-copy">© Urban Eye Security — Integrated Security Systems, Nairobi.</p>
-    <a href="https://www.urbaneyesecurity.co.ke/security-packages/" class="pkg-link" style="color:var(--navy);">Full packages &amp; pricing →</a>
+  <div class="wrap footer-inner">
+    <!-- Linked Footer Logo back to primary domain -->
+    <a href="https://www.urbaneyesecurity.co.ke/" class="logo">URBAN <span>EYE</span></a>
+    <div class="footer-copy">© 2026 Urban Eye Security. All rights reserved. Nairobi, Kenya.</div>
   </div>
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  var topbar = document.getElementById('topbar');
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 8) {
-      topbar.classList.add('is-scrolled');
-    } else {
-      topbar.classList.remove('is-scrolled');
+  let currentSiteMode = 'residential';
+
+  // Base hardware prices under 30% Gross Margin
+  const basePrices = {
+    apartment: 59800,
+    maisonette: 176100,
+    villa: 411800,
+    commercial: 109700
+  };
+
+  const siteModeData = {
+    residential: {
+      eyebrow: "Enterprise Security System",
+      title: "Unbox.<br>Mount.<br>Protect.",
+      priceLabel: "Hardware Kit starting at",
+      priceVal: "KES 59,800",
+      desc: "No wiring corridors. No physical line liabilities. Zero drilling through structural masonry. Professional security deployed to any property in less than 2 hours."
+    },
+    commercial: {
+      eyebrow: "Commercial Infrastructure Protection",
+      title: "Secure.<br>Monitor.<br>Comply.",
+      priceLabel: "Commercial Kit starting at",
+      priceVal: "KES 109,700",
+      desc: "Multi-site cellular backup coverage. Advanced entry monitoring and deep security integrations with premium reliability for offices, logistics, and retail."
     }
-  }, { passive: true });
+  };
 
-  var diagram = document.getElementById('diagram');
-  var modeBtns = document.querySelectorAll('[data-mode-btn]');
-  var toggleWrap = document.getElementById('toggleWrap');
+  function setSiteMode(mode) {
+    currentSiteMode = mode;
+    
+    // Toggle active state classes on navigation buttons
+    document.getElementById('mode-res').classList.toggle('active', mode === 'residential');
+    document.getElementById('mode-com').classList.toggle('active', mode === 'commercial');
 
-  for (var i = 0; i < modeBtns.length; i++) {
-    modeBtns[i].addEventListener('click', function(e) {
-      e.preventDefault();
-      var mode = this.getAttribute('data-mode-btn');
-      diagram.setAttribute('data-mode', mode);
-      for (var j = 0; j < modeBtns.length; j++) {
-        if (modeBtns[j] === this) {
-          modeBtns[j].classList.add('is-active');
-          modeBtns[j].setAttribute('aria-pressed', 'true');
-        } else {
-          modeBtns[j].classList.remove('is-active');
-          modeBtns[j].setAttribute('aria-pressed', 'false');
-        }
+    // Update Hero elements
+    const hEyebrow = document.getElementById('hero-eyebrow');
+    const hTitle = document.getElementById('hero-title');
+    const hPriceLabel = document.getElementById('hero-price-label');
+    const hPriceVal = document.getElementById('hero-price-val');
+    const hDesc = document.getElementById('hero-desc');
+
+    // Apply smooth fading transits
+    hEyebrow.style.opacity = '0';
+    hTitle.style.opacity = '0';
+    hDesc.style.opacity = '0';
+
+    setTimeout(() => {
+      const targetData = siteModeData[mode];
+      hEyebrow.textContent = targetData.eyebrow;
+      hTitle.innerHTML = targetData.title;
+      hPriceLabel.textContent = targetData.priceLabel;
+      hPriceVal.textContent = targetData.priceVal;
+      hDesc.textContent = targetData.desc;
+
+      hEyebrow.style.opacity = '1';
+      hTitle.style.opacity = '1';
+      hDesc.style.opacity = '1';
+    }, 150);
+
+    // Toggle Pricing Matrix display layouts
+    const resGrid = document.getElementById('pricing-residential-grid');
+    const comGrid = document.getElementById('pricing-commercial-grid');
+
+    if (mode === 'residential') {
+      resGrid.style.display = 'grid';
+      comGrid.style.display = 'none';
+      document.getElementById('company-field-wrap').style.display = 'none';
+      document.getElementById('company-field').removeAttribute('required');
+    } else {
+      resGrid.style.display = 'none';
+      comGrid.style.display = 'grid';
+      document.getElementById('company-field-wrap').style.display = 'block';
+      document.getElementById('company-field').setAttribute('required', 'required');
+    }
+  }
+
+  // Calculate live price when options are checked
+  function calculatePrice(tier) {
+    let price = basePrices[tier];
+    const card = document.getElementById(`card-${tier}`);
+    const checkboxes = card.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        price += parseInt(cb.getAttribute('data-price'));
       }
-      toggleWrap.classList.add('has-interacted');
     });
-  });
-});
-</script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var ctas = document.querySelectorAll('a.btn-primary, a.btn-dark-ghost');
-  for (var i = 0; i < ctas.length; i++) {
-    ctas[i].addEventListener('click', function() {
-      if (typeof gtag !== 'function') return;
-      var dest = this.href.indexOf('wa.me') !== -1 ? 'whatsapp' : 'packages_page';
-      gtag('event', 'cta_click', {
-        source: 'meta_landing_wired_vs_wireless',
-        destination: dest,
-        link_text: this.textContent.trim(),
-        position: i
-      });
+    const priceLabel = document.getElementById(`price-val-${tier}`);
+    priceLabel.textContent = `KES ${price.toLocaleString()}`;
+  }
+
+  // Handle dynamic bookings
+  function handleOrder(tier) {
+    let price = basePrices[tier];
+    const card = document.getElementById(`card-${tier}`);
+    const checkboxes = card.querySelectorAll('input[type="checkbox"]');
+    const activeAddons = [];
+
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        price += parseInt(cb.getAttribute('data-price'));
+        activeAddons.push(cb.getAttribute('data-label'));
+      }
+    });
+
+    const titleMap = {
+      apartment: "Residential Apartment Kit",
+      maisonette: "Residential Maisonette Kit",
+      villa: "Residential Villa Kit",
+      commercial: "Commercial SecureBase Kit"
+    };
+
+    const pkgTitle = titleMap[tier] || "Custom Secure Kit";
+    const pkgPriceString = `KES ${price.toLocaleString()} Outright`;
+    const imageMap = {
+      apartment: 'images/hub.png',
+      maisonette: 'images/motion%20sensor.png',
+      villa: 'images/alarm%20siren.png',
+      commercial: 'images/hub.png'
+    };
+
+    document.getElementById('selectedPkgTitle').textContent = pkgTitle;
+    document.getElementById('selectedPkgPrice').textContent = pkgPriceString;
+    document.getElementById('selectedPkgImg').src = imageMap[tier] || 'images/hub.png';
+    document.getElementById('selectedPkgImg').alt = pkgTitle;
+
+    const addonsBox = document.getElementById('selectedPkgAddons');
+    if (activeAddons.length > 0) {
+      addonsBox.innerHTML = "<strong>Selected Upgrades:</strong><br>" + activeAddons.join("<br>");
+    } else {
+      addonsBox.innerHTML = "Base intrusion system configuration only (Includes Professional Installation).";
+    }
+
+    document.getElementById('drawerBackdrop').classList.add('open');
+    document.getElementById('drawer').classList.add('open');
+    document.body.classList.add('drawer-open');
+  }
+
+  function openFormDrawer() {
+    // Dynamic fallback for custom reviews
+    document.getElementById('selectedPkgTitle').textContent = "Custom Site Survey";
+    document.getElementById('selectedPkgPrice').textContent = "Free Assessment";
+    document.getElementById('selectedPkgImg').src = 'images/hub.png';
+    document.getElementById('selectedPkgImg').alt = "Central Core";
+    document.getElementById('selectedPkgAddons').innerHTML = "";
+
+    document.getElementById('drawerBackdrop').classList.add('open');
+    document.getElementById('drawer').classList.add('open');
+    document.body.classList.add('drawer-open');
+  }
+
+  function closeFormDrawer() {
+    document.getElementById('drawerBackdrop').classList.remove('open');
+    document.getElementById('drawer').classList.remove('open');
+    document.body.classList.remove('drawer-open');
+  }
+
+  // Handle Formspree AJAX submission
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    
+    // Prevent double submission
+    submitBtn.textContent = "Submitting...";
+    submitBtn.disabled = true;
+
+    // Normalize selected addons formatting for email presentation
+    const upgradeText = document.getElementById('selectedPkgAddons').innerHTML
+      .replace(/<br>/g, ', ')
+      .replace(/<strong>.*?<\/strong>/g, '')
+      .trim();
+
+    // Map inputs into a structured payload matching the layout values
+    const payload = {
+      _subject: "New Urban Eye Lead Submission",
+      configured_package: document.getElementById('selectedPkgTitle').textContent,
+      package_cost: document.getElementById('selectedPkgPrice').textContent,
+      selected_upgrades: upgradeText || "Base Configuration Only (Professional Installation Included)",
+      company: document.getElementById('company-field').value || "Residential Lead",
+      first_name: form.querySelector('input[name="firstName"]').value,
+      last_name: form.querySelector('input[name="lastName"]').value,
+      email: form.querySelector('input[name="email"]').value,
+      phone: "+254 " + form.querySelector('input[name="phone"]').value,
+      location_county: form.querySelector('select[name="location"]').value,
+      property_details: form.querySelector('textarea[name="details"]').value,
+      marketing_consent: form.querySelector('input[name="consentMkt"]').checked ? "Consented" : "Declined"
+    };
+
+    fetch("https://formspree.io/f/xkoegypv", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Request successfully submitted. A systems designer will contact you shortly.");
+        form.reset();
+        closeFormDrawer();
+      } else {
+        response.json().then(data => {
+          if (data && data.errors) {
+            alert("Error: " + data.errors.map(err => err.message).join(", "));
+          } else {
+            alert("Oops! There was a problem submitting your request. Please try again.");
+          }
+        });
+      }
+    })
+    .catch(error => {
+      console.error("Formspree Submission Error:", error);
+      alert("A connection error occurred. Please verify your internet connection and try again.");
+    })
+    .finally(() => {
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
     });
   }
-});
 </script>
 
 </body>
