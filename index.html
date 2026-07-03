@@ -106,19 +106,46 @@
     color: var(--bg-pure);
   }
 
-  /* Hero Section */
+  /* Dynamic Split Hero Section */
   .hero {
-    padding: 180px 0 100px;
+    padding: 140px 0 80px;
     background-image: radial-gradient(circle at 80% 20%, rgba(200, 16, 46, 0.03) 0%, transparent 60%);
-    min-height: 90vh; display: flex; align-items: center;
+    min-height: 90vh; 
+    display: flex; 
+    align-items: center;
   }
-  .hero-inner { max-width: 800px; }
+  .hero-split {
+    display: grid;
+    grid-template-columns: 1.10fr 1fr;
+    align-items: center;
+    gap: 48px;
+    width: 100%;
+  }
+  .hero-content {
+    max-width: 600px;
+  }
   .hero h1 { font-size: clamp(2.5rem, 6.5vw, 4.8rem); line-height: 0.95; margin-bottom: 24px; transition: opacity 0.2s ease; }
   .hero-price { font-family: var(--mono); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 600; margin-bottom: 16px; }
   .hero-price span { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 4px; }
   .hero p { font-size: clamp(16px, 1.8vw, 20px); margin-bottom: 36px; max-width: 580px; transition: opacity 0.2s ease; }
   .hero-subhead { color: var(--text-primary) !important; font-weight: 400 !important; margin-bottom: 20px !important; }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-media {
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+    background: #000;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+  }
+  .hero-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
 
   /* Core Layout Grid */
   .section { padding: 100px 0; border-top: 1px solid var(--border-soft); }
@@ -547,6 +574,15 @@
     .form-grid-2 { grid-template-columns: 1fr; }
     .drawer { max-width: 100%; }
     .spec-table th, .spec-table td { padding: 12px 16px; font-size: 13px; }
+    /* Split Hero Mobile overrides */
+    .hero-split {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .hero-media {
+      max-width: 600px;
+      margin: 0 auto;
+    }
   }
 
   @media (max-width: 960px) {
@@ -593,22 +629,35 @@
 
 <main>
 
-  <!-- Dynamic Starlink Cinematic Hero -->
+  <!-- Dynamic Split Video Hero -->
   <section class="hero">
-    <div class="wrap hero-inner">
-      <p class="eyebrow" id="hero-eyebrow">Enterprise Security System</p>
-      <h1 id="hero-title">Security That<br>Sees More.</h1>
-      <p class="hero-subhead" id="hero-subhead">And does more. The same system that catches an intruder can shut off a burst pipe or power down appliances when you arm it.</p>
-      <div class="hero-price">
-        <span id="hero-price-label">Hardware Kit starting at</span>
-        <span id="hero-price-val">KES 59,800</span>
+    <div class="wrap hero-split">
+      
+      <!-- Left Column: Dynamic Text Content -->
+      <div class="hero-content">
+        <p class="eyebrow" id="hero-eyebrow">Enterprise Security System</p>
+        <h1 id="hero-title">Security That<br>Sees More.</h1>
+        <p class="hero-subhead" id="hero-subhead">And does more. The same system that catches an intruder can shut off a burst pipe or power down appliances when you arm it.</p>
+        <div class="hero-price">
+          <span id="hero-price-label">Hardware Kit starting at</span>
+          <span id="hero-price-val">KES 59,800</span>
+        </div>
+        <p id="hero-desc">No wiring corridors. No physical line liabilities. Zero drilling through structural masonry. Professional security deployed to any property in less than 2 hours.</p>
+        <div class="hero-ctas">
+          <!-- Scroll-based navigation links for better UX flow -->
+          <a href="#pricing" class="btn btn-primary">Explore Packages</a>
+          <a href="#how-it-works" class="btn btn-ghost">Explore System</a>
+        </div>
       </div>
-      <p id="hero-desc">No wiring corridors. No physical line liabilities. Zero drilling through structural masonry. Professional security deployed to any property in less than 2 hours.</p>
-      <div class="hero-ctas">
-        <!-- Scroll-based navigation links for better UX flow -->
-        <a href="#pricing" class="btn btn-primary">Explore Packages</a>
-        <a href="#how-it-works" class="btn btn-ghost">Explore System</a>
+
+      <!-- Right Column: Interactive Video Showcase -->
+      <div class="hero-media">
+        <video id="hero-video-element" autoplay loop muted playsinline class="hero-video">
+          <source id="hero-video-source" src="videos/product%20placement.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
       </div>
+
     </div>
   </section>
 
@@ -626,11 +675,11 @@
         <!-- Device 1: Hub -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/hub.png" alt="Ajax Hub 2 Plus Jeweller">
+            <img src="images/hub.png" alt="Central Control Hub">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
-            <h3>Hub 2 Plus Jeweller</h3>
+            <h3>Central Control Hub</h3>
             <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Centralized Smart Control Panel</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
@@ -651,11 +700,11 @@
         <!-- Device 2: Motion Sensor -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/motion%20sensor.png" alt="MotionCam Jeweller">
+            <img src="images/motion%20sensor.png" alt="Motion Sensor with Camera">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
-            <h3>MotionCam Jeweller</h3>
+            <h3>Motion Sensor with Camera</h3>
             <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">PIR Motion Detector with Verification Camera</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
@@ -676,11 +725,11 @@
         <!-- Device 3: Siren -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/alarm%20siren.png" alt="StreetSiren Jeweller">
+            <img src="images/alarm%20siren.png" alt="Outdoor Siren">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
-            <h3>StreetSiren Jeweller</h3>
+            <h3>Outdoor Siren</h3>
             <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">High-Decibel Outdoor Sounder</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
@@ -701,11 +750,11 @@
         <!-- Device 4: Keypad -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/keypad.png" alt="KeyPad Jeweller">
+            <img src="images/keypad.png" alt="Wireless Keypad">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
-            <h3>KeyPad Jeweller</h3>
+            <h3>Wireless Keypad</h3>
             <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Wireless Touch Control Console</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
@@ -726,11 +775,11 @@
         <!-- Device 5: Leak Detector -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/leak%20detector.png" alt="LeaksProtect Jeweller">
+            <img src="images/leak%20detector.png" alt="Leak Shield Sensor">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
-            <h3>LeaksProtect Jeweller</h3>
+            <h3>Leak Shield Sensor</h3>
             <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Disaster Prevention Flood Sensor</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
@@ -751,11 +800,11 @@
         <!-- Device 6: Fire Detector -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/Ajax%20FireProtect%202%20white.png" alt="FireProtect 2 Jeweller">
+            <img src="images/Ajax%20FireProtect%202%20white.png" alt="Fire & CO Detector">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
-            <h3>FireProtect 2 SB</h3>
+            <h3>Fire & CO Detector</h3>
             <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Heat, Smoke, and CO Matrix Sensor</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-white"></span></div>
@@ -776,11 +825,11 @@
         <!-- Device 7: Panic Button -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/panic.png" alt="Button Jeweller">
+            <img src="images/panic.png" alt="Panic & Automation Button">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
-            <h3>Button Jeweller</h3>
+            <h3>Panic & Automation Button</h3>
             <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Fully Programmable Panic & Automation Key</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
@@ -886,7 +935,7 @@
             <label class="config-option">
               <div class="config-option-details">
                 <input type="checkbox" id="opt-ap-camera" onchange="calculatePrice('apartment')" data-price="3200" data-label="Full-Color Front Door Camera">
-                <span>+ HD Front-Door Camera [1]</span>
+                <span>+ HD Front-Door Camera</span>
               </div>
               <span class="config-option-price">KES 3,200</span>
             </label>
@@ -934,7 +983,7 @@
             <label class="config-option">
               <div class="config-option-details">
                 <input type="checkbox" id="opt-ms-camera" onchange="calculatePrice('maisonette')" data-price="11800" data-label="Dual Outdoor High-Definition Cameras">
-                <span>+ Dual Outdoor HD Cameras [1]</span>
+                <span>+ Dual Outdoor HD Cameras</span>
               </div>
               <span class="config-option-price">KES 11,800</span>
             </label>
@@ -982,7 +1031,7 @@
             <label class="config-option">
               <div class="config-option-details">
                 <input type="checkbox" id="opt-vl-camera" onchange="calculatePrice('villa')" data-price="29600" data-label="Triple Full-Color Camera System with PTZ Backup">
-                <span>+ Triple-Cam Outdoor System [1]</span>
+                <span>+ Triple-Cam Outdoor System</span>
               </div>
               <span class="config-option-price">KES 29,600</span>
             </label>
@@ -1066,7 +1115,7 @@
       <div class="faq-container">
         <details open>
           <summary>How does the video monitoring integration function?</summary>
-          <p class="faq-ans">We use secure connection protocol streams to display high-definition security camera live feeds directly inside your primary security smartphone interface [1, 2]. Unlike entirely wireless battery-powered sensors, these premium cameras require standard local power cabling (PoE or 12V adapters) and network runs to function reliably.</p>
+          <p class="faq-ans">We use secure connection protocol streams to display high-definition security security camera live feeds directly inside your primary security smartphone interface. Unlike entirely wireless battery-powered sensors, these premium cameras require standard local power cabling (PoE or 12V adapters) and network runs to function reliably.</p>
         </details>
         <details>
           <summary>How does the system perform during power blackouts?</summary>
@@ -1229,6 +1278,39 @@
     rowEl.classList.toggle('is-expanded', !wasExpanded);
   }
 
+  // Ad traffic can arrive with ?mode=commercial (or business/enterprise) in the URL.
+  // Applied immediately on parse, before paint, so there's no flash of residential
+  // content for a visitor who clicked a commercial-intent ad.
+  (function applyInitialSiteMode() {
+    const params = new URLSearchParams(window.location.search);
+    const modeParam = (params.get('mode') || '').toLowerCase();
+    const isCommercialIntent = ['commercial', 'business', 'enterprise'].includes(modeParam);
+    if (!isCommercialIntent) return;
+
+    currentSiteMode = 'commercial';
+    const targetData = siteModeData.commercial;
+
+    document.getElementById('mode-res').classList.remove('active');
+    document.getElementById('mode-com').classList.add('active');
+    document.getElementById('hero-eyebrow').textContent = targetData.eyebrow;
+    document.getElementById('hero-title').innerHTML = targetData.title;
+    document.getElementById('hero-price-label').textContent = targetData.priceLabel;
+    document.getElementById('hero-price-val').textContent = targetData.priceVal;
+    document.getElementById('hero-desc').textContent = targetData.desc;
+    document.getElementById('pricing-residential-grid').style.display = 'none';
+    document.getElementById('pricing-commercial-grid').style.display = 'grid';
+    document.getElementById('company-field-wrap').style.display = 'block';
+    document.getElementById('company-field').setAttribute('required', 'required');
+
+    // Ensure the initial commercial video is loaded properly
+    const heroVideo = document.getElementById('hero-video-element');
+    const heroVideoSource = document.getElementById('hero-video-source');
+    if (heroVideo && heroVideoSource) {
+      heroVideoSource.setAttribute('src', 'videos/motioncam.mp4');
+      heroVideo.load();
+    }
+  })();
+
   function setSiteMode(mode) {
     currentSiteMode = mode;
     
@@ -1260,6 +1342,21 @@
       hTitle.style.opacity = '1';
       hDesc.style.opacity = '1';
     }, 150);
+
+    // --- DYNAMIC VIDEO SWAP ---
+    const heroVideo = document.getElementById('hero-video-element');
+    const heroVideoSource = document.getElementById('hero-video-source');
+    if (heroVideo && heroVideoSource) {
+      const targetVideo = (mode === 'residential') 
+        ? 'videos/product%20placement.mp4' 
+        : 'videos/motioncam.mp4';
+      
+      heroVideoSource.setAttribute('src', targetVideo);
+      heroVideo.load(); // Instructs browser to load the new video track
+      heroVideo.play().catch(error => {
+        console.warn("Autoplay was prevented by browser configuration:", error);
+      });
+    }
 
     // Toggle Pricing Matrix display layouts
     const resGrid = document.getElementById('pricing-residential-grid');
