@@ -278,6 +278,16 @@
     margin-bottom: 12px;
   }
 
+  .overlay-content .catalog-benefit {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
   .overlay-content .catalog-specs {
     list-style: none;
   }
@@ -407,6 +417,15 @@
   }
   .status-dot.active { background-color: var(--accent-green); }
   .status-dot.inactive { background-color: var(--accent-red); }
+  .spec-table .benefit-note {
+    display: block;
+    margin-top: 4px;
+    margin-left: 16px;
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
 
   /* Massive Scale Pricing Cards */
   .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
@@ -689,6 +708,7 @@
                   <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
                   Obsidian / Stark White
                 </div>
+                <p class="catalog-benefit">Stays online through blackouts and network outages, with three ways to reach you, always.</p>
                 <ul class="catalog-specs">
                   <li>Ethernet, Wi-Fi, dual SIM (2G/3G/4G)</li>
                   <li>Supports detectors with photo verification</li>
@@ -722,6 +742,7 @@
                   <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
                   Obsidian / Stark White
                 </div>
+                <p class="catalog-benefit">See who's actually there, with a photo that hits your phone the instant it triggers, not just a beep.</p>
                 <ul class="catalog-specs">
                   <li>PIR motion detection up to 39 ft range</li>
                   <li>Sends animated series of photos upon alarm</li>
@@ -755,6 +776,7 @@
                   <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
                   Obsidian / Stark White
                 </div>
+                <p class="catalog-benefit">Scares off intruders and alerts neighbors, built to survive heavy rain and sun for years.</p>
                 <ul class="catalog-specs">
                   <li>Adjustable volume from 85 to 113 dB</li>
                   <li>IP54 weatherproof protection (-25°C to 50°C)</li>
@@ -788,6 +810,7 @@
                   <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
                   Obsidian / Stark White
                 </div>
+                <p class="catalog-benefit">A hidden duress code sends a silent alert if you're ever forced to disarm the system.</p>
                 <ul class="catalog-specs">
                   <li>Secure keypad supporting contactless tags</li>
                   <li>Dedicated duress/silent alarm entry code</li>
@@ -821,6 +844,7 @@
                   <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
                   Obsidian / Stark White
                 </div>
+                <p class="catalog-benefit">Catches a burst pipe before it floods your floors, and shuts the water off automatically.</p>
                 <ul class="catalog-specs">
                   <li>4 pairs of gold-plated sensor contact rings</li>
                   <li>IP65 fully waterproof housing shield</li>
@@ -854,6 +878,7 @@
                   <div class="color-dots"><span class="dot-white"></span></div>
                   Stark White Base Chassis
                 </div>
+                <p class="catalog-benefit">Detects smoke and deadly carbon monoxide from jikos, gas, or generators, even while you sleep.</p>
                 <ul class="catalog-specs">
                   <li>Patented dual-spectrum optical smoke sensor</li>
                   <li>Rapid temperature spike tracking alarms</li>
@@ -887,6 +912,7 @@
                   <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
                   Obsidian / Stark White
                 </div>
+                <p class="catalog-benefit">One press for an emergency, break-in, or fire, reaching the hub from anywhere on the compound.</p>
                 <ul class="catalog-specs">
                   <li>Accidental trigger prevention parameters</li>
                   <li>Up to 4,260 ft wireless range to hub core</li>
@@ -927,6 +953,7 @@
               <td class="highlight-col">
                 <span class="status-dot active"></span>
                 Encrypted Wireless (Multi-Channel)
+                <span class="benefit-note">Nothing to cut. There's no exposed line for anyone to sever.</span>
               </td>
               <td>Exposed Copper Cable (Vulnerable to cutting)</td>
             </tr>
@@ -934,7 +961,8 @@
               <td><strong>Power Blackouts</strong></td>
               <td class="highlight-col">
                 <span class="status-dot active"></span>
-                16-Hour Automatic Battery Backup
+                Up to 15-Hour Automatic Battery Backup
+                <span class="benefit-note">Keeps protecting your home through load-shedding, no generator needed.</span>
               </td>
               <td>Immediate Offline (Without external generator/UPS)</td>
             </tr>
@@ -943,6 +971,7 @@
               <td class="highlight-col">
                 <span class="status-dot active"></span>
                 Jamming Detection & Frequency Hopping
+                <span class="benefit-note">You're alerted the moment someone tries to block the signal.</span>
               </td>
               <td>Silent Failure (Physical lines cut without warning)</td>
             </tr>
@@ -951,6 +980,7 @@
               <td class="highlight-col">
                 <span class="status-dot active"></span>
                 Zero Wall Drilling or Structural Masonry Damage
+                <span class="benefit-note">Install in a day, no landlord permissions or repairs required.</span>
               </td>
               <td>Conduit installation, trunking, and visible wiring runs</td>
             </tr>
