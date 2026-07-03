@@ -25,7 +25,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
   body {
     background-color: var(--bg-pure);
     color: var(--text-primary);
@@ -619,8 +619,8 @@
     
     <!-- Mode Switcher Pill -->
     <div class="mode-toggle-pill">
-      <button id="mode-res" class="mode-pill-btn active" onclick="setSiteMode('residential')">Residential</button>
-      <button id="mode-com" class="mode-pill-btn" onclick="setSiteMode('commercial')">Commercial</button>
+      <button id="mode-res" class="mode-pill-btn active" aria-pressed="true" onclick="setSiteMode('residential')">Residential</button>
+      <button id="mode-com" class="mode-pill-btn" aria-pressed="false" onclick="setSiteMode('commercial')">Commercial</button>
     </div>
 
     <button onclick="openFormDrawer()" class="btn btn-ghost" style="padding: 10px 20px; font-size: 11px;">Book Site Review</button>
@@ -675,7 +675,7 @@
         <!-- Device 1: Hub -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/hub.png" alt="Central Control Hub">
+            <img src="images/hub.png" alt="Central Control Hub" loading="lazy">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
@@ -700,7 +700,7 @@
         <!-- Device 2: Motion Sensor -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/motion%20sensor.png" alt="Motion Sensor with Camera">
+            <img src="images/motion%20sensor.png" alt="Motion Sensor with Camera" loading="lazy">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
@@ -725,7 +725,7 @@
         <!-- Device 3: Siren -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/alarm%20siren.png" alt="Outdoor Siren">
+            <img src="images/alarm%20siren.png" alt="Outdoor Siren" loading="lazy">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
@@ -750,7 +750,7 @@
         <!-- Device 4: Keypad -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/keypad.png" alt="Wireless Keypad">
+            <img src="images/keypad.png" alt="Wireless Keypad" loading="lazy">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
@@ -775,7 +775,7 @@
         <!-- Device 5: Leak Detector -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/leak%20detector.png" alt="Leak Shield Sensor">
+            <img src="images/leak%20detector.png" alt="Leak Shield Sensor" loading="lazy">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
@@ -800,7 +800,7 @@
         <!-- Device 6: Fire Detector -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/Ajax%20FireProtect%202%20white.png" alt="Fire & CO Detector">
+            <img src="images/Ajax%20FireProtect%202%20white.png" alt="Fire & CO Detector" loading="lazy">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
@@ -825,7 +825,7 @@
         <!-- Device 7: Panic Button -->
         <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
-            <img src="images/panic.png" alt="Panic & Automation Button">
+            <img src="images/panic.png" alt="Panic & Automation Button" loading="lazy">
             <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
@@ -1152,7 +1152,7 @@
     <!-- Dynamic Package Selection Preview -->
     <div class="selected-pkg-box" id="selectedPkgBox">
       <div class="selected-pkg-img">
-        <img id="selectedPkgImg" src="images/hub.png" alt="Dynamic Hardware Showcase">
+        <img id="selectedPkgImg" src="images/hub.png" alt="Dynamic Hardware Showcase" loading="lazy">
       </div>
       <div class="selected-pkg-details">
         <div class="selected-pkg-title" id="selectedPkgTitle">Custom Site Survey</div>
@@ -1291,7 +1291,9 @@
     const targetData = siteModeData.commercial;
 
     document.getElementById('mode-res').classList.remove('active');
+    document.getElementById('mode-res').setAttribute('aria-pressed', 'false');
     document.getElementById('mode-com').classList.add('active');
+    document.getElementById('mode-com').setAttribute('aria-pressed', 'true');
     document.getElementById('hero-eyebrow').textContent = targetData.eyebrow;
     document.getElementById('hero-title').innerHTML = targetData.title;
     document.getElementById('hero-price-label').textContent = targetData.priceLabel;
@@ -1314,9 +1316,13 @@
   function setSiteMode(mode) {
     currentSiteMode = mode;
     
-    // Toggle active state classes on navigation buttons
-    document.getElementById('mode-res').classList.toggle('active', mode === 'residential');
-    document.getElementById('mode-com').classList.toggle('active', mode === 'commercial');
+    // Toggle active state classes and screen reader states
+    const isRes = (mode === 'residential');
+    document.getElementById('mode-res').classList.toggle('active', isRes);
+    document.getElementById('mode-res').setAttribute('aria-pressed', isRes ? 'true' : 'false');
+
+    document.getElementById('mode-com').classList.toggle('active', !isRes);
+    document.getElementById('mode-com').setAttribute('aria-pressed', !isRes ? 'true' : 'false');
 
     // Update Hero elements
     const hEyebrow = document.getElementById('hero-eyebrow');
@@ -1485,7 +1491,20 @@
       first_name: form.querySelector('input[name="firstName"]').value,
       last_name: form.querySelector('input[name="lastName"]').value,
       email: form.querySelector('input[name="email"]').value,
-      phone: "+254 " + form.querySelector('input[name="phone"]').value,
+      phone: (function() {
+        let rawPhone = form.querySelector('input[name="phone"]').value.replace(/\s+/g, ''); // strip spaces
+        // If user typed '0712...' or '0112...', remove the leading zero
+        if (rawPhone.startsWith('0')) {
+          rawPhone = rawPhone.substring(1);
+        }
+        // If the user accidentally typed +254 or 254 in the input field directly, clean it up
+        if (rawPhone.startsWith('+254')) {
+          rawPhone = rawPhone.substring(4);
+        } else if (rawPhone.startsWith('254')) {
+          rawPhone = rawPhone.substring(3);
+        }
+        return "+254 " + rawPhone;
+      })(),
       location_county: form.querySelector('select[name="location"]').value,
       property_details: form.querySelector('textarea[name="details"]').value,
       marketing_consent: form.querySelector('input[name="consentMkt"]').checked ? "Consented" : "Declined"
