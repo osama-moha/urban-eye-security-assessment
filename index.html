@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17823714787"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-17823714787');
+  gtag('config', 'G-ZER6GV8ZCS');
+</script>
+
 <title>Professional Security. Effortless Installation. | Urban Eye Security</title>
 <meta name="description" content="No wires. No concrete drilling. Zero lines to cut. Professional grade security that installs in minutes and keeps you connected through anything.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -325,6 +337,34 @@
     border-radius: 2px;
     margin-bottom: 12px;
   }
+
+  /* Teaser card: abstract expansion graphic in place of a product photo */
+  .product-card--teaser .product-card-img-wrap svg {
+    width: 100%;
+    height: 100%;
+    max-height: 140px;
+  }
+
+  .catalog-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: var(--accent-red);
+    border: none;
+    border-radius: 2px;
+    padding: 12px 18px;
+    margin-top: 14px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .catalog-cta-btn:hover { background: #b00e28; }
 
   /* Tap hint for mobile screens */
   .card-tap-hint {
@@ -680,8 +720,8 @@
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">The Hardware Ecosystem</p>
-        <h2>Seven Devices. One Network. Zero Lines.</h2>
-        <p>No architectural disruption. Standard elements mount instantly and connect wirelessly back to the encrypted centralized core.</p>
+        <h2>The Foundational Matrix. Unlimited Expansion.</h2>
+        <p>Seven core baseline devices form your structural defense. However, your property design isn't limited to a pre-packaged box. Our wireless architecture integrates with 50+ specialized detection, environmental, and automation modules tailored specifically to your Property &amp; Risk evaluation.</p>
       </div>
 
       <div class="product-grid">
@@ -919,6 +959,61 @@
                   <li>IP55 weatherproof dust/splash casing</li>
                   <li>Ultra-compact body with mounting options</li>
                 </ul>
+              </div>
+            </div>
+          </div>
+          <span class="card-tap-hint">Tap for details</span>
+        </div>
+
+        <!-- Card 8: Specialized Matrix (Showroom Expansion Teaser) -->
+        <div class="product-card product-card--teaser" onclick="toggleProductCard(this)">
+          <div class="product-card-inner">
+            <div class="product-card-main">
+              <div class="product-card-img-wrap">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Expanding module network graphic">
+                  <circle cx="100" cy="100" r="14" fill="var(--text-primary)"></circle>
+                  <g stroke="var(--border-soft)" stroke-width="1.5" fill="none">
+                    <line x1="100" y1="100" x2="40" y2="55"></line>
+                    <line x1="100" y1="100" x2="160" y2="55"></line>
+                    <line x1="100" y1="100" x2="40" y2="145"></line>
+                    <line x1="100" y1="100" x2="160" y2="145"></line>
+                    <line x1="100" y1="100" x2="100" y2="30"></line>
+                    <line x1="100" y1="100" x2="100" y2="170"></line>
+                  </g>
+                  <g fill="var(--accent-red)">
+                    <circle cx="40" cy="55" r="6"></circle>
+                    <circle cx="160" cy="55" r="6"></circle>
+                    <circle cx="40" cy="145" r="6"></circle>
+                    <circle cx="160" cy="145" r="6"></circle>
+                    <circle cx="100" cy="30" r="6"></circle>
+                    <circle cx="100" cy="170" r="6"></circle>
+                  </g>
+                  <g fill="var(--text-muted)" opacity="0.5">
+                    <circle cx="22" cy="30" r="3"></circle>
+                    <circle cx="178" cy="30" r="3"></circle>
+                    <circle cx="22" cy="170" r="3"></circle>
+                    <circle cx="178" cy="170" r="3"></circle>
+                  </g>
+                </svg>
+              </div>
+              <div class="product-card-header">
+                <h3>Specialized Matrix</h3>
+                <span class="catalog-tier-badge badge-opt">50+ Custom Integration Modules</span>
+              </div>
+            </div>
+
+            <div class="product-card-overlay">
+              <div class="overlay-content">
+                <h4>Specialized Matrix</h4>
+                <p class="product-card-subtitle">50+ Custom Integration Modules</p>
+                <p class="catalog-benefit">Your security layout is designed dynamically. We integrate niche environmental, physical, and automation defenses based on your custom requirements.</p>
+                <ul class="catalog-specs">
+                  <li>Acoustic glass-break &amp; curtain motion sensors</li>
+                  <li>Smart power sockets &amp; wireless circuit relays</li>
+                  <li>High-capacity wireless signal range extenders</li>
+                  <li>Dual-curtain outdoor perimeter beam detectors</li>
+                </ul>
+                <button type="button" class="catalog-cta-btn" onclick="event.stopPropagation(); openCustomModuleDrawer();">Get a Custom Layout</button>
               </div>
             </div>
           </div>
@@ -1535,6 +1630,21 @@
     } else {
       addonsBox.innerHTML = "Base intrusion system configuration only (Includes Professional Installation).";
     }
+
+    document.getElementById('drawerBackdrop').classList.add('open');
+    document.getElementById('drawer').classList.add('open');
+    document.body.classList.add('drawer-open');
+  }
+
+  // Opens the same enquiry drawer/Formspree pipeline as the waitlist flow,
+  // but with summary copy relevant to a visitor who tapped the "Specialized
+  // Matrix" teaser card rather than a standard package.
+  function openCustomModuleDrawer() {
+    document.getElementById('selectedPkgTitle').textContent = "Custom Integration Request";
+    document.getElementById('selectedPkgPrice').textContent = "Pending Design Consultation";
+    document.getElementById('selectedPkgImg').src = 'images/hub.png';
+    document.getElementById('selectedPkgImg').alt = "Central Core";
+    document.getElementById('selectedPkgAddons').innerHTML = "Enquiry for specialized modules beyond the core baseline configuration.";
 
     document.getElementById('drawerBackdrop').classList.add('open');
     document.getElementById('drawer').classList.add('open');
