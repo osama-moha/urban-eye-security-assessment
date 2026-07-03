@@ -61,6 +61,8 @@
   .btn-primary:hover { background: #333333; }
   .btn-ghost { background: transparent; color: var(--text-primary); border: 1.5px solid var(--text-primary); }
   .btn-ghost:hover { background: rgba(0, 0, 0, 0.04); }
+  .btn-accent { background: var(--accent-red); color: var(--bg-pure); }
+  .btn-accent:hover { background: #b00e28; }
   .btn:active { transform: scale(0.98); }
 
   /* Navigation Bar */
@@ -153,58 +155,151 @@
   .section-head { max-width: 600px; margin-bottom: 60px; }
   .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.0; margin-bottom: 16px; }
   
-  /* Catalog Style Hardware Listing Layout */
-  .catalog-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  /* Floating Interactive Hardware Grid */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
     margin-top: 40px;
   }
-  .catalog-row {
+  @media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
+
+  .product-card {
     background: var(--bg-card);
     border: 1px solid var(--border-soft);
-    border-radius: 2px;
-    padding: 24px;
-    display: grid;
-    grid-template-columns: 180px 1.5fr 2.5fr 1fr;
-    align-items: center;
-    gap: 32px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    border-radius: 4px;
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .catalog-row:hover {
+
+  .product-card:hover, .product-card.is-active {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
     border-color: var(--text-primary);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
   }
-  .catalog-img-wrap {
-    width: 100%;
-    height: 140px;
-    background: var(--bg-soft);
-    border-radius: 2px;
+
+  .product-card-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    position: relative;
+  }
+
+  .product-card-main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-card-img-wrap {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    position: relative;
-    padding: 12px;
-    border: 1px solid var(--border-soft);
+    width: 100%;
+    max-height: 220px;
+    margin-bottom: 16px;
   }
-  .catalog-img-wrap img {
-    max-width: 90%;
-    max-height: 90%;
+
+  .product-card-img-wrap img {
+    max-width: 80%;
+    max-height: 80%;
     object-fit: contain;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .catalog-row:hover .catalog-img-wrap img {
+
+  .product-card:hover .product-card-img-wrap img,
+  .product-card.is-active .product-card-img-wrap img {
     transform: scale(1.05);
   }
-  .catalog-info h3 {
-    font-size: 17px;
+
+  .product-card-header {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-card-header h3 {
+    font-size: 16px;
     font-weight: 900;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     letter-spacing: -0.01em;
   }
-  .catalog-color-badge {
+
+  /* Overlay specs sliding up from the bottom */
+  .product-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 17, 17, 0.96);
+    backdrop-filter: blur(4px);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: translateY(100%);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+  }
+
+  .product-card:hover .product-card-overlay,
+  .product-card.is-active .product-card-overlay {
+    transform: translateY(0);
+  }
+
+  .overlay-content {
+    color: #ffffff;
+  }
+
+  .overlay-content h4 {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .overlay-content .product-card-subtitle {
+    color: #a1a1a6;
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .overlay-content .catalog-specs {
+    list-style: none;
+  }
+
+  .overlay-content .catalog-specs li {
+    color: #e5e5e7;
+    font-size: 13px;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    position: relative;
+    padding-left: 14px;
+  }
+
+  .overlay-content .catalog-specs li::before {
+    content: "•";
+    color: var(--accent-red);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .overlay-content .catalog-color-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -213,13 +308,50 @@
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    background: var(--bg-soft);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e5e5e7;
     padding: 4px 8px;
     border-radius: 2px;
-    margin-top: 6px;
-    border: 1px solid var(--border-soft);
+    margin-bottom: 12px;
   }
+
+  /* Tap hint for mobile screens */
+  .card-tap-hint {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .product-card:hover .card-tap-hint,
+  .product-card.is-active .card-tap-hint {
+    opacity: 0;
+  }
+
+  /* Styling helper components */
+  .catalog-tier-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .badge-all { background: rgba(36, 160, 75, 0.08); color: var(--accent-green); border: 1px solid rgba(36, 160, 75, 0.15); }
+  .badge-opt { background: var(--bg-soft); border: 1px solid var(--border-soft); color: var(--text-muted); }
+
   .color-dots {
     display: inline-flex;
     gap: 4px;
@@ -232,143 +364,6 @@
   }
   .dot-black { background-color: #111111; }
   .dot-white { background-color: #ffffff; border-color: #dddddd; }
-
-  .catalog-specs {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 24px;
-  }
-  .catalog-specs li {
-    font-size: 13px;
-    color: var(--text-muted);
-    position: relative;
-    padding-left: 14px;
-    line-height: 1.35;
-  }
-  .catalog-specs li::before {
-    content: "•";
-    color: var(--accent-red);
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-  }
-  .catalog-action {
-    text-align: right;
-  }
-  .catalog-tier-badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    border-radius: 2px;
-    display: inline-block;
-  }
-  .badge-all { background: rgba(36, 160, 75, 0.08); color: var(--accent-green); border: 1px solid rgba(36, 160, 75, 0.15); }
-  .badge-mid { background: rgba(200, 16, 46, 0.08); color: var(--accent-red); border: 1px solid rgba(200, 16, 46, 0.15); }
-  .badge-opt { background: var(--bg-soft); border: 1px solid var(--border-soft); color: var(--text-muted); }
-
-  /* Reveal-on-interact: everything except image + title stays hidden until hover (desktop)
-     or tap (touch). On touch, the first 2 specs stay visible by default regardless.
-     max-height collapse (not just opacity) so hidden content doesn't leave blank space. */
-  .catalog-subtitle,
-  .catalog-color-badge {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    margin: 0 !important;
-    transition: opacity 0.25s ease, max-height 0.25s ease;
-    pointer-events: none;
-  }
-  .catalog-specs li:nth-child(n+3) {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.25s ease, max-height 0.25s ease;
-    pointer-events: none;
-  }
-  .catalog-action {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.25s ease, max-height 0.25s ease;
-    pointer-events: none;
-  }
-  .catalog-row {
-    cursor: default;
-    position: relative;
-  }
-  @media (hover: hover) {
-    .catalog-row:hover .catalog-subtitle,
-    .catalog-row:hover .catalog-color-badge {
-      opacity: 1;
-      max-height: 40px;
-      margin-top: 6px !important;
-      margin-bottom: 4px !important;
-    }
-    .catalog-row:hover .catalog-specs li:nth-child(n+3) {
-      opacity: 1;
-      max-height: 40px;
-    }
-    .catalog-row:hover .catalog-action {
-      opacity: 1;
-      max-height: 60px;
-    }
-    .catalog-row:hover .catalog-subtitle,
-    .catalog-row:hover .catalog-color-badge,
-    .catalog-row:hover .catalog-specs li:nth-child(n+3),
-    .catalog-row:hover .catalog-action {
-      pointer-events: auto;
-    }
-  }
-  .catalog-row.is-expanded .catalog-subtitle,
-  .catalog-row.is-expanded .catalog-color-badge {
-    opacity: 1;
-    max-height: 40px;
-    margin-top: 6px !important;
-    margin-bottom: 4px !important;
-  }
-  .catalog-row.is-expanded .catalog-specs li:nth-child(n+3) {
-    opacity: 1;
-    max-height: 40px;
-  }
-  .catalog-row.is-expanded .catalog-action {
-    opacity: 1;
-    max-height: 60px;
-  }
-  .catalog-row.is-expanded .catalog-subtitle,
-  .catalog-row.is-expanded .catalog-color-badge,
-  .catalog-row.is-expanded .catalog-specs li:nth-child(n+3),
-  .catalog-row.is-expanded .catalog-action {
-    pointer-events: auto;
-  }
-  /* Touch affordance: small "tap for details" hint, only shown on devices without real hover,
-     and only while the row is collapsed */
-  .catalog-tap-hint {
-    display: none;
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #ffffff;
-    background: rgba(17, 17, 17, 0.75);
-    padding: 4px 8px;
-    border-radius: 2px;
-    pointer-events: none;
-    white-space: nowrap;
-  }
-  @media (hover: none) {
-    .catalog-row { cursor: pointer; }
-    .catalog-tap-hint { display: block; }
-    .catalog-row.is-expanded .catalog-tap-hint { display: none; }
-  }
 
   /* Compact Comparison Section Specs */
   .spec-table-wrapper {
@@ -623,7 +618,7 @@
       <button id="mode-com" class="mode-pill-btn" aria-pressed="false" onclick="setSiteMode('commercial')">Commercial</button>
     </div>
 
-    <button onclick="openFormDrawer()" class="btn btn-ghost" style="padding: 10px 20px; font-size: 11px;">Book Site Review</button>
+    <button onclick="openFormDrawer()" class="btn btn-ghost" style="padding: 10px 20px; font-size: 11px;">Apply for Deployment</button>
   </div>
 </header>
 
@@ -661,7 +656,7 @@
     </div>
   </section>
 
-  <!-- Spec-Catalog Hardware Ecosystem Layout -->
+  <!-- Spec-Catalog Hardware Ecosystem Layout (Floating Card Grid) -->
   <section class="section section--soft" id="how-it-works">
     <div class="wrap">
       <div class="section-head">
@@ -670,181 +665,238 @@
         <p>No architectural disruption. Standard elements mount instantly and connect wirelessly back to the encrypted centralized core.</p>
       </div>
 
-      <div class="catalog-list">
+      <div class="product-grid">
         
-        <!-- Device 1: Hub -->
-        <div class="catalog-row" onclick="toggleCatalogRow(this)">
-          <div class="catalog-img-wrap">
-            <img src="images/hub.png" alt="Central Control Hub" loading="lazy">
-            <span class="catalog-tap-hint">Tap for full specs</span>
-          </div>
-          <div class="catalog-info">
-            <h3>Central Control Hub</h3>
-            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Centralized Smart Control Panel</p>
-            <div class="catalog-color-badge">
-              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
-              Available in Obsidian / Stark White
+        <!-- Card 1: Hub -->
+        <div class="product-card" onclick="toggleProductCard(this)">
+          <div class="product-card-inner">
+            <div class="product-card-main">
+              <div class="product-card-img-wrap">
+                <img src="images/hub.png" alt="Central Control Hub" loading="lazy">
+              </div>
+              <div class="product-card-header">
+                <h3>Central Control Hub</h3>
+                <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+              </div>
+            </div>
+            
+            <!-- Overlay specs panel sliding up on hover/active -->
+            <div class="product-card-overlay">
+              <div class="overlay-content">
+                <h4>Central Control Hub</h4>
+                <p class="product-card-subtitle">Centralized Smart Control Panel</p>
+                <div class="catalog-color-badge">
+                  <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+                  Obsidian / Stark White
+                </div>
+                <ul class="catalog-specs">
+                  <li>Ethernet, Wi-Fi, dual SIM (2G/3G/4G)</li>
+                  <li>Supports detectors with photo verification</li>
+                  <li>Max. 200 devices & 25 security groups</li>
+                  <li>Built-in battery with 15 hrs backup runtime</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <ul class="catalog-specs">
-            <li>Ethernet, Wi-Fi, dual SIM (2G/3G/4G)</li>
-            <li>Supports detectors with photo verification</li>
-            <li>Max. 200 devices & 25 security groups</li>
-            <li>Built-in battery with 15 hrs backup runtime</li>
-          </ul>
-          <div class="catalog-action">
-            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
-          </div>
+          <span class="card-tap-hint">Tap for details</span>
         </div>
 
-        <!-- Device 2: Motion Sensor -->
-        <div class="catalog-row" onclick="toggleCatalogRow(this)">
-          <div class="catalog-img-wrap">
-            <img src="images/motion%20sensor.png" alt="Motion Sensor with Camera" loading="lazy">
-            <span class="catalog-tap-hint">Tap for full specs</span>
-          </div>
-          <div class="catalog-info">
-            <h3>Motion Sensor with Camera</h3>
-            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">PIR Motion Detector with Verification Camera</p>
-            <div class="catalog-color-badge">
-              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
-              Available in Obsidian / Stark White
+        <!-- Card 2: Motion Sensor -->
+        <div class="product-card" onclick="toggleProductCard(this)">
+          <div class="product-card-inner">
+            <div class="product-card-main">
+              <div class="product-card-img-wrap">
+                <img src="images/motion%20sensor.png" alt="Motion Sensor with Camera" loading="lazy">
+              </div>
+              <div class="product-card-header">
+                <h3>Motion Sensor with Camera</h3>
+                <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+              </div>
+            </div>
+            
+            <div class="product-card-overlay">
+              <div class="overlay-content">
+                <h4>Motion Sensor with Camera</h4>
+                <p class="product-card-subtitle">PIR Motion Detector with Verification Camera</p>
+                <div class="catalog-color-badge">
+                  <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+                  Obsidian / Stark White
+                </div>
+                <ul class="catalog-specs">
+                  <li>PIR motion detection up to 39 ft range</li>
+                  <li>Sends animated series of photos upon alarm</li>
+                  <li>Pet immunity up to 44 lbs (20 kg) & 19 in</li>
+                  <li>Tampering alarm and jam detection protection</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <ul class="catalog-specs">
-            <li>PIR motion detection up to 39 ft range</li>
-            <li>Sends animated series of photos upon alarm</li>
-            <li>Pet immunity up to 44 lbs (20 kg) & 19 in</li>
-            <li>Tampering alarm and jam detection protection</li>
-          </ul>
-          <div class="catalog-action">
-            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
-          </div>
+          <span class="card-tap-hint">Tap for details</span>
         </div>
 
-        <!-- Device 3: Siren -->
-        <div class="catalog-row" onclick="toggleCatalogRow(this)">
-          <div class="catalog-img-wrap">
-            <img src="images/alarm%20siren.png" alt="Outdoor Siren" loading="lazy">
-            <span class="catalog-tap-hint">Tap for full specs</span>
-          </div>
-          <div class="catalog-info">
-            <h3>Outdoor Siren</h3>
-            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">High-Decibel Outdoor Sounder</p>
-            <div class="catalog-color-badge">
-              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
-              Available in Obsidian / Stark White
+        <!-- Card 3: Siren -->
+        <div class="product-card" onclick="toggleProductCard(this)">
+          <div class="product-card-inner">
+            <div class="product-card-main">
+              <div class="product-card-img-wrap">
+                <img src="images/alarm%20siren.png" alt="Outdoor Siren" loading="lazy">
+              </div>
+              <div class="product-card-header">
+                <h3>Outdoor Siren</h3>
+                <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+              </div>
+            </div>
+            
+            <div class="product-card-overlay">
+              <div class="overlay-content">
+                <h4>Outdoor Siren</h4>
+                <p class="product-card-subtitle">High-Decibel Outdoor Sounder</p>
+                <div class="catalog-color-badge">
+                  <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+                  Obsidian / Stark White
+                </div>
+                <ul class="catalog-specs">
+                  <li>Adjustable volume from 85 to 113 dB</li>
+                  <li>IP54 weatherproof protection (-25°C to 50°C)</li>
+                  <li>Tampering and accelerometer alarm trigger</li>
+                  <li>Up to 5 years battery life on internal cells</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <ul class="catalog-specs">
-            <li>Adjustable volume from 85 to 113 dB</li>
-            <li>IP54 weatherproof protection (-25°C to 50°C)</li>
-            <li>Tampering and accelerometer alarm trigger</li>
-            <li>Up to 5 years battery life on internal cells</li>
-          </ul>
-          <div class="catalog-action">
-            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
-          </div>
+          <span class="card-tap-hint">Tap for details</span>
         </div>
 
-        <!-- Device 4: Keypad -->
-        <div class="catalog-row" onclick="toggleCatalogRow(this)">
-          <div class="catalog-img-wrap">
-            <img src="images/keypad.png" alt="Wireless Keypad" loading="lazy">
-            <span class="catalog-tap-hint">Tap for full specs</span>
-          </div>
-          <div class="catalog-info">
-            <h3>Wireless Keypad</h3>
-            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Wireless Touch Control Console</p>
-            <div class="catalog-color-badge">
-              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
-              Available in Obsidian / Stark White
+        <!-- Card 4: Keypad -->
+        <div class="product-card" onclick="toggleProductCard(this)">
+          <div class="product-card-inner">
+            <div class="product-card-main">
+              <div class="product-card-img-wrap">
+                <img src="images/keypad.png" alt="Wireless Keypad" loading="lazy">
+              </div>
+              <div class="product-card-header">
+                <h3>Wireless Keypad</h3>
+                <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+              </div>
+            </div>
+            
+            <div class="product-card-overlay">
+              <div class="overlay-content">
+                <h4>Wireless Keypad</h4>
+                <p class="product-card-subtitle">Wireless Touch Control Console</p>
+                <div class="catalog-color-badge">
+                  <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+                  Obsidian / Stark White
+                </div>
+                <ul class="catalog-specs">
+                  <li>Secure keypad supporting contactless tags</li>
+                  <li>Dedicated duress/silent alarm entry code</li>
+                  <li>One-button system status checks</li>
+                  <li>Fully wireless, powered by 4x AA batteries</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <ul class="catalog-specs">
-            <li>Secure keypad supporting contactless tags</li>
-            <li>Dedicated duress/silent alarm entry code</li>
-            <li>One-button system status checks</li>
-            <li>Fully wireless, powered by 4x AA batteries</li>
-          </ul>
-          <div class="catalog-action">
-            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
-          </div>
+          <span class="card-tap-hint">Tap for details</span>
         </div>
 
-        <!-- Device 5: Leak Detector -->
-        <div class="catalog-row" onclick="toggleCatalogRow(this)">
-          <div class="catalog-img-wrap">
-            <img src="images/leak%20detector.png" alt="Leak Shield Sensor" loading="lazy">
-            <span class="catalog-tap-hint">Tap for full specs</span>
-          </div>
-          <div class="catalog-info">
-            <h3>Leak Shield Sensor</h3>
-            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Disaster Prevention Flood Sensor</p>
-            <div class="catalog-color-badge">
-              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
-              Available in Obsidian / Stark White
+        <!-- Card 5: Leak Detector -->
+        <div class="product-card" onclick="toggleProductCard(this)">
+          <div class="product-card-inner">
+            <div class="product-card-main">
+              <div class="product-card-img-wrap">
+                <img src="images/leak%20detector.png" alt="Leak Shield Sensor" loading="lazy">
+              </div>
+              <div class="product-card-header">
+                <h3>Leak Shield Sensor</h3>
+                <span class="catalog-tier-badge badge-opt">Optional Upgrade</span>
+              </div>
+            </div>
+            
+            <div class="product-card-overlay">
+              <div class="overlay-content">
+                <h4>Leak Shield Sensor</h4>
+                <p class="product-card-subtitle">Disaster Prevention Flood Sensor</p>
+                <div class="catalog-color-badge">
+                  <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+                  Obsidian / Stark White
+                </div>
+                <ul class="catalog-specs">
+                  <li>4 pairs of gold-plated sensor contact rings</li>
+                  <li>IP65 fully waterproof housing shield</li>
+                  <li>Triggers WaterStop main shutoff in 0.15s</li>
+                  <li>Operates up to 5 years without maintenance</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <ul class="catalog-specs">
-            <li>4 pairs of gold-plated sensor contact rings</li>
-            <li>IP65 fully waterproof housing shield</li>
-            <li>Triggers WaterStop main shutoff in 0.15s</li>
-            <li>Operates up to 5 years without maintenance</li>
-          </ul>
-          <div class="catalog-action">
-            <span class="catalog-tier-badge badge-opt">Optional Upgrade</span>
-          </div>
+          <span class="card-tap-hint">Tap for details</span>
         </div>
 
-        <!-- Device 6: Fire Detector -->
-        <div class="catalog-row" onclick="toggleCatalogRow(this)">
-          <div class="catalog-img-wrap">
-            <img src="images/Ajax%20FireProtect%202%20white.png" alt="Fire & CO Detector" loading="lazy">
-            <span class="catalog-tap-hint">Tap for full specs</span>
-          </div>
-          <div class="catalog-info">
-            <h3>Fire & CO Detector</h3>
-            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Heat, Smoke, and CO Matrix Sensor</p>
-            <div class="catalog-color-badge">
-              <div class="color-dots"><span class="dot-white"></span></div>
-              Stark White Base Chassis
+        <!-- Card 6: Fire Detector -->
+        <div class="product-card" onclick="toggleProductCard(this)">
+          <div class="product-card-inner">
+            <div class="product-card-main">
+              <div class="product-card-img-wrap">
+                <img src="images/Ajax%20FireProtect%202%20white.png" alt="Fire & CO Detector" loading="lazy">
+              </div>
+              <div class="product-card-header">
+                <h3>Fire & CO Detector</h3>
+                <span class="catalog-tier-badge badge-opt">Optional Upgrade</span>
+              </div>
+            </div>
+            
+            <div class="product-card-overlay">
+              <div class="overlay-content">
+                <h4>Fire & CO Detector</h4>
+                <p class="product-card-subtitle">Heat, Smoke, and CO Matrix Sensor</p>
+                <div class="catalog-color-badge">
+                  <div class="color-dots"><span class="dot-white"></span></div>
+                  Stark White Base Chassis
+                </div>
+                <ul class="catalog-specs">
+                  <li>Patented dual-spectrum optical smoke sensor</li>
+                  <li>Rapid temperature spike tracking alarms</li>
+                  <li>Built-in high-decibel acoustic siren (85 dB)</li>
+                  <li>Up to 10 years sealed battery runtime</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <ul class="catalog-specs">
-            <li>Patented dual-spectrum optical smoke sensor</li>
-            <li>Rapid temperature spike tracking alarms</li>
-            <li>Built-in high-decibel acoustic siren (85 dB)</li>
-            <li>Up to 10 years sealed battery runtime</li>
-          </ul>
-          <div class="catalog-action">
-            <span class="catalog-tier-badge badge-opt">Optional Upgrade</span>
-          </div>
+          <span class="card-tap-hint">Tap for details</span>
         </div>
 
-        <!-- Device 7: Panic Button -->
-        <div class="catalog-row" onclick="toggleCatalogRow(this)">
-          <div class="catalog-img-wrap">
-            <img src="images/panic.png" alt="Panic & Automation Button" loading="lazy">
-            <span class="catalog-tap-hint">Tap for full specs</span>
-          </div>
-          <div class="catalog-info">
-            <h3>Panic & Automation Button</h3>
-            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Fully Programmable Panic & Automation Key</p>
-            <div class="catalog-color-badge">
-              <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
-              Available in Obsidian / Stark White
+        <!-- Card 7: Panic Button -->
+        <div class="product-card" onclick="toggleProductCard(this)">
+          <div class="product-card-inner">
+            <div class="product-card-main">
+              <div class="product-card-img-wrap">
+                <img src="images/panic.png" alt="Panic & Automation Button" loading="lazy">
+              </div>
+              <div class="product-card-header">
+                <h3>Panic & Automation Button</h3>
+                <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
+              </div>
+            </div>
+            
+            <div class="product-card-overlay">
+              <div class="overlay-content">
+                <h4>Panic & Automation Button</h4>
+                <p class="product-card-subtitle">Fully Programmable Panic & Automation Key</p>
+                <div class="catalog-color-badge">
+                  <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
+                  Obsidian / Stark White
+                </div>
+                <ul class="catalog-specs">
+                  <li>Accidental trigger prevention parameters</li>
+                  <li>Up to 4,260 ft wireless range to hub core</li>
+                  <li>IP55 weatherproof dust/splash casing</li>
+                  <li>Ultra-compact body with mounting options</li>
+                </ul>
+              </div>
             </div>
           </div>
-          <ul class="catalog-specs">
-            <li>Accidental trigger prevention parameters</li>
-            <li>Up to 4,260 ft wireless range to hub core</li>
-            <li>IP55 weatherproof dust/splash casing</li>
-            <li>Ultra-compact body with mounting options</li>
-          </ul>
-          <div class="catalog-action">
-            <span class="catalog-tier-badge badge-all">Standard All Tiers</span>
-          </div>
+          <span class="card-tap-hint">Tap for details</span>
         </div>
 
       </div>
@@ -1155,17 +1207,26 @@
         <img id="selectedPkgImg" src="images/hub.png" alt="Dynamic Hardware Showcase" loading="lazy">
       </div>
       <div class="selected-pkg-details">
-        <div class="selected-pkg-title" id="selectedPkgTitle">Custom Site Survey</div>
-        <div class="selected-pkg-price" id="selectedPkgPrice">Free Consultation</div>
+        <div class="selected-pkg-title" id="selectedPkgTitle">Waitlist Application</div>
+        <div class="selected-pkg-price" id="selectedPkgPrice">Pending Evaluation</div>
         <div class="selected-pkg-addons" id="selectedPkgAddons"></div>
       </div>
     </div>
 
     <!-- Booking details submission -->
     <form id="siteSurveyForm" onsubmit="handleFormSubmit(event)">
-      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px; font-weight: 400;">
-        Send us your details and a systems designer will connect directly to organize your layout plan, clarify specifications, and verify custom configurations.
-      </p>
+      <!-- Scarcity EOI Info Header Block -->
+      <div style="margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-soft);">
+        <h4 style="font-family: var(--mono); font-size: 11px; color: var(--accent-red); letter-spacing: 0.1em; margin-bottom: 8px;">
+          Current Engineering Capacity: EXTREMELY LIMITED
+        </h4>
+        <p style="font-size: 13px; color: var(--text-primary); line-height: 1.5; font-weight: 400; margin-bottom: 10px;">
+          We custom-build every system, so we strictly limit our monthly installations.
+        </p>
+        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
+          Submit an Expression of Interest (EOI) below. We review daily and prioritize properties that need immediate protection.
+        </p>
+      </div>
 
       <!-- Company Name (Dynamically Displayed for Commercial Leads) -->
       <div class="form-group" id="company-field-wrap" style="display: none;">
@@ -1212,8 +1273,11 @@
       </div>
 
       <div class="form-group">
-        <label class="form-label">Property Details*</label>
-        <textarea class="form-control" name="details" rows="3" placeholder="Tell us what you need secured (e.g., number of rooms, outdoor sensors, continuous video options)..." required style="resize: none;"></textarea>
+        <label class="form-label">Property & Risk Overview*</label>
+        <span style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.35;">
+          Please describe your property type, primary security concerns, and target timeline. This information helps us evaluate setup feasibility.
+        </span>
+        <textarea class="form-control" name="details" rows="4" placeholder="e.g., 4-bedroom home, main gate vulnerability, target timeline: 2 weeks." required style="resize: none;"></textarea>
       </div>
 
       <div class="checkbox-group">
@@ -1226,7 +1290,7 @@
         <label for="consentData">I consent to the secure handling of my contact information to process this security evaluation request.*</label>
       </div>
 
-      <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+      <button type="submit" class="btn btn-accent" style="width: 100%;">Submit Expression of Interest</button>
     </form>
   </div>
 </div>
@@ -1267,15 +1331,18 @@
     }
   };
 
-  // Touch devices have no :hover, so tapping a device card toggles the extra
-  // specs/subtitle/badge open instead. Desktop mouse users still just hover.
-  function toggleCatalogRow(rowEl) {
-    if (window.matchMedia('(hover: hover)').matches) return; // desktop: hover handles it
-    const wasExpanded = rowEl.classList.contains('is-expanded');
-    document.querySelectorAll('.catalog-row.is-expanded').forEach(r => {
-      if (r !== rowEl) r.classList.remove('is-expanded');
+  // Touch devices have no :hover, so tapping a device card toggles the specs active.
+  function toggleProductCard(cardEl) {
+    if (window.matchMedia('(hover: hover)').matches) return; // desktop handles on hover
+    
+    const wasActive = cardEl.classList.contains('is-active');
+    
+    // Close other open cards
+    document.querySelectorAll('.product-card.is-active').forEach(c => {
+      if (c !== cardEl) c.classList.remove('is-active');
     });
-    rowEl.classList.toggle('is-expanded', !wasExpanded);
+    
+    cardEl.classList.toggle('is-active', !wasActive);
   }
 
   // Ad traffic can arrive with ?mode=commercial (or business/enterprise) in the URL.
@@ -1446,11 +1513,11 @@
 
   function openFormDrawer() {
     // Dynamic fallback for custom reviews
-    document.getElementById('selectedPkgTitle').textContent = "Custom Site Survey";
-    document.getElementById('selectedPkgPrice').textContent = "Free Assessment";
+    document.getElementById('selectedPkgTitle').textContent = "Waitlist Application";
+    document.getElementById('selectedPkgPrice').textContent = "Pending Evaluation";
     document.getElementById('selectedPkgImg').src = 'images/hub.png';
     document.getElementById('selectedPkgImg').alt = "Central Core";
-    document.getElementById('selectedPkgAddons').innerHTML = "";
+    document.getElementById('selectedPkgAddons').innerHTML = "Application for upcoming deployment slot.";
 
     document.getElementById('drawerBackdrop').classList.add('open');
     document.getElementById('drawer').classList.add('open');
@@ -1483,10 +1550,10 @@
 
     // Map inputs into a structured payload matching the layout values
     const payload = {
-      _subject: "New Urban Eye Lead Submission",
+      _subject: "New Urban Eye EOI Waitlist Submission",
       configured_package: document.getElementById('selectedPkgTitle').textContent,
       package_cost: document.getElementById('selectedPkgPrice').textContent,
-      selected_upgrades: upgradeText || "Base Configuration Only (Professional Installation Included)",
+      selected_upgrades: upgradeText || "Base Configuration Only (Waitlist Application)",
       company: document.getElementById('company-field').value || "Residential Lead",
       first_name: form.querySelector('input[name="firstName"]').value,
       last_name: form.querySelector('input[name="lastName"]').value,
@@ -1506,7 +1573,7 @@
         return "+254 " + rawPhone;
       })(),
       location_county: form.querySelector('select[name="location"]').value,
-      property_details: form.querySelector('textarea[name="details"]').value,
+      property_and_risk_overview: form.querySelector('textarea[name="details"]').value,
       marketing_consent: form.querySelector('input[name="consentMkt"]').checked ? "Consented" : "Declined"
     };
 
@@ -1520,7 +1587,7 @@
     })
     .then(response => {
       if (response.ok) {
-        alert("Request successfully submitted. A systems designer will contact you shortly.");
+        alert("Expression of Interest successfully submitted. A systems designer will contact you shortly if your layout plan qualifies.");
         form.reset();
         closeFormDrawer();
       } else {
