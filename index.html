@@ -117,6 +117,7 @@
   .hero-price { font-family: var(--mono); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 600; margin-bottom: 16px; }
   .hero-price span { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 4px; }
   .hero p { font-size: clamp(16px, 1.8vw, 20px); margin-bottom: 36px; max-width: 580px; transition: opacity 0.2s ease; }
+  .hero-subhead { color: var(--text-primary) !important; font-weight: 400 !important; margin-bottom: 20px !important; }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
   /* Core Layout Grid */
@@ -241,6 +242,106 @@
   .badge-all { background: rgba(36, 160, 75, 0.08); color: var(--accent-green); border: 1px solid rgba(36, 160, 75, 0.15); }
   .badge-mid { background: rgba(200, 16, 46, 0.08); color: var(--accent-red); border: 1px solid rgba(200, 16, 46, 0.15); }
   .badge-opt { background: var(--bg-soft); border: 1px solid var(--border-soft); color: var(--text-muted); }
+
+  /* Reveal-on-interact: everything except image + title stays hidden until hover (desktop)
+     or tap (touch). On touch, the first 2 specs stay visible by default regardless.
+     max-height collapse (not just opacity) so hidden content doesn't leave blank space. */
+  .catalog-subtitle,
+  .catalog-color-badge {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    margin: 0 !important;
+    transition: opacity 0.25s ease, max-height 0.25s ease;
+    pointer-events: none;
+  }
+  .catalog-specs li:nth-child(n+3) {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.25s ease, max-height 0.25s ease;
+    pointer-events: none;
+  }
+  .catalog-action {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.25s ease, max-height 0.25s ease;
+    pointer-events: none;
+  }
+  .catalog-row {
+    cursor: default;
+    position: relative;
+  }
+  @media (hover: hover) {
+    .catalog-row:hover .catalog-subtitle,
+    .catalog-row:hover .catalog-color-badge {
+      opacity: 1;
+      max-height: 40px;
+      margin-top: 6px !important;
+      margin-bottom: 4px !important;
+    }
+    .catalog-row:hover .catalog-specs li:nth-child(n+3) {
+      opacity: 1;
+      max-height: 40px;
+    }
+    .catalog-row:hover .catalog-action {
+      opacity: 1;
+      max-height: 60px;
+    }
+    .catalog-row:hover .catalog-subtitle,
+    .catalog-row:hover .catalog-color-badge,
+    .catalog-row:hover .catalog-specs li:nth-child(n+3),
+    .catalog-row:hover .catalog-action {
+      pointer-events: auto;
+    }
+  }
+  .catalog-row.is-expanded .catalog-subtitle,
+  .catalog-row.is-expanded .catalog-color-badge {
+    opacity: 1;
+    max-height: 40px;
+    margin-top: 6px !important;
+    margin-bottom: 4px !important;
+  }
+  .catalog-row.is-expanded .catalog-specs li:nth-child(n+3) {
+    opacity: 1;
+    max-height: 40px;
+  }
+  .catalog-row.is-expanded .catalog-action {
+    opacity: 1;
+    max-height: 60px;
+  }
+  .catalog-row.is-expanded .catalog-subtitle,
+  .catalog-row.is-expanded .catalog-color-badge,
+  .catalog-row.is-expanded .catalog-specs li:nth-child(n+3),
+  .catalog-row.is-expanded .catalog-action {
+    pointer-events: auto;
+  }
+  /* Touch affordance: small "tap for details" hint, only shown on devices without real hover,
+     and only while the row is collapsed */
+  .catalog-tap-hint {
+    display: none;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: rgba(17, 17, 17, 0.75);
+    padding: 4px 8px;
+    border-radius: 2px;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  @media (hover: none) {
+    .catalog-row { cursor: pointer; }
+    .catalog-tap-hint { display: block; }
+    .catalog-row.is-expanded .catalog-tap-hint { display: none; }
+  }
 
   /* Compact Comparison Section Specs */
   .spec-table-wrapper {
@@ -496,7 +597,8 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <p class="eyebrow" id="hero-eyebrow">Enterprise Security System</p>
-      <h1 id="hero-title">Unbox.<br>Mount.<br>Protect.</h1>
+      <h1 id="hero-title">Security That<br>Sees More.</h1>
+      <p class="hero-subhead" id="hero-subhead">And does more. The same system that catches an intruder can shut off a burst pipe or power down appliances when you arm it.</p>
       <div class="hero-price">
         <span id="hero-price-label">Hardware Kit starting at</span>
         <span id="hero-price-val">KES 59,800</span>
@@ -504,7 +606,7 @@
       <p id="hero-desc">No wiring corridors. No physical line liabilities. Zero drilling through structural masonry. Professional security deployed to any property in less than 2 hours.</p>
       <div class="hero-ctas">
         <!-- Scroll-based navigation links for better UX flow -->
-        <a href="#pricing" class="btn btn-primary">Get Started</a>
+        <a href="#pricing" class="btn btn-primary">Explore Packages</a>
         <a href="#how-it-works" class="btn btn-ghost">Explore System</a>
       </div>
     </div>
@@ -522,13 +624,14 @@
       <div class="catalog-list">
         
         <!-- Device 1: Hub -->
-        <div class="catalog-row">
+        <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
             <img src="images/hub.png" alt="Ajax Hub 2 Plus Jeweller">
+            <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
             <h3>Hub 2 Plus Jeweller</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Centralized Smart Control Panel</p>
+            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Centralized Smart Control Panel</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
               Available in Obsidian / Stark White
@@ -546,13 +649,14 @@
         </div>
 
         <!-- Device 2: Motion Sensor -->
-        <div class="catalog-row">
+        <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
             <img src="images/motion%20sensor.png" alt="MotionCam Jeweller">
+            <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
             <h3>MotionCam Jeweller</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">PIR Motion Detector with Verification Camera</p>
+            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">PIR Motion Detector with Verification Camera</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
               Available in Obsidian / Stark White
@@ -570,13 +674,14 @@
         </div>
 
         <!-- Device 3: Siren -->
-        <div class="catalog-row">
+        <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
             <img src="images/alarm%20siren.png" alt="StreetSiren Jeweller">
+            <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
             <h3>StreetSiren Jeweller</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">High-Decibel Outdoor Sounder</p>
+            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">High-Decibel Outdoor Sounder</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
               Available in Obsidian / Stark White
@@ -594,13 +699,14 @@
         </div>
 
         <!-- Device 4: Keypad -->
-        <div class="catalog-row">
+        <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
             <img src="images/keypad.png" alt="KeyPad Jeweller">
+            <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
             <h3>KeyPad Jeweller</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Wireless Touch Control Console</p>
+            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Wireless Touch Control Console</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
               Available in Obsidian / Stark White
@@ -618,13 +724,14 @@
         </div>
 
         <!-- Device 5: Leak Detector -->
-        <div class="catalog-row">
+        <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
             <img src="images/leak%20detector.png" alt="LeaksProtect Jeweller">
+            <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
             <h3>LeaksProtect Jeweller</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Disaster Prevention Flood Sensor</p>
+            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Disaster Prevention Flood Sensor</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
               Available in Obsidian / Stark White
@@ -642,13 +749,14 @@
         </div>
 
         <!-- Device 6: Fire Detector -->
-        <div class="catalog-row">
+        <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
             <img src="images/Ajax%20FireProtect%202%20white.png" alt="FireProtect 2 Jeweller">
+            <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
             <h3>FireProtect 2 SB</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Heat, Smoke, and CO Matrix Sensor</p>
+            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Heat, Smoke, and CO Matrix Sensor</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-white"></span></div>
               Stark White Base Chassis
@@ -666,13 +774,14 @@
         </div>
 
         <!-- Device 7: Panic Button -->
-        <div class="catalog-row">
+        <div class="catalog-row" onclick="toggleCatalogRow(this)">
           <div class="catalog-img-wrap">
             <img src="images/panic.png" alt="Button Jeweller">
+            <span class="catalog-tap-hint">Tap for full specs</span>
           </div>
           <div class="catalog-info">
             <h3>Button Jeweller</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Fully Programmable Panic & Automation Key</p>
+            <p class="catalog-subtitle" style="font-size: 13px; color: var(--text-muted); margin-bottom: 4px;">Fully Programmable Panic & Automation Key</p>
             <div class="catalog-color-badge">
               <div class="color-dots"><span class="dot-black"></span><span class="dot-white"></span></div>
               Available in Obsidian / Stark White
@@ -1095,19 +1204,30 @@
   const siteModeData = {
     residential: {
       eyebrow: "Enterprise Security System",
-      title: "Unbox.<br>Mount.<br>Protect.",
+      title: "Security That<br>Sees More.",
       priceLabel: "Hardware Kit starting at",
       priceVal: "KES 59,800",
       desc: "No wiring corridors. No physical line liabilities. Zero drilling through structural masonry. Professional security deployed to any property in less than 2 hours."
     },
     commercial: {
       eyebrow: "Commercial Infrastructure Protection",
-      title: "Secure.<br>Monitor.<br>Comply.",
+      title: "Security That<br>Sees More.",
       priceLabel: "Commercial Kit starting at",
       priceVal: "KES 109,700",
       desc: "Multi-site cellular backup coverage. Advanced entry monitoring and deep security integrations with premium reliability for offices, logistics, and retail."
     }
   };
+
+  // Touch devices have no :hover, so tapping a device card toggles the extra
+  // specs/subtitle/badge open instead. Desktop mouse users still just hover.
+  function toggleCatalogRow(rowEl) {
+    if (window.matchMedia('(hover: hover)').matches) return; // desktop: hover handles it
+    const wasExpanded = rowEl.classList.contains('is-expanded');
+    document.querySelectorAll('.catalog-row.is-expanded').forEach(r => {
+      if (r !== rowEl) r.classList.remove('is-expanded');
+    });
+    rowEl.classList.toggle('is-expanded', !wasExpanded);
+  }
 
   function setSiteMode(mode) {
     currentSiteMode = mode;
