@@ -66,7 +66,7 @@
     font-family: var(--display); font-weight: 700; font-size: 12px;
     letter-spacing: 0.08em; text-transform: uppercase;
     padding: 18px 36px; border-radius: 2px; border: none; cursor: pointer;
-    text-decoration: none; /* Prevents underlines when using <a> tags */
+    text-decoration: none;
     transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
   }
   .btn-primary { background: var(--text-primary); color: var(--bg-pure); }
@@ -96,24 +96,28 @@
 
   /* Mode Switcher Pill */
   .mode-toggle-pill {
+    position: relative;
     display: inline-flex;
     background: var(--bg-soft);
     border: 1px solid var(--border-soft);
-    padding: 2px;
-    border-radius: 2px;
+    padding: 3px;
+    border-radius: 4px;
   }
   .mode-pill-btn {
+    position: relative;
     font-family: var(--display);
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--text-muted);
-    padding: 8px 16px;
+    padding: 8px 18px;
     border: none;
-    background: none;
+    background: transparent;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
+    z-index: 2;
+    border-radius: 2px;
+    transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .mode-pill-btn.active {
     background: var(--text-primary);
@@ -144,13 +148,18 @@
   .hero p { font-size: clamp(16px, 1.8vw, 20px); margin-bottom: 36px; max-width: 580px; transition: opacity 0.2s ease; }
   .hero-subhead { color: var(--text-primary) !important; font-weight: 400 !important; margin-bottom: 20px !important; }
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  
+  /* Elevated Hero Video Wrapper */
   .hero-media {
     width: 100%;
-    border-radius: 4px;
+    border-radius: 6px;
     overflow: hidden;
-    border: 1px solid var(--border-soft);
+    border: 1px solid rgba(17, 17, 17, 0.08);
     background: #000;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+    box-shadow: 
+      0 20px 50px rgba(0, 0, 0, 0.06), 
+      0 1px 3px rgba(0, 0, 0, 0.02),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
   }
@@ -366,19 +375,24 @@
 
   .catalog-cta-btn:hover { background: #b00e28; }
 
-  /* Tap hint for mobile screens */
+  /* Premium Tap Hint Layout */
   .card-tap-hint {
     position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 12px;
+    right: 12px;
+    left: auto;
+    transform: none;
     font-family: var(--mono);
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    opacity: 0.6;
+    color: var(--text-primary);
+    background: var(--bg-soft);
+    border: 1px solid var(--border-soft);
+    padding: 4px 8px;
+    border-radius: 2px;
+    opacity: 0.8;
     transition: opacity 0.2s ease;
     pointer-events: none;
   }
@@ -419,7 +433,8 @@
   .spec-table-wrapper {
     overflow-x: auto;
     border: 1px solid var(--border-soft);
-    border-radius: 2px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
     background: var(--bg-pure);
   }
   .spec-table {
@@ -441,26 +456,40 @@
     font-size: 11px;
     letter-spacing: 0.08em;
     color: var(--text-muted);
-    background: var(--bg-soft);
+    background: var(--bg-pure);
+    border-bottom: 2px solid var(--border-soft);
   }
   .spec-table td.highlight-col {
     background: rgba(36, 160, 75, 0.02);
     font-weight: 600;
     color: var(--text-primary);
   }
-  .status-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 8px;
+  
+  /* Modern Visual Badges for Tables */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 8px;
+    border-radius: 2px;
+    margin-bottom: 6px;
   }
-  .status-dot.active { background-color: var(--accent-green); }
-  .status-dot.inactive { background-color: var(--accent-red); }
+  .status-badge.secure {
+    background: rgba(36, 160, 75, 0.08);
+    color: var(--accent-green);
+  }
+  .status-badge.vulnerable {
+    background: rgba(200, 16, 46, 0.08);
+    color: var(--accent-red);
+  }
+
   .spec-table .benefit-note {
     display: block;
     margin-top: 4px;
-    margin-left: 16px;
     font-family: var(--body);
     font-weight: 400;
     font-size: 12px;
@@ -504,12 +533,41 @@
     cursor: pointer;
     padding: 4px 0;
   }
-  .config-option input {
-    accent-color: var(--text-primary);
-    width: 16px;
-    height: 16px;
+
+  /* Custom Brand Checkbox UI Elements */
+  .config-option input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #d1d1d6;
+    border-radius: 2px;
+    background: var(--bg-pure);
     cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
   }
+  .config-option input[type="checkbox"]:hover {
+    border-color: var(--text-primary);
+  }
+  .config-option input[type="checkbox"]:checked {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+  }
+  .config-option input[type="checkbox"]:checked::after {
+    content: "";
+    width: 4px;
+    height: 8px;
+    border: solid var(--bg-pure);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-top: -2px;
+  }
+
   .config-option-details {
     display: flex;
     align-items: center;
@@ -1046,38 +1104,50 @@
             <tr>
               <td><strong>Communication Path</strong></td>
               <td class="highlight-col">
-                <span class="status-dot active"></span>
-                Encrypted Wireless (Multi-Channel)
-                <span class="benefit-note">Nothing to cut. There's no exposed line for anyone to sever.</span>
+                <span class="status-badge secure">Secure</span>
+                <div style="font-weight: 600;">Encrypted Wireless (Multi-Channel)</div>
+                <span class="benefit-note" style="margin-left: 0;">Nothing to cut. There's no exposed line for anyone to sever.</span>
               </td>
-              <td>Exposed Copper Cable (Vulnerable to cutting)</td>
+              <td>
+                <span class="status-badge vulnerable">Vulnerable</span>
+                <div>Exposed Copper Cable (Vulnerable to cutting)</div>
+              </td>
             </tr>
             <tr>
               <td><strong>Power Blackouts</strong></td>
               <td class="highlight-col">
-                <span class="status-dot active"></span>
-                Up to 15-Hour Automatic Battery Backup
-                <span class="benefit-note">Keeps protecting your home through load-shedding, no generator needed.</span>
+                <span class="status-badge secure">Secure Backup</span>
+                <div style="font-weight: 600;">Up to 15-Hour Automatic Battery Backup</div>
+                <span class="benefit-note" style="margin-left: 0;">Keeps protecting your home through load-shedding, no generator needed.</span>
               </td>
-              <td>Immediate Offline (Without external generator/UPS)</td>
+              <td>
+                <span class="status-badge vulnerable">Interrupted</span>
+                <div>Immediate Offline (Without external generator/UPS)</div>
+              </td>
             </tr>
             <tr>
               <td><strong>Signal Tampering</strong></td>
               <td class="highlight-col">
-                <span class="status-dot active"></span>
-                Jamming Detection & Frequency Hopping
-                <span class="benefit-note">You're alerted the moment someone tries to block the signal.</span>
+                <span class="status-badge secure">Monitored</span>
+                <div style="font-weight: 600;">Jamming Detection & Frequency Hopping</div>
+                <span class="benefit-note" style="margin-left: 0;">You're alerted the moment someone tries to block the signal.</span>
               </td>
-              <td>Silent Failure (Physical lines cut without warning)</td>
+              <td>
+                <span class="status-badge vulnerable">Unmonitored</span>
+                <div>Silent Failure (Physical lines cut without warning)</div>
+              </td>
             </tr>
             <tr>
               <td><strong>Property Integrity</strong></td>
               <td class="highlight-col">
-                <span class="status-dot active"></span>
-                Zero Wall Drilling or Structural Masonry Damage
-                <span class="benefit-note">Install in a day, no landlord permissions or repairs required.</span>
+                <span class="status-badge secure">Non-Invasive</span>
+                <div style="font-weight: 600;">Zero Wall Drilling or Structural Masonry Damage</div>
+                <span class="benefit-note" style="margin-left: 0;">Install in a day, no landlord permissions or repairs required.</span>
               </td>
-              <td>Conduit installation, trunking, and visible wiring runs</td>
+              <td>
+                <span class="status-badge vulnerable">Intrusive</span>
+                <div>Conduit installation, trunking, and visible wiring runs</div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -1636,9 +1706,7 @@
     document.body.classList.add('drawer-open');
   }
 
-  // Opens the same enquiry drawer/Formspree pipeline as the waitlist flow,
-  // but with summary copy relevant to a visitor who tapped the "Specialized
-  // Matrix" teaser card rather than a standard package.
+  // Opens the same enquiry drawer/Formspree pipeline as the waitlist flow
   function openCustomModuleDrawer() {
     document.getElementById('selectedPkgTitle').textContent = "Custom Integration Request";
     document.getElementById('selectedPkgPrice').textContent = "Pending Design Consultation";
@@ -1699,12 +1767,10 @@
       last_name: form.querySelector('input[name="lastName"]').value,
       email: form.querySelector('input[name="email"]').value,
       phone: (function() {
-        let rawPhone = form.querySelector('input[name="phone"]').value.replace(/\s+/g, ''); // strip spaces
-        // If user typed '0712...' or '0112...', remove the leading zero
+        let rawPhone = form.querySelector('input[name="phone"]').value.replace(/\s+/g, '');
         if (rawPhone.startsWith('0')) {
           rawPhone = rawPhone.substring(1);
         }
-        // If the user accidentally typed +254 or 254 in the input field directly, clean it up
         if (rawPhone.startsWith('+254')) {
           rawPhone = rawPhone.substring(4);
         } else if (rawPhone.startsWith('254')) {
