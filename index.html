@@ -15,6 +15,24 @@
   gtag('config', 'G-ZER6GV8ZCS');
 </script>
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1898640170833152');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <title>Professional Security. Effortless Installation. | Urban Eye Security</title>
 <meta name="description" content="No wires. No concrete drilling. Zero lines to cut. Professional grade security that installs in minutes and keeps you connected through anything.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1793,6 +1811,13 @@
     })
     .then(response => {
       if (response.ok) {
+        // Fire Meta Pixel Lead event only on confirmed successful submission
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            content_name: document.getElementById('selectedPkgTitle').textContent,
+            content_category: 'Security Package Enquiry'
+          });
+        }
         alert("Expression of Interest successfully submitted. A systems designer will contact you shortly if your layout plan qualifies.");
         form.reset();
         closeFormDrawer();
