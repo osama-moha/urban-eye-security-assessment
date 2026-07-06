@@ -778,6 +778,7 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
           <a href="#pricing" class="btn btn-primary">Explore Packages</a>
           <a href="#how-it-works" class="btn btn-ghost">Explore System</a>
         </div>
+        <button type="button" onclick="openQuickInterestDrawer()" class="btn-text-link" style="display:block; margin-top:16px; background:none; border:none; padding:0; font: inherit; color: var(--text-muted); text-decoration: underline; cursor:pointer;">Not sure what you need? Get a free recommendation &rarr;</button>
       </div>
 
       <!-- Right Column: Interactive Video Showcase -->
@@ -1431,7 +1432,7 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
       <!-- Scarcity EOI Info Header Block -->
       <div style="margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-soft);">
         <h4 style="font-family: var(--mono); font-size: 11px; color: var(--accent-red); letter-spacing: 0.1em; margin-bottom: 8px;">
-          Current Engineering Capacity: EXTREMELY LIMITED
+          <span id="slotsRemaining">13</span> Engineering Slots Remaining This Month
         </h4>
         <p style="font-size: 13px; color: var(--text-primary); line-height: 1.5; font-weight: 400; margin-bottom: 10px;">
           We custom-build every system, so we strictly limit our monthly installations.
@@ -1447,28 +1448,16 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
         <input type="text" class="form-control" id="company-field" name="company" placeholder="Acme Ltd">
       </div>
 
-      <div class="form-grid-2">
-        <div class="form-group">
-          <label class="form-label">First Name*</label>
-          <input type="text" class="form-control" name="firstName" placeholder="Jane" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Last Name*</label>
-          <input type="text" class="form-control" name="lastName" placeholder="Doe" required>
-        </div>
+      <div class="form-group">
+        <label class="form-label">Full Name*</label>
+        <input type="text" class="form-control" name="fullName" placeholder="Jane Doe" required>
       </div>
 
-      <div class="form-grid-2">
-        <div class="form-group">
-          <label class="form-label">Email Address*</label>
-          <input type="email" class="form-control" name="email" placeholder="jane.doe@domain.ke" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Phone Number*</label>
-          <div class="phone-group">
-            <span class="phone-prefix">KE +254</span>
-            <input type="tel" class="form-control" name="phone" placeholder="712345678" required>
-          </div>
+      <div class="form-group">
+        <label class="form-label">Phone Number*</label>
+        <div class="phone-group">
+          <span class="phone-prefix">KE +254</span>
+          <input type="tel" class="form-control" name="phone" placeholder="712345678" required>
         </div>
       </div>
 
@@ -1724,6 +1713,20 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     document.body.classList.add('drawer-open');
   }
 
+  // Low-friction entry point: opens the drawer directly from the hero,
+  // for visitors who aren't ready to pick a specific package yet.
+  function openQuickInterestDrawer() {
+    document.getElementById('selectedPkgTitle').textContent = "Free Security Recommendation";
+    document.getElementById('selectedPkgPrice').textContent = "No obligation";
+    document.getElementById('selectedPkgImg').src = 'images/hub.png';
+    document.getElementById('selectedPkgImg').alt = "Central Core";
+    document.getElementById('selectedPkgAddons').innerHTML = "Tell us about your property and we'll recommend the right starting point.";
+
+    document.getElementById('drawerBackdrop').classList.add('open');
+    document.getElementById('drawer').classList.add('open');
+    document.body.classList.add('drawer-open');
+  }
+
   // Opens the same enquiry drawer/Formspree pipeline as the waitlist flow
   function openCustomModuleDrawer() {
     document.getElementById('selectedPkgTitle').textContent = "Custom Integration Request";
@@ -1756,6 +1759,51 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     document.body.classList.remove('drawer-open');
   }
 
+  // Live, globally-shared "slots remaining" counter (CountAPI).
+  // This is a REAL counter shared across all visitors, not per-browser/decorative.
+  // NOTE: it does not auto-reset monthly on its own — see conversation notes.
+  const SLOTS_NAMESPACE = 'urbaneyesecurity-co-ke';
+  const SLOTS_KEY = 'eoi-slots-remaining';
+  const SLOTS_START = 13;
+
+  function updateSlotsDisplay(value) {
+    const el = document.getElementById('slotsRemaining');
+    if (el && typeof value === 'number') {
+      el.textContent = Math.max(value, 0);
+    }
+  }
+
+  async function initSlotsCounter() {
+    try {
+      const res = await fetch(`https://api.countapi.xyz/get/${SLOTS_NAMESPACE}/${SLOTS_KEY}`);
+      const data = await res.json();
+      if (data && typeof data.value === 'number') {
+        updateSlotsDisplay(data.value);
+      } else {
+        // Key doesn't exist yet on CountAPI — create it once with the starting value.
+        const createRes = await fetch(`https://api.countapi.xyz/create?namespace=${SLOTS_NAMESPACE}&key=${SLOTS_KEY}&value=${SLOTS_START}&enable_reset=1`);
+        const createData = await createRes.json();
+        updateSlotsDisplay(typeof createData.value === 'number' ? createData.value : SLOTS_START);
+      }
+    } catch (e) {
+      // Fail silently — keep the static fallback already in the HTML (13).
+    }
+  }
+
+  async function decrementSlotsCounter() {
+    try {
+      const res = await fetch(`https://api.countapi.xyz/update/${SLOTS_NAMESPACE}/${SLOTS_KEY}?amount=-1`);
+      const data = await res.json();
+      if (data && typeof data.value === 'number') {
+        updateSlotsDisplay(data.value);
+      }
+    } catch (e) {
+      // Non-critical — the count will simply not reflect this one submission.
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initSlotsCounter);
+
   // Handle Formspree AJAX submission
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -1781,9 +1829,7 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
       package_cost: document.getElementById('selectedPkgPrice').textContent,
       selected_upgrades: upgradeText || "Base Configuration Only (Waitlist Application)",
       company: document.getElementById('company-field').value || "Residential Lead",
-      first_name: form.querySelector('input[name="firstName"]').value,
-      last_name: form.querySelector('input[name="lastName"]').value,
-      email: form.querySelector('input[name="email"]').value,
+      full_name: form.querySelector('input[name="fullName"]').value,
       phone: (function() {
         let rawPhone = form.querySelector('input[name="phone"]').value.replace(/\s+/g, '');
         if (rawPhone.startsWith('0')) {
@@ -1818,6 +1864,8 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
             content_category: 'Security Package Enquiry'
           });
         }
+        // Decrement the real slots-remaining counter, same success condition
+        decrementSlotsCounter();
         alert("Expression of Interest successfully submitted. A systems designer will contact you shortly if your layout plan qualifies.");
         form.reset();
         closeFormDrawer();
