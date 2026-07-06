@@ -15,6 +15,22 @@
   gtag('config', 'G-ZER6GV8ZCS');
 </script>
 
+<!-- Google Ads Event snippet for Security Assessment Form conversion page -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-17823714787/EEl_CJzO5cscEOObgbNC',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -1869,6 +1885,12 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
             content_category: 'Security Package Enquiry'
           });
         }
+
+        // Fire Google Ads Conversion Tracking on successful submission
+        if (typeof gtag_report_conversion === 'function') {
+          gtag_report_conversion();
+        }
+
         // Decrement the real slots-remaining counter, same success condition
         decrementSlotsCounter();
         alert("Expression of Interest successfully submitted. A systems designer will contact you shortly if your layout plan qualifies.");
