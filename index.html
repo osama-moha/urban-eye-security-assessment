@@ -1759,31 +1759,34 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     document.body.classList.remove('drawer-open');
   }
 
-  // Live, globally-shared "slots remaining" counter (CountAPI).
-  // This is a REAL counter shared across all visitors, not per-browser/decorative.
-  // NOTE: it does not auto-reset monthly on its own — see conversation notes.
-  const SLOTS_NAMESPACE = 'urbaneyesecurity-co-ke';
-  const SLOTS_KEY = 'eoi-slots-remaining';
+  // Live, globally-shared "slots remaining" counter.
+  // NOTE: countapi.xyz (the service originally used here) has shut down.
+  // This uses countapi.mileshilliard.com instead — a community-run, free
+  // replacement with a similar but simpler API (no namespaces, single key).
+  // This is still a third-party hobby service, not infrastructure you control —
+  // see the accompanying note about a more durable alternative if this one
+  // also goes down in future.
+  const SLOTS_KEY = 'urbaneyesecurity-eoi-slots-remaining-2026';
   const SLOTS_START = 13;
 
   function updateSlotsDisplay(value) {
     const el = document.getElementById('slotsRemaining');
-    if (el && typeof value === 'number') {
-      el.textContent = Math.max(value, 0);
+    if (el && !isNaN(value)) {
+      el.textContent = Math.max(parseInt(value, 10), 0);
     }
   }
 
   async function initSlotsCounter() {
     try {
-      const res = await fetch(`https://api.countapi.xyz/get/${SLOTS_NAMESPACE}/${SLOTS_KEY}`);
+      const res = await fetch(`https://countapi.mileshilliard.com/api/v1/get/${SLOTS_KEY}`);
       const data = await res.json();
-      if (data && typeof data.value === 'number') {
+      if (data && data.value !== undefined && data.value !== null) {
         updateSlotsDisplay(data.value);
       } else {
-        // Key doesn't exist yet on CountAPI — create it once with the starting value.
-        const createRes = await fetch(`https://api.countapi.xyz/create?namespace=${SLOTS_NAMESPACE}&key=${SLOTS_KEY}&value=${SLOTS_START}&enable_reset=1`);
-        const createData = await createRes.json();
-        updateSlotsDisplay(typeof createData.value === 'number' ? createData.value : SLOTS_START);
+        // Key doesn't exist yet — create it once with the starting value.
+        const setRes = await fetch(`https://countapi.mileshilliard.com/api/v1/set/${SLOTS_KEY}?value=${SLOTS_START}`);
+        const setData = await setRes.json();
+        updateSlotsDisplay(setData && setData.value !== undefined ? setData.value : SLOTS_START);
       }
     } catch (e) {
       // Fail silently — keep the static fallback already in the HTML (13).
@@ -1792,11 +1795,13 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
 
   async function decrementSlotsCounter() {
     try {
-      const res = await fetch(`https://api.countapi.xyz/update/${SLOTS_NAMESPACE}/${SLOTS_KEY}?amount=-1`);
-      const data = await res.json();
-      if (data && typeof data.value === 'number') {
-        updateSlotsDisplay(data.value);
-      }
+      const getRes = await fetch(`https://countapi.mileshilliard.com/api/v1/get/${SLOTS_KEY}`);
+      const getData = await getRes.json();
+      const current = (getData && getData.value !== undefined) ? parseInt(getData.value, 10) : SLOTS_START;
+      const next = Math.max(current - 1, 0);
+      const setRes = await fetch(`https://countapi.mileshilliard.com/api/v1/set/${SLOTS_KEY}?value=${next}`);
+      const setData = await setRes.json();
+      updateSlotsDisplay(setData && setData.value !== undefined ? setData.value : next);
     } catch (e) {
       // Non-critical — the count will simply not reflect this one submission.
     }
