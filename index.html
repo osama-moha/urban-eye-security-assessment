@@ -679,6 +679,145 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
   .selected-pkg-price { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--accent-red); }
   .selected-pkg-addons { font-size: 11px; font-family: var(--mono); color: var(--text-muted); margin-top: 4px; line-height: 1.3; }
 
+  /* Conversational / Multi-Step Form UI Elements */
+  .form-step {
+    display: none;
+  }
+  .form-step.active {
+    display: block;
+    animation: stepFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes stepFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .progress-tracker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--border-soft);
+    margin: 0 16px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent-red);
+    width: 25%;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .conversational-headline {
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  /* Interactive Option Cards */
+  .selection-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .selection-card {
+    background: var(--bg-pure);
+    border: 1.5px solid var(--border-soft);
+    border-radius: 4px;
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .selection-card:hover {
+    border-color: var(--text-primary);
+    background: var(--bg-soft);
+  }
+  .selection-card.selected {
+    border-color: var(--accent-red);
+    background: rgba(200, 16, 46, 0.02);
+  }
+  .selection-card-title {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-primary);
+  }
+  .selection-card-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .selection-card-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border-soft);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .selection-card.selected .selection-card-checkbox {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+  }
+  .selection-card.selected .selection-card-checkbox::after {
+    content: "";
+    width: 4px;
+    height: 8px;
+    border: solid var(--bg-pure);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-top: -2px;
+  }
+  .selection-card-radio {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border-soft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s;
+  }
+  .selection-card.selected .selection-card-radio {
+    border-color: var(--accent-red);
+  }
+  .selection-card.selected .selection-card-radio::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--accent-red);
+    border-radius: 50%;
+  }
+
+  .step-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
   /* Stark Form Elements */
   .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
   .form-group { margin-bottom: 20px; }
@@ -1443,72 +1582,216 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
       </div>
     </div>
 
-    <!-- Booking details submission -->
+    <!-- Progressive Conversational Counter -->
+    <div class="progress-tracker">
+      <span id="step-counter-label">Step 1 of 4</span>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Booking details submission in a multi-step conversational wrapper -->
     <form id="siteSurveyForm" onsubmit="handleFormSubmit(event)">
-      <!-- Scarcity EOI Info Header Block -->
-      <div style="margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-soft);">
-        <h4 style="font-family: var(--mono); font-size: 11px; color: var(--accent-red); letter-spacing: 0.1em; margin-bottom: 8px;">
-          <span id="slotsRemaining">13</span> Engineering Slots Remaining This Month
-        </h4>
-        <p style="font-size: 13px; color: var(--text-primary); line-height: 1.5; font-weight: 400; margin-bottom: 10px;">
-          We custom-build every system, so we strictly limit our monthly installations.
-        </p>
-        <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">
-          Submit an Expression of Interest (EOI) below. We review daily and prioritize properties that need immediate protection.
-        </p>
-      </div>
 
-      <!-- Company Name (Dynamically Displayed for Commercial Leads) -->
-      <div class="form-group" id="company-field-wrap" style="display: none;">
-        <label class="form-label">Company Name*</label>
-        <input type="text" class="form-control" id="company-field" name="company" placeholder="Acme Ltd">
-      </div>
+      <!-- STEP 1: Property Type (Conversational Radio) -->
+      <div class="form-step active" id="step-1">
+        <div class="conversational-headline">What type of property needs securing?</div>
+        
+        <div class="selection-cards">
+          <div class="selection-card" onclick="selectPropertyType('Apartment / Studio-2BR', this)">
+            <div>
+              <div class="selection-card-title">Apartment / Residential Unit</div>
+              <div class="selection-card-desc">Single-level flats, studios, or multi-family complexes.</div>
+            </div>
+            <div class="selection-card-radio"></div>
+          </div>
 
-      <div class="form-group">
-        <label class="form-label">Full Name*</label>
-        <input type="text" class="form-control" name="fullName" placeholder="Jane Doe" required>
-      </div>
+          <div class="selection-card" onclick="selectPropertyType('Maisonette / Townhouse', this)">
+            <div>
+              <div class="selection-card-title">Maisonette / Townhouse</div>
+              <div class="selection-card-desc">Multi-level detached/semi-detached residential structures.</div>
+            </div>
+            <div class="selection-card-radio"></div>
+          </div>
 
-      <div class="form-group">
-        <label class="form-label">Phone Number*</label>
-        <div class="phone-group">
-          <span class="phone-prefix">KE +254</span>
-          <input type="tel" class="form-control" name="phone" placeholder="712345678" required>
+          <div class="selection-card" onclick="selectPropertyType('Villa / Gated Compound', this)">
+            <div>
+              <div class="selection-card-title">Villa / Private Estate</div>
+              <div class="selection-card-desc">Expansive properties with gates, compounds, and outer perimeters.</div>
+            </div>
+            <div class="selection-card-radio"></div>
+          </div>
+
+          <div class="selection-card" onclick="selectPropertyType('Commercial Premise', this)">
+            <div>
+              <div class="selection-card-title">Commercial Premise / Office</div>
+              <div class="selection-card-desc">Retail stores, commercial parks, warehouses, or office sites.</div>
+            </div>
+            <div class="selection-card-radio"></div>
+          </div>
+        </div>
+
+        <input type="hidden" id="conv-property-type" required>
+        
+        <div class="step-actions" style="justify-content: flex-end;">
+          <button type="button" class="btn btn-ghost" onclick="nextStep()" style="padding: 12px 24px;">Next &rarr;</button>
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">City - County*</label>
-        <select class="form-control" name="location" required style="cursor: pointer;">
-          <option value="" disabled selected>Select location...</option>
-          <option value="Nairobi">Nairobi</option>
-          <option value="Kiambu">Kiambu</option>
-          <option value="Mombasa">Mombasa</option>
-          <option value="Machakos">Machakos</option>
-          <option value="Kajiado">Kajiado</option>
-          <option value="Other">Other County</option>
-        </select>
+      <!-- STEP 2: Main Threat Target (Conversational Multi-Select) -->
+      <div class="form-step" id="step-2">
+        <div class="conversational-headline">What are your primary security concerns?</div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Select all that apply to continue. (Required)</p>
+
+        <div class="selection-cards">
+          <div class="selection-card" onclick="toggleSecurityConcern('Burglary & Forced Entry', this)">
+            <div>
+              <div class="selection-card-title">Forced Entry / Break-ins</div>
+              <div class="selection-card-desc">Monitoring windows, main entryways, and perimeter bounds.</div>
+            </div>
+            <div class="selection-card-checkbox"></div>
+          </div>
+
+          <div class="selection-card" onclick="toggleSecurityConcern('Disaster (Water Leaks / Flood)', this)">
+            <div>
+              <div class="selection-card-title">Water Leaks & Flood Prevention</div>
+              <div class="selection-card-desc">Plumbing failure mitigation with immediate auto-shutoff valves.</div>
+            </div>
+            <div class="selection-card-checkbox"></div>
+          </div>
+
+          <div class="selection-card" onclick="toggleSecurityConcern('Fire & Carbon Monoxide Monitoring', this)">
+            <div>
+              <div class="selection-card-title">Fire, Smoke & CO Gas Alerts</div>
+              <div class="selection-card-desc">Detection systems optimized to sense hazards before major fire outbreaks.</div>
+            </div>
+            <div class="selection-card-checkbox"></div>
+          </div>
+
+          <div class="selection-card" onclick="toggleSecurityConcern('Power & Automation Control', this)">
+            <div>
+              <div class="selection-card-title">Automation & Utility Shutdown</div>
+              <div class="selection-card-desc">Remotely powering down heavy appliances when arming your space.</div>
+            </div>
+            <div class="selection-card-checkbox"></div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost" onclick="prevStep()" style="padding: 12px 24px;">&larr; Back</button>
+          <button type="button" class="btn btn-primary" onclick="nextStep()" style="padding: 12px 24px;">Next &rarr;</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Property & Risk Overview*</label>
-        <span style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.35;">
-          Please describe your property type, primary security concerns, and target timeline. This information helps us evaluate setup feasibility.
-        </span>
-        <textarea class="form-control" name="details" rows="4" placeholder="e.g., 4-bedroom home, main gate vulnerability, target timeline: 2 weeks." required style="resize: none;"></textarea>
+      <!-- STEP 3: Location (Conversational Dropdown Selection) -->
+      <div class="form-step" id="step-3">
+        <div class="conversational-headline">Where is this property located?</div>
+        
+        <div class="selection-cards" style="grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px;">
+          <div class="selection-card" onclick="selectCounty('Nairobi', this)">
+            <span class="selection-card-title">Nairobi</span>
+            <div class="selection-card-radio"></div>
+          </div>
+          <div class="selection-card" onclick="selectCounty('Kiambu', this)">
+            <span class="selection-card-title">Kiambu</span>
+            <div class="selection-card-radio"></div>
+          </div>
+          <div class="selection-card" onclick="selectCounty('Mombasa', this)">
+            <span class="selection-card-title">Mombasa</span>
+            <div class="selection-card-radio"></div>
+          </div>
+          <div class="selection-card" onclick="selectCounty('Machakos', this)">
+            <span class="selection-card-title">Machakos</span>
+            <div class="selection-card-radio"></div>
+          </div>
+          <div class="selection-card" onclick="selectCounty('Kajiado', this)">
+            <span class="selection-card-title">Kajiado</span>
+            <div class="selection-card-radio"></div>
+          </div>
+          <div class="selection-card" id="card-other-county" onclick="selectCounty('Other', this)">
+            <span class="selection-card-title">Other County</span>
+            <div class="selection-card-radio"></div>
+          </div>
+        </div>
+
+        <!-- Dynamic Write-In Field for other locations -->
+        <div class="form-group" id="write-in-county-wrap" style="display: none; margin-bottom: 24px;">
+          <label class="form-label">Write your location / county*</label>
+          <input type="text" class="form-control" id="conv-county-write-in" placeholder="e.g., Nakuru, Kisumu, Nyeri..." oninput="updateWriteInCounty(this.value)">
+        </div>
+
+        <input type="hidden" id="conv-county" required>
+
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost" onclick="prevStep()" style="padding: 12px 24px;">&larr; Back</button>
+          <button type="button" class="btn btn-primary" onclick="nextStep()" style="padding: 12px 24px;">Next &rarr;</button>
+        </div>
       </div>
 
-      <div class="checkbox-group">
-        <input type="checkbox" id="consentMkt" name="consentMkt">
-        <label for="consentMkt">I agree to receive security updates and systems notifications from Urban Eye.</label>
+      <!-- STEP 4: Final Verification and Contact Details -->
+      <div class="form-step" id="step-4">
+        <!-- Scarcity EOI Info Header Block -->
+        <div style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px dashed var(--border-soft);">
+          <h4 style="font-family: var(--mono); font-size: 11px; color: var(--accent-red); letter-spacing: 0.1em; margin-bottom: 8px;">
+            <span id="slotsRemaining">13</span> Engineering Slots Remaining This Month
+          </h4>
+          <p style="font-size: 13px; color: var(--text-primary); line-height: 1.4; font-weight: 400; margin-bottom: 4px;">
+            Submit your Expression of Interest (EOI) below.
+          </p>
+          <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">
+            We review submittals daily and prioritize properties needing immediate installation layout schedules.
+          </p>
+        </div>
+
+        <!-- Company Name (Dynamically Displayed for Commercial Leads) -->
+        <div class="form-group" id="company-field-wrap" style="display: none;">
+          <label class="form-label">Company Name*</label>
+          <input type="text" class="form-control" id="company-field" name="company" placeholder="Acme Ltd">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Full Name*</label>
+          <input type="text" class="form-control" id="conv-full-name" name="fullName" placeholder="Jane Doe" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Phone Number*</label>
+          <div class="phone-group">
+            <span class="phone-prefix">KE +254</span>
+            <input type="tel" class="form-control" id="conv-phone" name="phone" placeholder="712345678" required>
+          </div>
+        </div>
+
+        <!-- Hidden inputs configured dynamically to build standard payloads -->
+        <div class="form-group" style="display: none;">
+          <label class="form-label">Property Details Map</label>
+          <textarea class="form-control" id="conv-aggregate-details" name="details" rows="2"></textarea>
+          <select class="form-control" id="conv-aggregate-location" name="location">
+            <option value="Nairobi">Nairobi</option>
+            <option value="Kiambu">Kiambu</option>
+            <option value="Mombasa">Mombasa</option>
+            <option value="Machakos">Machakos</option>
+            <option value="Kajiado">Kajiado</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="consentMkt" name="consentMkt">
+          <label for="consentMkt">I agree to receive security updates and system notifications from Urban Eye.</label>
+        </div>
+
+        <div class="checkbox-group" style="margin-bottom: 24px;">
+          <input type="checkbox" id="consentData" name="consentData" required>
+          <label for="consentData">I consent to the secure handling of my contact information to process this security evaluation request.*</label>
+        </div>
+
+        <div class="step-actions">
+          <button type="button" class="btn btn-ghost" onclick="prevStep()" style="padding: 12px 24px;">&larr; Back</button>
+          <button type="submit" class="btn btn-accent" style="flex: 1; padding: 18px 24px;">Submit Waitlist EOI</button>
+        </div>
       </div>
 
-      <div class="checkbox-group" style="margin-bottom: 32px;">
-        <input type="checkbox" id="consentData" name="consentData" required>
-        <label for="consentData">I consent to the secure handling of my contact information to process this security evaluation request.*</label>
-      </div>
-
-      <button type="submit" class="btn btn-accent" style="width: 100%;">Submit Expression of Interest</button>
     </form>
   </div>
 </div>
@@ -1523,6 +1806,9 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
 
 <script>
   let currentSiteMode = 'residential';
+  let currentStep = 1;
+  const totalSteps = 4;
+  const selectedConcerns = new Set();
 
   // Base hardware prices under 30% Gross Margin
   const basePrices = {
@@ -1563,6 +1849,139 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     cardEl.classList.toggle('is-active', !wasActive);
   }
 
+  // Conversational Form Navigation Functions
+  function updateProgressBar() {
+    const fill = document.getElementById('progressFill');
+    const label = document.getElementById('step-counter-label');
+    const percentage = (currentStep / totalSteps) * 100;
+    
+    if (fill) fill.style.width = `${percentage}%`;
+    if (label) label.textContent = `Step ${currentStep} of ${totalSteps}`;
+  }
+
+  function showStep(stepNum) {
+    document.querySelectorAll('.form-step').forEach(step => {
+      step.classList.remove('active');
+    });
+    const targetStep = document.getElementById(`step-${stepNum}`);
+    if (targetStep) {
+      targetStep.classList.add('active');
+    }
+    currentStep = stepNum;
+    updateProgressBar();
+  }
+
+  function nextStep() {
+    // Progressive conversational validation
+    if (currentStep === 1) {
+      const typeVal = document.getElementById('conv-property-type').value;
+      if (!typeVal) {
+        alert("Please select a property configuration type.");
+        return;
+      }
+    } else if (currentStep === 2) {
+      // Must select at least one concern
+      if (selectedConcerns.size === 0) {
+        alert("Please select at least one security concern to continue.");
+        return;
+      }
+    } else if (currentStep === 3) {
+      const locVal = document.getElementById('conv-county').value.trim();
+      if (!locVal) {
+        alert("Please select a county or type in your location.");
+        return;
+      }
+    }
+
+    if (currentStep < totalSteps) {
+      showStep(currentStep + 1);
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 1) {
+      showStep(currentStep - 1);
+    }
+  }
+
+  // Interaction handlers for individual selection states
+  function selectPropertyType(type, element) {
+    // Set hidden field value
+    document.getElementById('conv-property-type').value = type;
+
+    // Toggle selected classes
+    const stepEl = document.getElementById('step-1');
+    stepEl.querySelectorAll('.selection-card').forEach(card => {
+      card.classList.remove('selected');
+    });
+    element.classList.add('selected');
+
+    // Dynamic show of Company Name field if Commercial is selected
+    const compWrap = document.getElementById('company-field-wrap');
+    const compInput = document.getElementById('company-field');
+    if (type.includes('Commercial')) {
+      if (compWrap) compWrap.style.display = 'block';
+      if (compInput) compInput.setAttribute('required', 'required');
+    } else {
+      if (compWrap) compWrap.style.display = 'none';
+      if (compInput) compInput.removeAttribute('required');
+    }
+
+    // Interactive conversational automatic step advance
+    setTimeout(() => {
+      nextStep();
+    }, 250);
+  }
+
+  function toggleSecurityConcern(concern, element) {
+    if (selectedConcerns.has(concern)) {
+      selectedConcerns.delete(concern);
+      element.classList.remove('selected');
+    } else {
+      selectedConcerns.add(concern);
+      element.classList.add('selected');
+    }
+  }
+
+  function selectCounty(county, element) {
+    const stepEl = document.getElementById('step-3');
+    stepEl.querySelectorAll('.selection-card').forEach(card => {
+      card.classList.remove('selected');
+    });
+    element.classList.add('selected');
+
+    const writeInWrap = document.getElementById('write-in-county-wrap');
+    const writeInInput = document.getElementById('conv-county-write-in');
+
+    if (county === 'Other') {
+      // Clear value until user types in the write-in input box
+      document.getElementById('conv-county').value = ''; 
+      if (writeInWrap) writeInWrap.style.display = 'block';
+      if (writeInInput) {
+        writeInInput.focus();
+        writeInInput.setAttribute('required', 'required');
+      }
+    } else {
+      document.getElementById('conv-county').value = county;
+      document.getElementById('conv-aggregate-location').value = county;
+      if (writeInWrap) writeInWrap.style.display = 'none';
+      if (writeInInput) {
+        writeInInput.removeAttribute('required');
+        writeInInput.value = '';
+      }
+      
+      // Auto advance only for preset quick selection choices
+      setTimeout(() => {
+        nextStep();
+      }, 250);
+    }
+  }
+
+  function updateWriteInCounty(val) {
+    document.getElementById('conv-county').value = val;
+    document.getElementById('conv-aggregate-location').value = val;
+  }
+
   // Ad traffic can arrive with ?mode=commercial (or business/enterprise) in the URL.
   // Applied immediately on parse, before paint, so there's no flash of residential
   // content for a visitor who clicked a commercial-intent ad.
@@ -1586,8 +2005,6 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     document.getElementById('hero-desc').textContent = targetData.desc;
     document.getElementById('pricing-residential-grid').style.display = 'none';
     document.getElementById('pricing-commercial-grid').style.display = 'grid';
-    document.getElementById('company-field-wrap').style.display = 'block';
-    document.getElementById('company-field').setAttribute('required', 'required');
 
     // Ensure the initial commercial video is loaded properly
     const heroVideo = document.getElementById('hero-video-element');
@@ -1656,13 +2073,9 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     if (mode === 'residential') {
       resGrid.style.display = 'grid';
       comGrid.style.display = 'none';
-      document.getElementById('company-field-wrap').style.display = 'none';
-      document.getElementById('company-field').removeAttribute('required');
     } else {
       resGrid.style.display = 'none';
       comGrid.style.display = 'grid';
-      document.getElementById('company-field-wrap').style.display = 'block';
-      document.getElementById('company-field').setAttribute('required', 'required');
     }
   }
 
@@ -1682,8 +2095,30 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     priceLabel.textContent = `KES ${price.toLocaleString()}`;
   }
 
+  // Reset conversational step options and highlighted styles
+  function resetConversationalFormSelection() {
+    selectedConcerns.clear();
+    document.querySelectorAll('.selection-card').forEach(card => {
+      card.classList.remove('selected');
+    });
+    document.getElementById('conv-property-type').value = '';
+    document.getElementById('conv-county').value = '';
+    document.getElementById('company-field-wrap').style.display = 'none';
+    document.getElementById('company-field').removeAttribute('required');
+
+    const writeInWrap = document.getElementById('write-in-county-wrap');
+    const writeInInput = document.getElementById('conv-county-write-in');
+    if (writeInWrap) writeInWrap.style.display = 'none';
+    if (writeInInput) {
+      writeInInput.value = '';
+      writeInInput.removeAttribute('required');
+    }
+  }
+
   // Handle dynamic bookings
   function handleOrder(tier) {
+    resetConversationalFormSelection();
+    
     let price = basePrices[tier];
     const card = document.getElementById(`card-${tier}`);
     const checkboxes = card.querySelectorAll('input[type="checkbox"]');
@@ -1724,14 +2159,48 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
       addonsBox.innerHTML = "Base intrusion system configuration only (Includes Professional Installation).";
     }
 
+    // Dynamic pre-population of step 1 based on selected package
+    let mappedPropertyStr = '';
+    if (tier === 'apartment') mappedPropertyStr = 'Apartment / Studio-2BR';
+    else if (tier === 'maisonette') mappedPropertyStr = 'Maisonette / Townhouse';
+    else if (tier === 'villa') mappedPropertyStr = 'Villa / Gated Compound';
+    else if (tier === 'commercial') mappedPropertyStr = 'Commercial Premise';
+
+    if (mappedPropertyStr) {
+      document.getElementById('conv-property-type').value = mappedPropertyStr;
+      const step1Cards = document.getElementById('step-1').querySelectorAll('.selection-card');
+      step1Cards.forEach(c => {
+        const text = c.querySelector('.selection-card-title').textContent;
+        if (
+          (tier === 'apartment' && text.includes('Apartment')) ||
+          (tier === 'maisonette' && text.includes('Maisonette')) ||
+          (tier === 'villa' && text.includes('Villa')) ||
+          (tier === 'commercial' && text.includes('Commercial'))
+        ) {
+          c.classList.add('selected');
+        }
+      });
+      
+      // Update Company Name field if Commercial was ordered
+      const compWrap = document.getElementById('company-field-wrap');
+      const compInput = document.getElementById('company-field');
+      if (tier === 'commercial') {
+        if (compWrap) compWrap.style.display = 'block';
+        if (compInput) compInput.setAttribute('required', 'required');
+      }
+    }
+
+    // Open drawer and direct straight to step 2 as property is already captured
     document.getElementById('drawerBackdrop').classList.add('open');
     document.getElementById('drawer').classList.add('open');
     document.body.classList.add('drawer-open');
+    showStep(2); 
   }
 
   // Low-friction entry point: opens the drawer directly from the hero,
   // for visitors who aren't ready to pick a specific package yet.
   function openQuickInterestDrawer() {
+    resetConversationalFormSelection();
     document.getElementById('selectedPkgTitle').textContent = "Free Security Recommendation";
     document.getElementById('selectedPkgPrice').textContent = "No obligation";
     document.getElementById('selectedPkgImg').src = 'images/hub.png';
@@ -1741,10 +2210,12 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     document.getElementById('drawerBackdrop').classList.add('open');
     document.getElementById('drawer').classList.add('open');
     document.body.classList.add('drawer-open');
+    showStep(1);
   }
 
   // Opens the same enquiry drawer/Formspree pipeline as the waitlist flow
   function openCustomModuleDrawer() {
+    resetConversationalFormSelection();
     document.getElementById('selectedPkgTitle').textContent = "Custom Integration Request";
     document.getElementById('selectedPkgPrice').textContent = "Pending Design Consultation";
     document.getElementById('selectedPkgImg').src = 'images/hub.png';
@@ -1754,9 +2225,11 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     document.getElementById('drawerBackdrop').classList.add('open');
     document.getElementById('drawer').classList.add('open');
     document.body.classList.add('drawer-open');
+    showStep(1);
   }
 
   function openFormDrawer() {
+    resetConversationalFormSelection();
     // Dynamic fallback for custom reviews
     document.getElementById('selectedPkgTitle').textContent = "Waitlist Application";
     document.getElementById('selectedPkgPrice').textContent = "Pending Evaluation";
@@ -1767,6 +2240,7 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     document.getElementById('drawerBackdrop').classList.add('open');
     document.getElementById('drawer').classList.add('open');
     document.body.classList.add('drawer-open');
+    showStep(1);
   }
 
   function closeFormDrawer() {
@@ -1776,12 +2250,6 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
   }
 
   // Live, globally-shared "slots remaining" counter.
-  // NOTE: countapi.xyz (the service originally used here) has shut down.
-  // This uses countapi.mileshilliard.com instead — a community-run, free
-  // replacement with a similar but simpler API (no namespaces, single key).
-  // This is still a third-party hobby service, not infrastructure you control —
-  // see the accompanying note about a more durable alternative if this one
-  // also goes down in future.
   const SLOTS_KEY = 'urbaneyesecurity-eoi-slots-remaining-2026';
   const SLOTS_START = 13;
 
@@ -1837,6 +2305,15 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
     submitBtn.textContent = "Submitting...";
     submitBtn.disabled = true;
 
+    // Compile step options into the aggregated payload details block
+    const propType = document.getElementById('conv-property-type').value;
+    const concernsArray = Array.from(selectedConcerns);
+    const concernsStr = concernsArray.length > 0 ? concernsArray.join(', ') : 'None selected';
+    const finalCounty = document.getElementById('conv-county').value;
+
+    const notesSummary = `Property Type: ${propType}. Concerns: ${concernsStr}. Target Region: ${finalCounty}. Conversational waitlist application.`;
+    document.getElementById('conv-aggregate-details').value = notesSummary;
+
     // Normalize selected addons formatting for email presentation
     const upgradeText = document.getElementById('selectedPkgAddons').innerHTML
       .replace(/<br>/g, ', ')
@@ -1850,9 +2327,9 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
       package_cost: document.getElementById('selectedPkgPrice').textContent,
       selected_upgrades: upgradeText || "Base Configuration Only (Waitlist Application)",
       company: document.getElementById('company-field').value || "Residential Lead",
-      full_name: form.querySelector('input[name="fullName"]').value,
+      full_name: document.getElementById('conv-full-name').value,
       phone: (function() {
-        let rawPhone = form.querySelector('input[name="phone"]').value.replace(/\s+/g, '');
+        let rawPhone = document.getElementById('conv-phone').value.replace(/\s+/g, '');
         if (rawPhone.startsWith('0')) {
           rawPhone = rawPhone.substring(1);
         }
@@ -1863,8 +2340,8 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
         }
         return "+254 " + rawPhone;
       })(),
-      location_county: form.querySelector('select[name="location"]').value,
-      property_and_risk_overview: form.querySelector('textarea[name="details"]').value,
+      location_county: finalCounty,
+      property_and_risk_overview: notesSummary,
       marketing_consent: form.querySelector('input[name="consentMkt"]').checked ? "Consented" : "Declined"
     };
 
@@ -1895,6 +2372,7 @@ src="https://www.facebook.com/tr?id=1898640170833152&ev=PageView&noscript=1"
         decrementSlotsCounter();
         alert("Expression of Interest successfully submitted. A systems designer will contact you shortly if your layout plan qualifies.");
         form.reset();
+        resetConversationalFormSelection();
         closeFormDrawer();
       } else {
         response.json().then(data => {
